@@ -1,0 +1,14 @@
+Fourvieres: 6.383193; 8.385086!
+Caluire-et-Cuire: 9.364764; 11.735732!
+Vaise: 5.214696; 9.760931!
+Saint Rambert: 7.46844; 12.923987!
+Part-Dieu: 11.557458; 8.431484!
+La Croix Rousse: 8.168184; 10.289846!
+Saint-Clair: 10.35; 10.949963!
+Brotteaux: 11.406276; 9.131228!
+Montplaisir: 12.69654; 6.172745!
+Saint-Fons: 11.522937; 2.677133!
+Villeurbanne: 13.182942; 8.970722!
+La Mulatiere: 5.589876; 4.574456!
+Perrache: 7.606302; 7.059857!
+Guillotiere: 10.110906; 7.93376!
