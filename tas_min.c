@@ -14,18 +14,26 @@
 #define Fils_g(i) (2*i)
 #define Fils_d(i) (2*i + 1)
 
+double poid (Tas T, int position);
+
 struct tas
 {
-	Arete ** tab;//tableau de pointeur d'arete
+	Arete ** tab;//tableau de pointeur d'arete represantant le tas
 	Matrice graph;//matrice d'adjacence utilisee pour calculer le poid d'une arete
 	int taille_tas_max;
 	int taille_tas_courant;//indice de la premiere case non utilisee
 };
 
-double poid (Tas T, Arete * e){
-	return getPoid(T->graph, e->u, e->v);
+double poid (Tas T, int position){
+	return getPoid(T->graph, T->tab[position]->u, T->tab[position]->v);
 }
 
+/**
+ * un tas contiendra au plus toutes les aretes
+ * @param graph_arg matrice d'adjacence pour calculer le poid d'une arete
+ * @param taille_tas_arg
+ * @return le tas cree
+ */
 Tas creer_tas (Matrice graph_arg, int taille_tas_arg){
 	Tas T = NULL;
 	T = (Tas) malloc(sizeof(struct tas));
@@ -36,6 +44,7 @@ Tas creer_tas (Matrice graph_arg, int taille_tas_arg){
 	T->taille_tas_max = taille_tas_arg+1;
 	T->taille_tas_courant = 1;
 	T->graph = graph_arg;
+
 	//(taille_tas_arg+1) car la premiere case ne sert pas (pour facilité la manipulation d'indice)
 	T->tab = (Arete **) malloc(sizeof(Arete *)*(taille_tas_arg+1));
 	if (T->tab == NULL){
@@ -44,6 +53,7 @@ Tas creer_tas (Matrice graph_arg, int taille_tas_arg){
 	}
 	return T;
 }
+
 void liberer_tas (Tas T){
 	free (T->tab);
 	free (T);
@@ -58,25 +68,28 @@ void liberer_tas (Tas T){
 void entasser_element (Tas T, int u, int v){
 	int indice, parent;
 	Arete * tmp;
+	//rappel : taille_tas_courant pointe sur la premiere case vide du tableau. si le tableau est plein, l'indice depace les bornes du tableau
 	if (T->taille_tas_max + 1 == T->taille_tas_courant){
 		fprintf(stderr, "erreur tas min plein");
 		exit(1);
 	}
-	indice = T->taille_tas_courant;
-	(T->tab)[T->taille_tas_courant] = (Arete *) malloc(sizeof(Arete));
-	if ((T->tab)[T->taille_tas_courant] == NULL){
+
+	indice = T->taille_tas_courant;//position ou l'on insert l'arete uv
+
+	T->tab[T->taille_tas_courant] = (Arete *) malloc(sizeof(Arete));
+	if (T->tab[T->taille_tas_courant] == NULL){
 		fprintf(stderr, "erreur allocation memoire tas min");
 		exit(1);
 	}
-	(T->tab)[indice]->u = u;
-	(T->tab)[indice]->v = v;
+	T->tab[indice]->u = u;
+	T->tab[indice]->v = v;
 
 	parent = indice / 2;
-	//s'arretera forcement, car si l'element remonte jusqu'a la racine, il ne sera pas plus petit que lui meme
-	while (parent > 0 && poid(T, (T->tab)[indice]) < poid(T, (T->tab)[parent])){
-		tmp = (T->tab)[indice];
-		(T->tab)[indice] = (T->tab)[parent];
-		(T->tab)[parent] = tmp;
+	//tant que l'element n'est pas la racine du tas, et qu'il est moins lourd que son pere, on les echanges.
+	while (parent > 0 && poid(T, indice) < poid(T, parent)){
+		tmp = T->tab[indice];
+		T->tab[indice] = T->tab[parent];
+		T->tab[parent] = tmp;
 
 		indice = parent;
 		parent = indice / 2;
@@ -84,21 +97,21 @@ void entasser_element (Tas T, int u, int v){
 	T->taille_tas_courant++;
 }
 /**
- * si on suppose que les fils de i sont tous deux des tas min, actualise_tas actualise le ta de sorte que le tas de racine i soit un tas min
+ * si on suppose que les fils de i sont tous deux des tas min, actualise_tas actualise le tel de sorte que le tas de racine i soit un tas min
  * @param T un tas
- * @param indice du noeud a partire du quel traiter le tas a traiter
+ * @param indice du noeud a partir du quel traiter le tas
  */
 void acutalise_tas (Tas T, int indice){
 	//fait descendre un element qui est plus petit que l'un de ces fils
 	int indice_gauche, indice_droit;
+	int min_indice;// l'indice de l'element le plus petit entre indice est ses deux fils
 	Arete * tmp;
-	int min_indice;
 
 	indice_gauche = Fils_g(indice);
 	indice_droit = Fils_d(indice);
-	min_indice = (indice_gauche < T->taille_tas_courant && poid(T, T->tab[indice_gauche]) < poid(T, T->tab[indice]))? indice_gauche : indice;
-	if (indice_droit < T->taille_tas_courant && poid(T, T->tab[indice_droit]) < poid(T, T->tab[min_indice])) min_indice = indice_droit;
-	//echange indice min
+	min_indice = (indice_gauche < T->taille_tas_courant && poid(T, indice_gauche) < poid(T, indice))? indice_gauche : indice;
+	if (indice_droit < T->taille_tas_courant && poid(T, indice_droit) < poid(T, min_indice)) min_indice = indice_droit;
+	//echange indice min avec indice
 	if (indice != min_indice){
 		tmp = T->tab[indice];
 		T->tab[indice] = T->tab[min_indice];
@@ -107,6 +120,13 @@ void acutalise_tas (Tas T, int indice){
 	}
 }
 
+/**
+ * on renvois la racine du tas min T,
+ * puis on place le dernier element de l'arbe a la racine
+ * et enfin, on actualise le tas pour qu'il redevienne un tas min
+ * @param T un tas min
+ * @return la racine de T (le plus petit element du tas)
+ */
 Arete extraire_min(Tas T){
 	Arete ret;
 	if (T->taille_tas_courant == 1){
@@ -119,7 +139,6 @@ Arete extraire_min(Tas T){
 	if (T->taille_tas_courant > 1){ // Tas non vide
 		T->tab[1] = T->tab[T->taille_tas_courant];
 		acutalise_tas(T,1);
-
 	}
 	return ret;
 }
@@ -129,12 +148,12 @@ void afficher_tas(Tas T, int indice){
 		if (indice * 2 < T->taille_tas_courant){
 			printf("(");
 			afficher_tas(T, indice*2);
-			printf(", (%d,%d _ %f), ", (T->tab)[indice]->u, (T->tab)[indice]->v, poid(T,(T->tab)[indice]));
+			printf(", (%d,%d _ %f), ", T->tab[indice]->u, T->tab[indice]->v, poid(T, indice));
 			afficher_tas(T, indice*2 + 1);
 			printf(")");
 		}
 		else
-			printf("(%d,%d _ %f)", (T->tab)[indice]->u, (T->tab)[indice]->v, poid(T,(T->tab)[indice]));
+			printf("(%d,%d _ %f)", T->tab[indice]->u, T->tab[indice]->v, poid(T, indice));
 	}
 
 }

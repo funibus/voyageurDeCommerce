@@ -19,7 +19,6 @@ typedef struct tas* Tas;
 
 Tas creer_tas (Matrice graph_arg, int taille_tas);
 void liberer_tas (Tas T);
-void acutalise_tas (Tas T, int indice);
 void entasser_element (Tas T, int u, int v);
 Arete extraire_min(Tas T);
 
