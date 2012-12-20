@@ -67,4 +67,5 @@ void TSP (Matrice matrice_poids, FILE* output)
 {
     element_liste* arbre = prim (matrice_poids);// arbre couvrant minimum
     parcourir_arbre(output, arbre);
+    liberer_arbre(arbre, getNbVilles(matrice_poids));
 }
