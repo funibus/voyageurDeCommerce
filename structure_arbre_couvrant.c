@@ -6,8 +6,7 @@ struct element_liste
 	element_liste suivant;
 };
 
-void parcourir_arbre_aux (FILE* fichier, element_liste* arbre, int sommet, int pere, int b);
-
+void parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, int sommet, int pere, int b);
 
 
 /**
@@ -73,21 +72,21 @@ void liberer_arbre (element_liste arbre[], int nombre_villes)
 
 /*parcourt l'arbre en partant d'un sommet donné, sans passer par le sommet du père, et renvoie la liste des sommets dans l'ordre du parcours,
   en ne notant un sommet que la premiere fois qu'on passe dessus*/
-void parcourir_arbre_aux (FILE* fichier, element_liste* arbre, int sommet, int pere, int b)
+void parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, int sommet, int pere, int b)
 {
 	element_liste fils;
 	if(b==0){
-		fprintf (fichier, "%d", sommet);
+		fprintf (fichier, "%s", getNameSommet(G, sommet));
 	}
 	else{
-		fprintf (fichier, ", %d", sommet);
+		fprintf (fichier, ", %s", getNameSommet(G, sommet));
 	}
 	fils = arbre[sommet];
 	while (fils != NULL)
 	{
 		if ((fils->sommet) != pere)
 		{
-			parcourir_arbre_aux (fichier, arbre, (fils->sommet), sommet, 1);
+			parcourir_arbre_aux (fichier, arbre, G, (fils->sommet), sommet, 1);
 		}
 		fils = fils->suivant;
 	}
@@ -95,9 +94,9 @@ void parcourir_arbre_aux (FILE* fichier, element_liste* arbre, int sommet, int p
 
 
 /*cette fonction parcourt l'arbre, en inscrivant une seule fois chaque sommet, et en partant du sommet 0*/
-void parcourir_arbre (FILE* fichier, element_liste* arbre)
+void parcourir_arbre (FILE* fichier, element_liste* arbre, Matrice matrice_poids)
 {
-	parcourir_arbre_aux (fichier, arbre, 0, -1, 0);
+	parcourir_arbre_aux (fichier, arbre, matrice_poids, 0, -1, 0);
 }
 
 

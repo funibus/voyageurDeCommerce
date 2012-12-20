@@ -66,6 +66,6 @@ Arete trouver_bonne_arete (Tas T, Matrice matrice_poids)
 void TSP (Matrice matrice_poids, FILE* output)
 {
     element_liste* arbre = prim (matrice_poids);// arbre couvrant minimum
-    parcourir_arbre(output, arbre);
+    parcourir_arbre(output, arbre, matrice_poids);
     liberer_arbre(arbre, getNbVilles(matrice_poids));
 }

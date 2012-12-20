@@ -13,7 +13,7 @@ void test_prim_4_villes ()
   Matrice matrice_poids = matrice_of_coordonnees (fichier);
   double distance = 0.;
 
-  TSP(matrice_poids);
+  TSP(matrice_poids,stdout);
   fclose(fichier);
 
  /*on rajoute la distance parcourue à la fin du fichier chemin.txt")*/

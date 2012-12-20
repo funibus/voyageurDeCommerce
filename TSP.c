@@ -3,6 +3,9 @@
 
 #include <math.h>
 
+double distance (double x1, double y1, double x2, double y2);
+
+
 /*calcule la matrice avec les poids des aretes a partir du fichier avec la distance entre les sommets*/
 Matrice matrice_of_fichier (FILE* fichier)
 {
@@ -32,12 +35,12 @@ double distance (double x1, double y1, double x2, double y2)
 /*calcule la matrice avec le poids de toutes les aretes en partant du fichier avec les coordonnees des villes*/
 Matrice matrice_of_coordonnees (FILE* fichier)
 {
-    int nombre_villes = 0;
-    fscanf (fichier, "%d!", &nombre_villes);
-    int sommet = 0;
+    int nombre_villes, i, j, sommet;
+    char name[1000];
     double sommet_x, sommet_y;
+
+    fscanf (fichier, "%d!", &nombre_villes);
     Matrice matrice_poids = create_mat (nombre_villes);
-    int i = 0, j = 0;
     double* tableau = malloc (sizeof(double)*2*nombre_villes); //on stocke les coordonnees des villes dans un tableau pour que ce soit plus facile d'acces
     if (tableau == NULL)
     {
@@ -45,11 +48,21 @@ Matrice matrice_of_coordonnees (FILE* fichier)
         exit(1);
     }
 
-    for (i=0; i<nombre_villes; i++)
+    for (sommet=0; sommet<nombre_villes; sommet++)
     {
-        fscanf(fichier, "\n%d: %lf; %lf!", &sommet, &sommet_x, &sommet_y);
-        tableau[2*(sommet-1)]= sommet_x; //on stocke les coordonnees de i dans les cases 2i et 2i+1
-        tableau[2*(sommet-1) +1] = sommet_y;
+    	name[0] = fgetc(fichier);// \n
+    	i = -1;
+    	do{
+    		i++;
+    		name[i] = fgetc(fichier);
+    	} while (name[i] != ':');
+    	name[i] = '\0';
+        fscanf(fichier, "%lf; %lf!", &sommet_x, &sommet_y);
+        tableau[2*(sommet)]= sommet_x; //on stocke les coordonnees de i dans les cases 2i et 2i+1
+        tableau[2*(sommet) +1] = sommet_y;
+        SetXSommet(matrice_poids, sommet, sommet_x);
+        SetYSommet(matrice_poids, sommet, sommet_y);
+        SetNameSommet(matrice_poids, sommet, name);
     }
 
     for (i = 0; i<nombre_villes; i++) //on calcule la distance entre chaque paire de sommet
