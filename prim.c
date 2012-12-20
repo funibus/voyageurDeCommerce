@@ -38,30 +38,33 @@ element_liste* prim (Matrice matrice_poids)
     return arbre;
 }
 
-/*quand on piohe l'arete de poids minimal, il faut vérifier qu'elle a bien une extremite
-dans l'arbre et pas l'autre, si ce n'est pas le cas on recommence a piocher
-jusqu'a tomber sur une arete qui convient*/
+/**
+ * quand on piohe l'arete de poids minimal, il faut vérifier qu'elle a bien une extremite
+ * dans l'arbre et pas l'autre, si ce n'est pas le cas on recommence a piocher
+ * jusqu'a tomber sur une arete qui convient
+ * @param T un tas min qui contient des aretes n'appartenant pas a l'arbre
+ * @param matrice_poids une matrice d'adjacence. Un sommet est "marque" si il appartient à l'arbre couvrant en construction
+ * @return l'arrete minimal dont un seul sommet appartient a l'arbre couvrant
+ */
 Arete trouver_bonne_arete (Tas T, Matrice matrice_poids)
 {
-    Arete nouvelle_arete = extraire_min(T);
-    if (getMarque(matrice_poids, nouvelle_arete.u) && getMarque(matrice_poids, nouvelle_arete.v))
-    {
-       return trouver_bonne_arete(T, matrice_poids);
-    }
-    else
-    {return nouvelle_arete;}
+	Arete nouvelle_arete;
+	//on cherche une arete tant que ses deux sommets sont dans l'arbre couvrant
+	do{
+		nouvelle_arete = extraire_min(T);
+	} while (getMarque(matrice_poids, nouvelle_arete.u) && getMarque(matrice_poids, nouvelle_arete.v));
+
+	return nouvelle_arete;
 }
 
 
-/*cette fonction prend en entree une matrice avec le poids de toutes les aretes et cree un fichier "chemin.txt" dans
-lequel est note le chemin obtenu par l'algorithme TSP*/
-void TSP (Matrice matrice_poids)
+/**
+ * cette fonction calcule un arbre couvrant minimum et ecrit le parcours correspondant
+ * @param matrice_poids une matrice d'adjacence
+ * @param output le flux dans le quel sera inscrit le parcours du voyageur.
+ */
+void TSP (Matrice matrice_poids, FILE* output)
 {
-    int nombre_villes = getNbVilles(matrice_poids);
-    FILE* fichier = fopen ("chemin.txt", "w");
-    element_liste* arbre = prim (matrice_poids);
-
-    parcourir_arbre(fichier, arbre);
-
-    fclose(fichier);
+    element_liste* arbre = prim (matrice_poids);// arbre couvrant minimum
+    parcourir_arbre(output, arbre);
 }
