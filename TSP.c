@@ -1,7 +1,6 @@
-#include "TSP.h"
-
-
 #include <math.h>
+
+#include "TSP.h"
 
 double distance (double x1, double y1, double x2, double y2);
 
@@ -27,8 +26,7 @@ Matrice matrice_of_fichier (FILE* fichier)
 /*calcule la distance entre 2 points de coordonnees (x1, y1) et (x2,y2)*/
 double distance (double x1, double y1, double x2, double y2)
 {
-    double d = sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
-    return d;
+	return sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 }
 
 
@@ -36,12 +34,41 @@ double distance (double x1, double y1, double x2, double y2)
 Matrice matrice_of_coordonnees (FILE* fichier)
 {
     int nombre_villes, i, j, sommet;
-    char name[1000];
+    char name[1000],c;
     double sommet_x, sommet_y;
+    long curseur_init;
+    double* tableau; // tableau dynamique pour les villes
+    Matrice matrice_poids;
+    /*
+    les fichiers coordonnées sommets commence par une ligne indiquant le nombre de sommet
+    tandis ce que les fichiers coordonnées villes n'indique pas le nombre de villes présentent dans le fichier.
+    On vas tester si le fichiers comporte cette indication, et ci c'est le cas, on va simplement l'ignoré (et lire le fichier jusqu'a la fin)
+    */
+    curseur_init = ftell(fichier);//position initial dans le fichier
+    c = 'A'; //c un charatere différent de '\n' et de ':'
+    while (c != '\n' && c != ':'){
+    	c = fgetc(fichier);
+    }
+    if (c == ':'){// fichiers avec nom de ville
+    	//on compte le nombre de villes présentent dans le fichier
+    	nombre_villes=1;
+    	while (c != EOF){
+    		c = fgetc(fichier);
+    		if (c == ':'){
+    			nombre_villes++;
+    		}
+    	}
+    	fseek(fichier, 0, curseur_init);//on revient a la position initial pour traiter la premier ligne
+    }
+    else{//fichier sommet
+    	fseek(fichier, 0, curseur_init);//on revient a la position initial pour récupérer la taille exacte du tableau
+    	fscanf (fichier, "%d!", &nombre_villes);
+    	if (!feof(fichier))fgetc(fichier);// saut le \n
+    }
 
-    fscanf (fichier, "%d!", &nombre_villes);
-    Matrice matrice_poids = create_mat (nombre_villes);
-    double* tableau = malloc (sizeof(double)*2*nombre_villes); //on stocke les coordonnees des villes dans un tableau pour que ce soit plus facile d'acces
+
+    matrice_poids = create_mat (nombre_villes);
+    tableau = malloc (sizeof(double)*2*nombre_villes); //on stocke les coordonnees des villes dans un tableau pour que ce soit plus facile d'acces
     if (tableau == NULL)
     {
         printf("probleme d'allocation memoire dans la fonction matrice_of_coordonnees");
@@ -50,7 +77,6 @@ Matrice matrice_of_coordonnees (FILE* fichier)
 
     for (sommet=0; sommet<nombre_villes; sommet++)
     {
-    	name[0] = fgetc(fichier);// \n
     	i = -1;
     	do{
     		i++;
@@ -58,6 +84,7 @@ Matrice matrice_of_coordonnees (FILE* fichier)
     	} while (name[i] != ':');
     	name[i] = '\0';
         fscanf(fichier, "%lf; %lf!", &sommet_x, &sommet_y);
+        if (!feof(fichier))fgetc(fichier);// saut le \n
         tableau[2*(sommet)]= sommet_x; //on stocke les coordonnees de i dans les cases 2i et 2i+1
         tableau[2*(sommet) +1] = sommet_y;
         SetXSommet(matrice_poids, sommet, sommet_x);

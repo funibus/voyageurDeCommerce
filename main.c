@@ -31,7 +31,7 @@ int main (int argc, char *argv[]){
 	}
 	else {
 
-		input = fopen("testVerticesCoordinates.txt", "r");
+		input = fopen("intermediateTownsTest.txt", "r");
 		if (input == NULL)
 		{
 			printf("probleme a l'ouverture du fichier");
