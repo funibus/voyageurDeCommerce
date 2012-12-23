@@ -28,12 +28,12 @@ struct ville
 Ville create_ville (char* name, double x, double y){
 	Ville V = NULL;
 	V = (struct ville*) malloc(sizeof(struct ville));
-
 	if (V == NULL)
 	{
 		printf("problème d'allocation pour la ville %s", name);
 		exit(1);
 	};
+	V->nom = NULL;
 	SetNameVille(V, name);
 	SetXVille(V, x);
 	SetYVille(V, y);
@@ -61,6 +61,7 @@ double getYVille(Ville V){
 void SetNameVille(Ville V, char * name){
 	int length=0;
 	while (name[length] != '\0') length++;
+	if (V->nom != NULL) free(V->nom);
 	V->nom = (char *) malloc(sizeof(char)*(length+1));
 	for (length++; length >=0; length--)V->nom[length] = name[length];
 }
