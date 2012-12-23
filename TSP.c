@@ -14,7 +14,7 @@ Matrice matrice_of_fichier (FILE* fichier)
     int sommet2 = 0;
     int i = 0;
     double distance_sommets = 0;
-    Matrice matrice_poids = create_mat(nombre_villes);
+    Matrice matrice_poids;
     for (i=0; i<(nombre_villes*(nombre_villes-1)/2); i++)
     {
         fscanf(fichier, "%d %d: %lf!", &sommet1, &sommet2, &distance_sommets);

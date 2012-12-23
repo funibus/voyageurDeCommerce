@@ -55,6 +55,7 @@ int main (int argc, char *argv[]){
 	}
 
 	TSP (mat,output);
+	liberer_mat(mat);
 	fclose(output);
 	return 0;
 }
