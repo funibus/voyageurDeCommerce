@@ -19,10 +19,10 @@ void prim (Matrice matrice_poids)
 
     setMarque(matrice_poids, 0); //ajout de 0 aux sommets de l'arbre
     nombre_sommets_arbre = 1;
-    for (i=1; i<nombre_villes; i++) //ajout des aretes partant de 0 au tas
+    for (i=1; i<nombre_villes; i++) //ajout de toutes les aretes partant du graph
     {
         entasser_element(T, 0, i);
-    };
+    }
 
     /*on remplit l'arbre tant que tous les sommets n'y sont pas*/
 
@@ -34,7 +34,7 @@ void prim (Matrice matrice_poids)
         nombre_sommets_arbre ++;
         inserer_element_arbre(arbre, nouvelle_arete.u, nouvelle_arete.v); //ajout de l'arete (u,v) a l'arbre
 
-    };
+    }
 
 
     liberer_tas(T);
