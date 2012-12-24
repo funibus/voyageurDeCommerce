@@ -1,9 +1,12 @@
 #ifndef STRUCTURE_MATRICE_H_INCLUDED
 #define STRUCTURE_MATRICE_H_INCLUDED
 
-#include "structure_ville.h"
-
 typedef struct matrice* Matrice;
+
+#include "structure_ville.h"
+#include "structure_arbre_couvrant.h"
+
+
 
 
 Matrice create_mat (int nb_villes);
@@ -15,6 +18,8 @@ int getMarque(Matrice G, int s);
 int getNbVilles(Matrice G);
 double getPoid(Matrice G, int u, int v);
 void setPoid(Matrice G, int u, int v, double w);
+element_liste* getTree(Matrice G);
+void setTree(Matrice G, element_liste* tree);
 
 char * getNameSommet(Matrice G, int sommet);
 double getXSommet(Matrice G, int sommet);

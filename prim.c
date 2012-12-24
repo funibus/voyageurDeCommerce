@@ -1,10 +1,13 @@
 #include "prim.h"
 
-
-element_liste* prim (Matrice matrice_poids)
+/**
+ * construit l'arbre couvrant et le stock dans matrice_poids
+ * @param matrice_poids
+ */
+void prim (Matrice matrice_poids)
 {
     int nombre_villes = getNbVilles(matrice_poids);
-    element_liste* arbre = creer_arbre (nombre_villes);
+    element_liste* arbre = getTree(matrice_poids);
     Tas T = creer_tas (matrice_poids, nombre_villes*nombre_villes);
     int i;
     int nombre_sommets_arbre = 0;
@@ -35,7 +38,6 @@ element_liste* prim (Matrice matrice_poids)
 
 
     liberer_tas(T);
-    return arbre;
 }
 
 /**
@@ -65,7 +67,6 @@ Arete trouver_bonne_arete (Tas T, Matrice matrice_poids)
  */
 void TSP (Matrice matrice_poids, FILE* output)
 {
-    element_liste* arbre = prim (matrice_poids);// arbre couvrant minimum
-    parcourir_arbre(output, arbre, matrice_poids);
-    liberer_arbre(arbre, getNbVilles(matrice_poids));
+    prim (matrice_poids);// arbre couvrant minimum
+    parcourir_arbre(output, matrice_poids);
 }

@@ -94,9 +94,9 @@ void parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, int so
 
 
 /*cette fonction parcourt l'arbre, en inscrivant une seule fois chaque sommet, et en partant du sommet 0*/
-void parcourir_arbre (FILE* fichier, element_liste* arbre, Matrice matrice_poids)
+void parcourir_arbre (FILE* fichier, Matrice matrice_poids)
 {
-	parcourir_arbre_aux (fichier, arbre, matrice_poids, 0, -1, 0);
+	parcourir_arbre_aux (fichier, getTree(matrice_poids), matrice_poids, 0, -1, 0);
 }
 
 

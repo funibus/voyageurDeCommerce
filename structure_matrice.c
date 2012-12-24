@@ -10,6 +10,7 @@ typedef struct matrice
 	double ** graph;//matrice d'adjacence
 	int * marque;//tableau indiquant si un sommet est dans l'arbre couvrant
 	Ville * liste_name;// tableau associatif entre sommet et nom du sommet
+	element_liste* arbre_couvrant;
 };
 
 
@@ -45,6 +46,7 @@ Matrice create_mat (int nb_villes_arg){
 		sprintf(tmp,"%d",i);
 		ret->liste_name[i] = create_ville(tmp, 0, 0);
 	}
+	ret->arbre_couvrant = creer_arbre(nb_villes_arg);
 	return ret;
 }
 
@@ -63,6 +65,7 @@ void liberer_mat (Matrice G)
 	free (G->graph);
 	free (G->marque);
 	free (G->liste_name);
+	liberer_arbre(G->arbre_couvrant, G->nb_villes);
 	free (G);
 }
 
@@ -88,6 +91,13 @@ double getPoid(Matrice G, int u, int v){
 void setPoid(Matrice G, int u, int v, double w){
 	(G->graph)[u][v] = w;
 	(G->graph)[v][u] = w;
+}
+
+element_liste* getTree(Matrice G){
+	return G->arbre_couvrant;
+}
+void setTree(Matrice G, element_liste* tree){
+	G->arbre_couvrant = tree;
 }
 
 char * getNameSommet(Matrice G, int sommet){
