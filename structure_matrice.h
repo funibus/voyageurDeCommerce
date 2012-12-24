@@ -27,6 +27,9 @@ void SetNameSommet(Matrice G, int sommet, char * name);
 void SetXSommet(Matrice G, int sommet, double x);
 void SetYSommet(Matrice G, int sommet, double y);
 
+element_liste getCycle(Matrice G);
+void setCycle(Matrice G, element_liste c);
+
 void setXmin(Matrice G, double x);
 void setXmax(Matrice G, double x);
 void setYmin(Matrice G, double y);

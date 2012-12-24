@@ -13,6 +13,8 @@
 
 #include "tas_min.h"
 #include "prim.h"
+#include "TSP.h"
+#include "gui.h"
 #include "structure_matrice.h"
 
 /**
@@ -31,10 +33,10 @@ int main (int argc, char *argv[]){
 	}
 	else {
 
-		input = fopen("intermediateTownsTest.txt", "r");
+		input = fopen("test.txt", "r");
 		if (input == NULL)
 		{
-			printf("probleme a l'ouverture du fichier");
+			printf("probleme a l'ouverture du fichier\n");
 			exit(1);
 		};
 	}
@@ -46,7 +48,7 @@ int main (int argc, char *argv[]){
 		output = fopen (argv[2], "w");
 		if (output == NULL)
 		{
-			printf("probleme a l'ouverture du fichier");
+			printf("probleme a l'ouverture du fichier\n");
 			exit(1);
 		};
 	}
@@ -55,7 +57,9 @@ int main (int argc, char *argv[]){
 	}
 
 	TSP (mat,output);
+	gui(mat);//ligne à commenter pour désactiver le graphique
 	liberer_mat(mat);
 	fclose(output);
 	return 0;
 }
+

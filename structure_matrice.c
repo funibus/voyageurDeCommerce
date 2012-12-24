@@ -11,7 +11,8 @@ struct matrice
 	double ** graph;//matrice d'adjacence
 	int * marque;//tableau indiquant si un sommet est dans l'arbre couvrant
 	Ville * liste_name;// tableau associatif entre sommet et nom du sommet
-	element_liste* arbre_couvrant;
+	element_liste* arbre_couvrant;//arbre couvrant
+	element_liste cycle;//liste chaine pour le cycle
 
 	//pour l'afficahge, il faut avoir le rectangle qui contien toutes les villes
 	double xmin, xmax, ymin, ymax;
@@ -53,6 +54,7 @@ Matrice create_mat (int nb_villes_arg){
 	ret->arbre_couvrant = creer_arbre(nb_villes_arg);
 	ret->xmin = ret->ymin = DBL_MAX;
 	ret->xmax = ret->ymax = -DBL_MAX;
+	ret->cycle = NULL;
 	return ret;
 }
 
@@ -72,6 +74,7 @@ void liberer_mat (Matrice G)
 	free (G->marque);
 	free (G->liste_name);
 	liberer_arbre(G->arbre_couvrant, G->nb_villes);
+	liberer_liste(G->cycle);
 	free (G);
 }
 
@@ -127,6 +130,14 @@ void SetYSommet(Matrice G, int sommet, double y){
 	SetYVille(G->liste_name[sommet], y);
 	if (y > G->ymax) G->ymax = y;
 	if (y < G->ymin) G->ymin = y;
+}
+
+element_liste getCycle(Matrice G){
+	return G->cycle;
+}
+void setCycle(Matrice G, element_liste c){
+	liberer_liste (G->cycle);
+	G->cycle = c;
 }
 
 void setXmin(Matrice G, double x){

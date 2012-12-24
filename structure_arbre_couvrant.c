@@ -6,8 +6,7 @@ struct element_liste
 	element_liste suivant;
 };
 
-void parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, int sommet, int pere, int b);
-
+element_liste parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, element_liste cycle, int sommet, int pere, int b);
 
 /**
  * cree un tableau dont chaque case represente un sommet et contient la liste des sommets voisins
@@ -26,19 +25,23 @@ element_liste* creer_arbre (int nombre_villes)
 	return arbre;
 };
 
+element_liste insertion_tete(element_liste head, int element){
+	element_liste new_head = (element_liste) malloc (sizeof(struct element_liste));
+	if (new_head == NULL)
+		{
+			printf("problème d'allocation pour la creation d'un element_liste\n");
+			exit(1);
+		}
+	new_head->sommet = element;
+	new_head->suivant = head;
+	return new_head;
+}
 
 /*insere l'arete allant du sommet1 au sommet2 dans l'arbre*/
 void inserer_element_arbre (element_liste arbre[], int sommet1, int sommet2)
 {
-	element_liste nouveau_voisin_1 = malloc (sizeof(struct element_liste));
-	nouveau_voisin_1->sommet = sommet2;
-	nouveau_voisin_1->suivant = arbre[sommet1];
-	arbre[sommet1] = nouveau_voisin_1;
-
-	element_liste nouveau_voisin_2 = malloc (sizeof(struct element_liste));
-	nouveau_voisin_2->sommet = sommet1;
-	nouveau_voisin_2->suivant = arbre[sommet2];
-	arbre[sommet2] = nouveau_voisin_2;
+	arbre[sommet1] = insertion_tete(arbre[sommet1], sommet2);
+	arbre[sommet2] = insertion_tete(arbre[sommet2], sommet1);
 }
 
 
@@ -67,31 +70,35 @@ void liberer_arbre (element_liste arbre[], int nombre_villes)
 
 /*parcourt l'arbre en partant d'un sommet donné, sans passer par le sommet du père, et renvoie la liste des sommets dans l'ordre du parcours,
   en ne notant un sommet que la premiere fois qu'on passe dessus*/
-void parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, int sommet, int pere, int b)
+element_liste parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, element_liste cycle, int sommet, int pere, int b)
 {
-	element_liste fils;
+	element_liste fils,tete_cycle;
 	if(b==0){
 		fprintf (fichier, "%s", getNameSommet(G, sommet));
 	}
 	else{
 		fprintf (fichier, ", %s", getNameSommet(G, sommet));
 	}
+	tete_cycle = insertion_tete(cycle, sommet);
 	fils = arbre[sommet];
 	while (fils != NULL)
 	{
 		if ((fils->sommet) != pere)
 		{
-			parcourir_arbre_aux (fichier, arbre, G, (fils->sommet), sommet, 1);
+			tete_cycle = parcourir_arbre_aux (fichier, arbre, G, tete_cycle, (fils->sommet), sommet, 1);
 		}
 		fils = fils->suivant;
 	}
+	return tete_cycle;
 }
 
 
 /*cette fonction parcourt l'arbre, en inscrivant une seule fois chaque sommet, et en partant du sommet 0*/
 void parcourir_arbre (FILE* fichier, Matrice matrice_poids)
 {
-	parcourir_arbre_aux (fichier, getTree(matrice_poids), matrice_poids, 0, -1, 0);
+	element_liste tete_cycle = NULL;
+	tete_cycle = parcourir_arbre_aux (fichier, getTree(matrice_poids), matrice_poids, tete_cycle, 0, -1, 0);
+	setCycle(matrice_poids, tete_cycle);
 }
 
 

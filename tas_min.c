@@ -55,7 +55,11 @@ Tas creer_tas (Matrice graph_arg, int taille_tas_arg){
 }
 
 void liberer_tas (Tas T){
-	//liberer les arretes inutiliser
+	int i;
+	//Libérer les aretes inutilisée
+	for (i = 1;  i < T->taille_tas_courant; i++) {
+		free(T->tab[i]);
+	}
 	free (T->tab);
 	free (T);
 }
