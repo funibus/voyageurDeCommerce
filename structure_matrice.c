@@ -1,16 +1,20 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <float.h>
 #include "structure_matrice.h"
 
 /*utilise pour representer un graph avec une matrice d'adjacence*/
-typedef struct matrice
+struct matrice
 {
 	int nb_villes;// nombre de sommet dans le graph
 	double ** graph;//matrice d'adjacence
 	int * marque;//tableau indiquant si un sommet est dans l'arbre couvrant
 	Ville * liste_name;// tableau associatif entre sommet et nom du sommet
 	element_liste* arbre_couvrant;
+
+	//pour l'afficahge, il faut avoir le rectangle qui contien toutes les villes
+	double xmin, xmax, ymin, ymax;
 };
 
 
@@ -47,6 +51,8 @@ Matrice create_mat (int nb_villes_arg){
 		ret->liste_name[i] = create_ville(tmp, 0, 0);
 	}
 	ret->arbre_couvrant = creer_arbre(nb_villes_arg);
+	ret->xmin = ret->ymin = DBL_MAX;
+	ret->xmax = ret->ymax = -DBL_MAX;
 	return ret;
 }
 
@@ -114,7 +120,37 @@ void SetNameSommet(Matrice G, int sommet, char * name){
 }
 void SetXSommet(Matrice G, int sommet, double x){
 	SetXVille(G->liste_name[sommet], x);
+	if (x > G->xmax) G->xmax = x;
+	if (x < G->xmin) G->xmin = x;
 }
 void SetYSommet(Matrice G, int sommet, double y){
 	SetYVille(G->liste_name[sommet], y);
+	if (y > G->ymax) G->ymax = y;
+	if (y < G->ymin) G->ymin = y;
+}
+
+void setXmin(Matrice G, double x){
+	G->xmin = x;
+}
+void setXmax(Matrice G, double x){
+	G->xmax = x;
+}
+void setYmin(Matrice G, double y){
+	G->ymin = y;
+}
+void setYmax(Matrice G, double y){
+	G->ymax = y;
+}
+
+double getXmin(Matrice G){
+	return G->xmin;
+}
+double getXmax(Matrice G){
+	return G->xmax;
+}
+double getYmin(Matrice G){
+	return G->ymin;
+}
+double getYmax(Matrice G){
+	return G->ymax;
 }

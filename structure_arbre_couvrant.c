@@ -17,16 +17,11 @@ void parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, int so
  */
 element_liste* creer_arbre (int nombre_villes)
 {
-	int i;
-	element_liste* arbre = malloc (sizeof(element_liste) * nombre_villes);
+	element_liste* arbre = calloc (sizeof(element_liste), nombre_villes);//auto initailise à NULL
 	if (arbre == NULL)
 	{
-		printf("problème d'allocation pour l'arbre");
+		printf("problème d'allocation pour l'arbre\n");
 		exit(1);
-	}
-	for (i=0; i<nombre_villes; i++)
-	{
-		arbre[i] = NULL;
 	}
 	return arbre;
 };
@@ -113,6 +108,12 @@ double distance_parcourue (FILE* fichier, Matrice matrice_poids)
 		sommet1 = sommet2;
 	}
 	return distance;
+}
+int getSommetNode(element_liste l){
+	return l->sommet;
+}
+element_liste getNextSommetTree(element_liste l){
+	return l->suivant;
 }
 
 

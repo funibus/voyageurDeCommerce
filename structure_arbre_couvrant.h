@@ -15,5 +15,7 @@ void inserer_element_arbre (element_liste arbre[], int sommet1, int sommet2);
 void liberer_arbre (element_liste arbre[], int nombre_villes);
 void parcourir_arbre (FILE* fichier, Matrice matrice_poids);
 double distance_parcourue (FILE* fichier, Matrice matrice_poids);
+int getSommetNode(element_liste l);
+element_liste getNextSommetTree(element_liste l);
 
 #endif // STRUCTURE_ARBRE_COUVRANT_H_INCLUDED

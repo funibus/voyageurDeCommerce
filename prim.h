@@ -7,7 +7,6 @@
 #include "tas_min.h"
 
 void prim (Matrice matrice_poids);
-Arete trouver_bonne_arete (Tas T, Matrice matrice_poids);
 void TSP (Matrice matrice_poids, FILE* output);
 
 #endif /* PRIM_H_ */

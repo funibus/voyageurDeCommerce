@@ -3,9 +3,8 @@
 
 typedef struct matrice* Matrice;
 
-#include "structure_ville.h"
 #include "structure_arbre_couvrant.h"
-
+#include "structure_ville.h"
 
 
 
@@ -28,6 +27,15 @@ void SetNameSommet(Matrice G, int sommet, char * name);
 void SetXSommet(Matrice G, int sommet, double x);
 void SetYSommet(Matrice G, int sommet, double y);
 
+void setXmin(Matrice G, double x);
+void setXmax(Matrice G, double x);
+void setYmin(Matrice G, double y);
+void setYmax(Matrice G, double y);
+
+double getXmin(Matrice G);
+double getXmax(Matrice G);
+double getYmin(Matrice G);
+double getYmax(Matrice G);
 
 
 #endif // STRUCTURE_MATRICE_H_INCLUDED

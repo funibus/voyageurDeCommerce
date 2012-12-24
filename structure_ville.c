@@ -63,7 +63,7 @@ void SetNameVille(Ville V, char * name){
 	while (name[length] != '\0') length++;
 	if (V->nom != NULL) free(V->nom);
 	V->nom = (char *) malloc(sizeof(char)*(length+1));
-	for (length; length >=0; length--)
+	for (; length >=0; length--)
 		V->nom[length] = name[length];
 }
 void SetXVille(Ville V, double x){

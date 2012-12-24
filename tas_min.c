@@ -55,6 +55,7 @@ Tas creer_tas (Matrice graph_arg, int taille_tas_arg){
 }
 
 void liberer_tas (Tas T){
+	//liberer les arretes inutiliser
 	free (T->tab);
 	free (T);
 }
