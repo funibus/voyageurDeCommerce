@@ -73,13 +73,12 @@ void test_create_tab_villes ()
 {
     int nb_villes = 0;
     int* nombre_villes = &nb_villes;
-    Ville** grand_tab = create_tab_villes (nombre_villes);
+    Ville* tab_villes = create_tab_villes (nombre_villes);
 
     printf ("il y a %d villes\n", *nombre_villes);
-    printf ("la 1235eme ville est %s\n\n", getNameVille(grand_tab[1][234]));
-    printf ("de coordonnees x = %f, y = %f\n", getXVille(grand_tab[1][234]), getYVille(grand_tab[1][234]));
+    printf ("la 1235eme ville est %s\n\n", getNameVille(tab_villes[1234]));
+    printf ("de coordonnees x = %f, y = %f\n", getXVille(tab_villes[1234]), getYVille(tab_villes[1234]));
 }
-
 
 
 

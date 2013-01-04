@@ -132,7 +132,7 @@ int compter_villes (FILE* fichier)
 
 /* lit le fichier France_towns.txt et renvoie un tableau tab_villes contenant toutes les villes du fichier
  pour obtenir le nombre de ville a la fin, on donne un pointeur vers un entier nb_villes, que l'on modifiera dans la fonction*/
-Ville** create_tab_villes (int* nombre_villes)
+Ville* create_tab_villes (int* nombre_villes)
 {
     FILE* fichier = fopen("FranceTowns.txt", "r");
     if (fichier == NULL)
@@ -148,24 +148,12 @@ Ville** create_tab_villes (int* nombre_villes)
     int i=0;
     int j;
 
-    int nombre_de_tab =(taille_tab / 1000)+1; //pour ne pas faire un tableau trop grand, on le decoupe
-                                              //en tableau de longueur 1000 au plus
-    Ville** grand_tab =(Ville **) malloc(sizeof(Ville*)*nombre_de_tab); //on stocke les adresses de chaque tableau dans un grand tableau
-    if (grand_tab == NULL)
+    Ville* tab_villes =(Ville*) malloc(sizeof(Ville)*taille_tab);
+    if (tab_villes == NULL)
     {
-        printf ("probleme d'allocation memoire pour le grand tableau de villes");
-        exit (1);
-    }
-
-    for (i=0; i<nombre_de_tab; i++)
-    {
-        grand_tab[i] = (Ville*) malloc(sizeof(Ville)*1000);
-        if (grand_tab[i] == NULL)
-        {
         printf ("probleme d'allocation memoire pour le tableau de villes");
         exit (1);
-        }
-    };
+    }
 
     char nom_ville[100];
     double pos_x, pos_y;
@@ -174,7 +162,7 @@ Ville** create_tab_villes (int* nombre_villes)
     for (j=0; j<nb_villes; j++)
     {
         i = 0;
-        while (c != ':') //on laisse c != EOF des fois que le fichier n'ait pas la forme voulu
+        while (c != ':' && c != EOF) //on laisse c != EOF des fois que le fichier n'ait pas la forme voulu
         {
             nom_ville[i] = c;
             i++;
@@ -182,7 +170,7 @@ Ville** create_tab_villes (int* nombre_villes)
         }
         nom_ville[i] = '\0';
         fscanf (fichier, " %lf; %lf!\n", &pos_x, &pos_y);
-        grand_tab[j/1000][j%1000] = create_ville(nom_ville, pos_x, pos_y);
+        tab_villes[j] = create_ville(nom_ville, pos_x, pos_y);
 
         c=fgetc (fichier);
 
@@ -190,5 +178,5 @@ Ville** create_tab_villes (int* nombre_villes)
 
     fclose (fichier);
     *nombre_villes = nb_villes;
-    return grand_tab;
+    return tab_villes;
 }

@@ -9,7 +9,7 @@
 
 Matrice matrice_of_fichier (FILE* fichier);
 Matrice matrice_of_coordonnees (FILE* fichier);
-Ville** create_tab_villes (int* nombre_villes);
+Ville* create_tab_villes (int* nombre_villes);
 int compter_villes (FILE* fichier);
 
 
