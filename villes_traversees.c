@@ -11,6 +11,23 @@ struct chemin
 typedef struct chemin* Chemin;
 
 
+Chemin ajouter_chemin (Ville ville, Chemin suite_du_chemin)
+{
+    Chemin nouvelle_ville = (struct chemin*) malloc(sizeof(struct chemin));
+    if (nouvelle_ville == NULL)
+    {
+        printf("probleme d'allocation memoire pour le chemin");
+        exit(1);
+    }
+    nouvelle_ville->ville = ville;
+    nouvelle_ville->ville_suivante = suite_du_chemin;
+}
+
+/*free chemin*/
+
+
+
+
 //prend en entree un tableau avec les coordonnees de toutes les villes, et le chemin initial du voyageur de commerce
 //(avec au moins une ville dedans).
 //rajoute au chemin les villes traversees par le voyageur de commerce mais non demandees

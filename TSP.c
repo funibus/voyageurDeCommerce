@@ -40,17 +40,17 @@ Matrice matrice_of_coordonnees (FILE* fichier)
     double* tableau; // tableau dynamique pour les villes
     Matrice matrice_poids;
     /*
-    les fichiers coordonnées sommets commence par une ligne indiquant le nombre de sommet
-    tandis ce que les fichiers coordonnées villes n'indique pas le nombre de villes présentent dans le fichier.
-    On vas tester si le fichiers comporte cette indication, et ci c'est le cas, on va simplement l'ignoré (et lire le fichier jusqu'a la fin)
+    les fichiers coordonnees sommets commencent par une ligne indiquant le nombre de sommets
+    alors que les fichiers coordonnees villes n'indiquent pas le nombre de villes présentes dans le fichier.
+    On va tester si le fichier contient cette indication, et ci c'est le cas, on va simplement l'ignorer (et lire le fichier jusqu'a la fin)
     */
     curseur_init = ftell(fichier);//position initial dans le fichier
-    c = 'A'; //c un charatere différent de '\n' et de ':'
+    c = 'A'; //c un charatere different de '\n' et de ':'
     while (c != '\n' && c != ':'){
     	c = fgetc(fichier);
     }
-    if (c == ':'){// fichiers avec nom de ville
-    	//on compte le nombre de villes présentent dans le fichier
+    if (c == ':'){// fichier avec nom de ville
+    	//on compte le nombre de villes presentess dans le fichier
     	nombre_villes=1;
     	while (c != EOF){
     		c = fgetc(fichier);
@@ -61,7 +61,7 @@ Matrice matrice_of_coordonnees (FILE* fichier)
     	fseek(fichier, 0, curseur_init);//on revient a la position initial pour traiter la premier ligne
     }
     else{//fichier sommet
-    	fseek(fichier, 0, curseur_init);//on revient a la position initial pour récupérer la taille exacte du tableau
+    	fseek(fichier, 0, curseur_init);//on revient a la position initial pour recuperer la taille exacte du tableau
     	fscanf (fichier, "%d!", &nombre_villes);
     	if (!feof(fichier))fgetc(fichier);// saut le \n
     }
@@ -105,5 +105,59 @@ Matrice matrice_of_coordonnees (FILE* fichier)
 }
 
 
+/* lit le fichier France_towns.txt et renvoie un tableau tab_villes contenant toutes les villes du fichier
+ pour obtenir le nombre de ville a la fin, on donne un pointeur vers un entier nb_villes, que l'on modifiera dans la fonction*/
+Ville* create_tab_villes (int* nombre_villes)
+{
+    FILE* fichier = fopen("FranceTowns.txt", "r");
+    if (fichier == NULL)
+    {
+        printf("probleme a l'ouverture de FranceTowns.txt");
+        exit(1);
+    }
+    int taille_tab = 200;
+    int nb_villes = 0;
+    char c = fgetc (fichier);
+    Ville* tab_villes = malloc(sizeof(Ville));
+    char nom_ville[100];
+    int i=0;
+    double pos_x, pos_y;
+
+
+    while (c != EOF)
+    {
+        if (nb_villes == (taille_tab -1) ) //pour ne pas parcourir une première fois le fichier pour compter le nombre de villes,
+        {                                 //on realloue la memoire quand on n'a plus assez de place dans le tableau
+            taille_tab = (taille_tab + 200); //on alloue la memoire de 200 en 200
+            tab_villes = realloc (tab_villes, taille_tab);
+            if (tab_villes == NULL)
+            {
+                printf ("probleme de reallocation du tableau");
+                exit (1);
+            }
+        }
+        while (c != ':')
+        {
+            nom_ville[i] = c;
+            i++;
+            c = fgetc (fichier);
+        }
+        fscanf (fichier, " %lf; %lf!", &pos_x, &pos_y);
+        tab_villes[nb_villes] = create_ville(nom_ville, pos_x, pos_y);
+        nb_villes++;
+
+        c=fgetc (fichier);
+
+    }
+    fclose (fichier);
+    *nombre_villes = nb_villes;
+    return tab_villes;
+}
+
+/*void trier_tab_villes (Ville* tab_villes)
+{
+
+}
+*/
 
 
