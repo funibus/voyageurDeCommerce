@@ -51,14 +51,33 @@ void test_matrice_of_coordonnees ()
 }
 
 
+/*on doit trouver 100107*/
+void test_compter_villes ()
+{
+    FILE* fichier = fopen("FranceTowns.txt", "r");
+    if (fichier == NULL)
+    {
+        printf("probleme a l'ouverture de FranceTowns.txt");
+        exit(1);
+    }
+
+    int nb_villes = compter_villes (fichier);
+    fclose (fichier);
+
+    printf ("il y a %d villes\n", nb_villes);
+
+}
+
+/*la 1235eme ville est Goderville*/
 void test_create_tab_villes ()
 {
-    int* nombre_villes;
-    *nombre_villes = 0;
-    Ville* tab_villes = create_tab_villes (nombre_villes);
+    int nb_villes = 0;
+    int* nombre_villes = &nb_villes;
+    Ville** grand_tab = create_tab_villes (nombre_villes);
 
     printf ("il y a %d villes\n", *nombre_villes);
-    printf ("la 3eme ville est %s\n\n", getNameVille(tab_villes[2]));
+    printf ("la 1235eme ville est %s\n\n", getNameVille(grand_tab[1][234]));
+    printf ("de coordonnees x = %f, y = %f\n", getXVille(grand_tab[1][234]), getYVille(grand_tab[1][234]));
 }
 
 

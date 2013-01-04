@@ -105,9 +105,34 @@ Matrice matrice_of_coordonnees (FILE* fichier)
 }
 
 
+
+int compter_villes (FILE* fichier)
+{
+    char c = fgetc (fichier);
+    int nb_villes = 0;
+
+    while (c != EOF)
+    {
+        while (c != '!' && c != EOF)
+        {
+            c = fgetc (fichier);
+        }
+        if (c == EOF)
+        return nb_villes;
+        else
+        {
+            nb_villes++;
+            c = fgetc (fichier);
+        }
+
+    }
+    return nb_villes;
+
+}
+
 /* lit le fichier France_towns.txt et renvoie un tableau tab_villes contenant toutes les villes du fichier
  pour obtenir le nombre de ville a la fin, on donne un pointeur vers un entier nb_villes, que l'on modifiera dans la fonction*/
-Ville* create_tab_villes (int* nombre_villes)
+Ville** create_tab_villes (int* nombre_villes)
 {
     FILE* fichier = fopen("FranceTowns.txt", "r");
     if (fichier == NULL)
@@ -115,49 +140,55 @@ Ville* create_tab_villes (int* nombre_villes)
         printf("probleme a l'ouverture de FranceTowns.txt");
         exit(1);
     }
-    int taille_tab = 200;
-    int nb_villes = 0;
+    int nb_villes = compter_villes(fichier);
+    int taille_tab = nb_villes + 20; // prend un tableau un peu plus grand pour pouvoir rajouter des villes a la main
+    fseek(fichier, 0, SEEK_SET); //on revient au debut
+
     char c = fgetc (fichier);
-    Ville* tab_villes = malloc(sizeof(Ville));
-    char nom_ville[100];
     int i=0;
+    int j;
+
+    int nombre_de_tab =(taille_tab / 1000)+1; //pour ne pas faire un tableau trop grand, on le decoupe
+                                              //en tableau de longueur 1000 au plus
+    Ville** grand_tab =(Ville **) malloc(sizeof(Ville*)*nombre_de_tab); //on stocke les adresses de chaque tableau dans un grand tableau
+    if (grand_tab == NULL)
+    {
+        printf ("probleme d'allocation memoire pour le grand tableau de villes");
+        exit (1);
+    }
+
+    for (i=0; i<nombre_de_tab; i++)
+    {
+        grand_tab[i] = (Ville*) malloc(sizeof(Ville)*1000);
+        if (grand_tab[i] == NULL)
+        {
+        printf ("probleme d'allocation memoire pour le tableau de villes");
+        exit (1);
+        }
+    };
+
+    char nom_ville[100];
     double pos_x, pos_y;
 
 
-    while (c != EOF)
+    for (j=0; j<nb_villes; j++)
     {
-        if (nb_villes == (taille_tab -1) ) //pour ne pas parcourir une première fois le fichier pour compter le nombre de villes,
-        {                                 //on realloue la memoire quand on n'a plus assez de place dans le tableau
-            taille_tab = (taille_tab + 200); //on alloue la memoire de 200 en 200
-            tab_villes = realloc (tab_villes, taille_tab);
-            if (tab_villes == NULL)
-            {
-                printf ("probleme de reallocation du tableau");
-                exit (1);
-            }
-        }
-        while (c != ':')
+        i = 0;
+        while (c != ':') //on laisse c != EOF des fois que le fichier n'ait pas la forme voulu
         {
             nom_ville[i] = c;
             i++;
             c = fgetc (fichier);
         }
-        fscanf (fichier, " %lf; %lf!", &pos_x, &pos_y);
-        tab_villes[nb_villes] = create_ville(nom_ville, pos_x, pos_y);
-        nb_villes++;
+        nom_ville[i] = '\0';
+        fscanf (fichier, " %lf; %lf!\n", &pos_x, &pos_y);
+        grand_tab[j/1000][j%1000] = create_ville(nom_ville, pos_x, pos_y);
 
         c=fgetc (fichier);
 
-    }
+    };
+
     fclose (fichier);
     *nombre_villes = nb_villes;
-    return tab_villes;
+    return grand_tab;
 }
-
-/*void trier_tab_villes (Ville* tab_villes)
-{
-
-}
-*/
-
-
