@@ -2,8 +2,6 @@
 
 #include "TSP.h"
 
-double distance (double x1, double y1, double x2, double y2);
-
 
 /*calcule la matrice avec les poids des aretes a partir du fichier avec la distance entre les sommets*/
 Matrice matrice_of_fichier (FILE* fichier)

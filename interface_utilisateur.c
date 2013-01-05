@@ -179,8 +179,44 @@ void voyageur_de_commerce_utilisateur ()
     int* nombre_villes = &nb_villes;
     Ville* tab_villes = create_tab_villes (nombre_villes);
     int nb_villes_parcourt;
+    int i,j;
+    double d;
 
     Ville* tab_parcourt = interface_utilisateur(tab_villes, nombre_villes, &nb_villes_parcourt);
+
+    Matrice mat_parcourt = create_mat (nb_villes_parcourt);
+
+    for (i=0; i<nb_villes_parcourt; i++)
+    {
+        SetNameSommet(mat_parcourt, i, getNameVille(tab_parcourt[i]));
+        SetXSommet(mat_parcourt, i, getXVille(tab_parcourt[i]));
+        SetYSommet(mat_parcourt, i, getYVille(tab_parcourt[i]));
+    };
+
+    for (i=0; i<nb_villes_parcourt; i++)
+    {
+        for (j=0; j<nb_villes_parcourt; j++)
+        {
+            d = distance (getXSommet(i), getYSommet (i), getXSommet(j), getYSommet(j));
+            setPoids (mat_parcourt, i, j, d);
+        };
+    };
+
+    FILE* chemin = NULL;
+    chemin = fopen ("chemin.txt", "w");
+    if (chemin == NULL)
+    {
+        printf("probleme à l'ouverture de chemin.txt");
+        exit(1);
+    }
+
+    TSP (mat_parcourt, chemin);
+
+    fclose (chemin);
+    liberer_mat(mat_parcourt);
+
+    free (tab_parcourt);
+    free (tab_ville);
 
 
 }

@@ -13,10 +13,12 @@ void test_prim_4_villes ()
   Matrice matrice_poids = matrice_of_coordonnees (fichier);
   double distance = 0.;
 
-  TSP(matrice_poids,stdout);
+  FILE* chemin = fopen ("chemin.txt", "w");
+  TSP(matrice_poids,chemin);
+  fclose (chemin);
   fclose(fichier);
 
- /*on rajoute la distance parcourue à la fin du fichier chemin.txt")*/
+ /*on rajoute la distance parcourue à la fin du fichier chemin.txt*/
   FILE* chemin = NULL;
   chemin = fopen("chemin.txt", "r");
   if (chemin==NULL)
@@ -26,7 +28,7 @@ void test_prim_4_villes ()
   }
   distance = distance_parcourue (chemin, matrice_poids);
   fclose(chemin);
-  
+
   chemin = NULL;
   chemin = fopen("chemin.txt", "a");
   if (chemin==NULL)
@@ -36,6 +38,6 @@ void test_prim_4_villes ()
   }
   fprintf(chemin, "\ndistance parcourue : %f \n", distance);
   fclose(chemin);
-  
+
 }
 
