@@ -31,3 +31,21 @@ void test_interface_utilisateur ()
     }
     printf("\n");
 }
+
+
+void test ()
+{
+    int nb_villes = 0;
+    int* nombre_villes = &nb_villes;
+    Ville* tab_villes = create_tab_villes (nombre_villes);
+
+    char nom_ville[100];
+    int i;
+    scanf ("%d", &i);
+    printf ("entier choisi : %d\n", i);
+    vider_buffer();
+    fgets (nom_ville, 100, stdin);
+    printf ("ville choisie : %s", nom_ville);
+
+    int j = trouver_ville (tab_villes, *nombre_villes, nom_ville);
+}
