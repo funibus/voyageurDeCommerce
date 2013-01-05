@@ -197,7 +197,7 @@ void voyageur_de_commerce_utilisateur ()
     {
         for (j=0; j<nb_villes_parcourt; j++)
         {
-            d = distance (getXSommet(i), getYSommet (i), getXSommet(j), getYSommet(j));
+            d = distance (getXSommet(mat_parcourt, i), getYSommet (mat_parcourt, i), getXSommet(mat_parcourt, j), getYSommet(mat_parcourt, j));
             setPoids (mat_parcourt, i, j, d);
         };
     };
@@ -216,7 +216,6 @@ void voyageur_de_commerce_utilisateur ()
     liberer_mat(mat_parcourt);
 
     free (tab_parcourt);
-    free (tab_ville);
-
+    free (tab_villes);
 
 }
