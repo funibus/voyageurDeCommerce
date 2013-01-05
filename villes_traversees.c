@@ -21,9 +21,18 @@ Chemin ajouter_chemin (Ville ville, Chemin suite_du_chemin)
     }
     nouvelle_ville->ville = ville;
     nouvelle_ville->ville_suivante = suite_du_chemin;
+
+    return nouvelle_ville;
 }
 
-/*free chemin*/
+void liberer_chemin (Chemin chemin)
+{
+    if (chemin != NULL)
+    {
+        liberer_chemin (chemin->ville_suivante);
+        free (chemin);
+    }
+}
 
 
 
