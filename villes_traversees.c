@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "structure_ville.h"
+#include "villes_traversees.h"
 
 struct chemin
 {
     Ville ville;
     struct chemin* ville_suivante;
 };
-
-typedef struct chemin* Chemin;
 
 
 Chemin ajouter_chemin (Ville ville, Chemin suite_du_chemin)
@@ -34,7 +32,61 @@ void liberer_chemin (Chemin chemin)
     }
 }
 
+/*prend en entree un fichier avec un chemin, de la forme ville1, ville2, ville3... et renvoie une liste de villes de type Chemin*/
+Chemin chemin_of_fichier (FILE* fichier, Ville* tab_villes, int nb_villes)
+{
+    char nom_ville[100];
+    int c = fgetc (fichier);
+    int i,j;
+    Ville ville;
+    Chemin debut_chemin = NULL;
 
+    while (c != EOF)
+    {
+        i = 0;
+        while (c != ',' && c != EOF)
+        {
+            nom_ville[i] = c;
+            i++;
+            c=fgetc(fichier);
+        }
+        nom_ville[i] = '\0';
+        c = fgetc(fichier);
+
+        j = trouver_ville (tab_villes, nb_villes, nom_ville);
+
+        if (j>=0 && j < nb_villes)
+        {
+            ville = tab_villes[j];
+            debut_chemin = ajouter_chemin(ville, debut_chemin); //on parcourt le chemin a l'envers (la premiere ville du fichier devient
+        }                                                       // la derniere du chemin, mais ce n'est pas très grave.
+        else
+        {
+            printf ("probleme : une ville du chemin ne devrait pas exister");
+            exit(1);
+        }
+
+    }
+
+    return debut_chemin;
+}
+
+/*ecrit le chemin de type Chemin dans un fichier donne en argument*/
+void fichier_of_chemin (Chemin chemin, FILE* fichier)
+{
+    if (chemin != NULL)
+    {
+        fprintf (fichier, "%s", getNameVille(chemin->ville));
+        Chemin chemin_aux = chemin->ville_suivante;
+
+        while (chemin_aux != NULL)
+        {
+            fprintf (fichier, ", %s", getNameVille (chemin_aux->ville));
+            chemin_aux = chemin_aux->ville_suivante;
+        }
+    }
+
+}
 
 
 //prend en entree un tableau avec les coordonnees de toutes les villes, et le chemin initial du voyageur de commerce
