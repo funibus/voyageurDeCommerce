@@ -137,7 +137,7 @@ Ville* create_tab_villes (char *input, int* nombre_villes)
     FILE* fichier = fopen(input, "r");
     if (fichier == NULL)
     {
-        printf("probleme a l'ouverture de FranceTowns.txt");
+        printf("probleme a l'ouverture de %s", input);
         exit(1);
     }
 

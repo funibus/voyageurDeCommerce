@@ -73,6 +73,9 @@ int main (int argc, char *argv[]){
 			TSP (mat,output);
 			continuer = 13;
 			break;
+		case 4 :
+			//inserer les testes ici
+			break;
 		case 0 :
 			break;
 		default :

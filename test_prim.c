@@ -19,6 +19,7 @@ void test_prim_4_villes ()
   fclose(fichier);
 
  /*on rajoute la distance parcourue à la fin du fichier chemin.txt*/
+  chemin = NULL;
   chemin = fopen("chemin.txt", "r");
   if (chemin==NULL)
   {
