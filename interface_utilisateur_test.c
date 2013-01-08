@@ -32,20 +32,11 @@ void test_interface_utilisateur ()
     printf("\n");
 }
 
-
-void test ()
+void test_voyageur_de_commerce ()
 {
-    int nb_villes = 0;
-    int* nombre_villes = &nb_villes;
-    Ville* tab_villes = create_tab_villes (nombre_villes);
+   FILE* chemin = NULL;
+   chemin = fopen ("chemin.txt", "w");
+   Matrice matrice_parcourt;
 
-    char nom_ville[100];
-    int i;
-    scanf ("%d", &i);
-    printf ("entier choisi : %d\n", i);
-    vider_buffer();
-    fgets (nom_ville, 100, stdin);
-    printf ("ville choisie : %s", nom_ville);
-
-    int j = trouver_ville (tab_villes, *nombre_villes, nom_ville);
+   voyageur_de_commerce_utilisateur (chemin, matrice_parcourt);
 }

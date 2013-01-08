@@ -131,14 +131,22 @@ Ville* interface_utilisateur (Ville* tab_villes, int* nombre_villes_total, int* 
                 else
                 {
                     tab_parcourt[i]=tab_villes[j];
-                    printf ("ville trouvee : %s\nx=%f, y=%f\nAppuyez sur entree\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
+                    if (i!=(nb_villes_main-1))
+                      printf ("ville trouvee : %s\nx=%f, y=%f\nAppuyez sur entree\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
+                    else
+		      printf ("ville trouvee : %s\nx=%f, y=%f\nPatientez (plus ou moins longtemps)\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
+
                     i++;
                 }
             }
             else
             {
                 tab_parcourt[i]=tab_villes[j];
-                printf ("ville trouvee : %s\nx=%f, y=%f\n\nAppuyez sur entree\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
+                if (i!=(nb_villes_main-1))
+                  printf ("ville trouvee : %s\nx=%f, y=%f\nAppuyez sur entree\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
+                else
+		  printf ("ville trouvee : %s\nx=%f, y=%f\nPatientez (plus ou moins longtemps)\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
+
                 i++;
             }
         }
@@ -173,48 +181,38 @@ Ville* interface_utilisateur (Ville* tab_villes, int* nombre_villes_total, int* 
 
 }
 
-void voyageur_de_commerce_utilisateur ()
+/*prend en argument un fichier chemin ouvert en ecriture et un pointeur sur une matrice*/
+void voyageur_de_commerce_utilisateur (FILE* chemin, Matrice mat_parcourt)
 {
     int nb_villes = 0;
-    int* nombre_villes = &nb_villes;
-    Ville* tab_villes = create_tab_villes (nombre_villes);
+    Ville* tab_villes = create_tab_villes (&nb_villes);
     int nb_villes_parcourt;
     int i,j;
     double d;
 
-    Ville* tab_parcourt = interface_utilisateur(tab_villes, nombre_villes, &nb_villes_parcourt);
+    Ville* tab_parcourt = interface_utilisateur(tab_villes, &nb_villes, &nb_villes_parcourt);
 
-    Matrice mat_parcourt = create_mat (nb_villes_parcourt);
+    mat_parcourt = create_mat (nb_villes_parcourt);
 
     for (i=0; i<nb_villes_parcourt; i++)
     {
         SetNameSommet(mat_parcourt, i, getNameVille(tab_parcourt[i]));
         SetXSommet(mat_parcourt, i, getXVille(tab_parcourt[i]));
         SetYSommet(mat_parcourt, i, getYVille(tab_parcourt[i]));
-    };
+    }
 
     for (i=0; i<nb_villes_parcourt; i++)
     {
         for (j=0; j<nb_villes_parcourt; j++)
         {
             d = distance (getXSommet(mat_parcourt, i), getYSommet (mat_parcourt, i), getXSommet(mat_parcourt, j), getYSommet(mat_parcourt, j));
-            setPoids (mat_parcourt, i, j, d);
-        };
-    };
-
-    FILE* chemin = NULL;
-    chemin = fopen ("chemin.txt", "w");
-    if (chemin == NULL)
-    {
-        printf("probleme à l'ouverture de chemin.txt");
-        exit(1);
+            setPoid (mat_parcourt, i, j, d);
+        }
     }
 
     TSP (mat_parcourt, chemin);
-
     fclose (chemin);
-    liberer_mat(mat_parcourt);
-
+    liberer_mat (mat_parcourt);
     free (tab_parcourt);
     free (tab_villes);
 

@@ -14,8 +14,11 @@
 #include "tas_min.h"
 #include "prim.h"
 #include "TSP.h"
-#include "gui.h"
+//#include "gui.h"
 #include "structure_matrice.h"
+#include "interface_utilisateur.h"
+#include "interface_utilisateur_test.h"
+
 
 /**
  * prog arg1 arg2
@@ -25,7 +28,7 @@
  * @param argv tableau de chaine de carateres
  * @return
  */
-int main (int argc, char *argv[]){
+/*int main (int argc, char *argv[]){
 	FILE* input = NULL, *output = NULL;
 	Matrice mat = NULL;
 	if(argc >= 2){
@@ -62,4 +65,13 @@ int main (int argc, char *argv[]){
 	fclose(output);
 	return 0;
 }
+*/
+
+int main ()
+{
+   test_voyageur_de_commerce ();
+   return 0;
+}
+
+
 
