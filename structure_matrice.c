@@ -24,11 +24,10 @@ struct matrice
  * @return une structure Matrice vide
  */
 Matrice create_mat (int nb_villes_arg){
-	Matrice ret = NULL;
 	int i;
 	char tmp[100];
 
-	ret = (struct matrice*) malloc(sizeof(struct matrice));
+	Matrice ret  = (Matrice) malloc(sizeof(struct matrice));
 	ret->nb_villes = nb_villes_arg;
 	if (ret == NULL ){
 		fprintf(stderr, "erreur allocation matrice : pas assez de memoire");

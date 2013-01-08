@@ -103,7 +103,6 @@ Matrice matrice_of_coordonnees (FILE* fichier)
 }
 
 
-
 int compter_villes (FILE* fichier)
 {
     char c = fgetc (fichier);
@@ -125,26 +124,26 @@ int compter_villes (FILE* fichier)
 
     }
     return nb_villes;
-
 }
 
 /* lit le fichier France_towns.txt et renvoie un tableau tab_villes contenant toutes les villes du fichier
  pour obtenir le nombre de ville a la fin, on donne un pointeur vers un entier nb_villes, que l'on modifiera dans la fonction*/
-Ville* create_tab_villes (int* nombre_villes)
+Ville* create_tab_villes (char *input, int* nombre_villes)
 {
-    FILE* fichier = fopen("FranceTowns.txt", "r");
+	int nb_villes, taille_tab, i, j;
+	char c;
+    char nom_ville[100];
+    double pos_x, pos_y;
+    FILE* fichier = fopen(input, "r");
     if (fichier == NULL)
     {
         printf("probleme a l'ouverture de FranceTowns.txt");
         exit(1);
     }
-    int nb_villes = compter_villes(fichier);
-    int taille_tab = nb_villes + 20; // prend un tableau un peu plus grand pour pouvoir rajouter des villes a la main
-    fseek(fichier, 0, SEEK_SET); //on revient au debut
 
-    char c = fgetc (fichier);
-    int i=0;
-    int j;
+    nb_villes = compter_villes(fichier);
+    rewind(fichier); //on revient au debut
+    taille_tab = nb_villes + 20; // prend un tableau un peu plus grand pour pouvoir rajouter des villes a la main
 
     Ville* tab_villes =(Ville*) malloc(sizeof(Ville)*taille_tab);
     if (tab_villes == NULL)
@@ -153,10 +152,7 @@ Ville* create_tab_villes (int* nombre_villes)
         exit (1);
     }
 
-    char nom_ville[100];
-    double pos_x, pos_y;
-
-
+    c = fgetc (fichier);
     for (j=0; j<nb_villes; j++)
     {
         i = 0;
@@ -170,11 +166,18 @@ Ville* create_tab_villes (int* nombre_villes)
         fscanf (fichier, " %lf; %lf!\n", &pos_x, &pos_y);
         tab_villes[j] = create_ville(nom_ville, pos_x, pos_y);
 
-        c=fgetc (fichier);
-
-    };
+        c = fgetc (fichier);
+    }
 
     fclose (fichier);
     *nombre_villes = nb_villes;
     return tab_villes;
+}
+
+void liberer_tab_villes (Ville *tab, int nombre_villes){
+	int j;
+    for (j=0; j<nombre_villes; j++){
+    	liberer_ville(tab[j]);
+    }
+    free(tab);
 }

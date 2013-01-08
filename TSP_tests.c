@@ -73,7 +73,7 @@ void test_create_tab_villes ()
 {
     int nb_villes = 0;
     int* nombre_villes = &nb_villes;
-    Ville* tab_villes = create_tab_villes (nombre_villes);
+    Ville* tab_villes = create_tab_villes ("FranceTowns.txt", nombre_villes);
 
     printf ("il y a %d villes\n", *nombre_villes);
     printf ("la 1235eme ville est %s\n\n", getNameVille(tab_villes[1234]));

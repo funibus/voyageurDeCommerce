@@ -41,8 +41,11 @@ Ville create_ville (char* name, double x, double y){
 	return V;
 }
 void liberer_ville (Ville V){
-	free(V->nom);
-	free(V);
+	if (V){
+		if (V->nom)
+			free(V->nom);
+		free(V);
+	}
 }
 char * getNameVille(Ville V){
 	return V->nom;
