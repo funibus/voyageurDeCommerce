@@ -185,7 +185,7 @@ Ville* interface_utilisateur (Ville* tab_villes, int* nombre_villes_total, int* 
  * @param input fichier contenant des villes et leur coordonnées
  * @param mat_parcourt Matrice dans la quelle sera stoke les villes sélectionne par l'utilisateur
  */
-void voyageur_de_commerce_utilisateur (char *input, Matrice *mat_parcourt)
+void voyageur_de_commerce_utilisateur (char *input, Matrice *mat_parcourt, char* output)
 {
     int nb_villes = 0;
     Ville* tab_villes = create_tab_villes (input, &nb_villes);
@@ -212,6 +212,31 @@ void voyageur_de_commerce_utilisateur (char *input, Matrice *mat_parcourt)
             setPoid (*mat_parcourt, i, j, d);
         }
     }
+
+    FILE* fichier_chemin= NULL;
+
+    fichier_chemin = fopen (output, "w");
+    if (fichier_chemin == NULL)
+    {
+        printf ("probleme a l'ouverture de %s", output);
+        exit(1);
+    }
+
+    TSP(*mat_parcourt, fichier_chemin);
+
+    fclose (fichier_chemin);
+    fichier_chemin = fopen (output, "r");
+
+    Chemin chemin = chemin_of_fichier (fichier_chemin, tab_villes, nb_villes);
+
+    fclose (fichier_chemin);
+
+    villes_traversees (chemin, chemin, tab_villes, nb_villes);
+    fichier_chemin = fopen (output, "w");
+    fichier_of_chemin (chemin, fichier_chemin);
+
+    fclose (fichier_chemin);
+    liberer_chemin (chemin);
 
 	liberer_tab_villes (tab_villes, nb_villes);
 	liberer_tab_villes (tab_parcourt, nb_villes_parcourt);
