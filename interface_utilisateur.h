@@ -5,6 +5,7 @@
 #include "TSP.h"
 #include "prim.h"
 #include "structure_matrice.h"
+#include "villes_traversees.h"
 
 int trouver_ville (Ville* tab_villes, int nombre_villes, char* nom_ville);
 Ville* interface_utilisateur (Ville* tab_villes, int* nombre_villes_total, int* nombre_villes_parcourt);

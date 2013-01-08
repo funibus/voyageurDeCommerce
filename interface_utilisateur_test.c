@@ -34,10 +34,26 @@ void test_interface_utilisateur ()
 
 void test_voyageur_de_commerce ()
 {
-   FILE* chemin = NULL;
-   chemin = fopen ("test_voyageur_de_commerce.txt", "w");
-   Matrice matrice_parcourt = NULL;
-   voyageur_de_commerce_utilisateur ("FranceTowns.txt",  &matrice_parcourt);
-   TSP (matrice_parcourt, chemin);
-   liberer_mat (matrice_parcourt);
+   int nb_villes = 0;
+   Ville* tab_villes = create_tab_villes (&nb_villes);
+   FILE* fichier_chemin = NULL;
+   FILE* chemin_villes_traversees = NULL;
+   fichier_chemin = fopen ("chemin.txt", "w");
+   Matrice matrice_parcourt;
+
+   voyageur_de_commerce_utilisateur (fichier_chemin, matrice_parcourt);
+
+   fichier_chemin = fopen ("chemin.txt", "r");
+
+   Chemin chemin = chemin_of_fichier (fichier_chemin, tab_villes, nb_villes);
+
+   fclose(fichier_chemin);
+
+   villes_traversees(chemin, chemin, tab_villes, nb_villes);
+
+   chemin_villes_traversees = fopen ("villes_traversees.txt", "w");
+   fichier_of_chemin (chemin, chemin_villes_traversees);
+
+   fclose (chemin_villes_traversees);
+   liberer_chemin(chemin);
 }
