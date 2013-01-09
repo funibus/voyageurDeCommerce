@@ -16,7 +16,7 @@ void test_creation_chemin ()
    }
 
    int nb_villes = 0;
-   Ville* tab_villes = create_tab_villes (&nb_villes);
+   Ville* tab_villes = create_tab_villes ("FranceTowns.txt",&nb_villes);
 
    Chemin chemin = chemin_of_fichier (fichierChemin, tab_villes, nb_villes);
 
@@ -46,7 +46,7 @@ void test_villes_traversees ()
    }
 
    int nb_villes = 0;
-   Ville* tab_villes = create_tab_villes (&nb_villes);
+   Ville* tab_villes = create_tab_villes ("FranceTowns.txt", &nb_villes);
 
    Chemin chemin = chemin_of_fichier (fichierChemin, tab_villes, nb_villes);
 

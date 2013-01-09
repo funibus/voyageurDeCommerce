@@ -23,7 +23,8 @@ int trouver_ville (Ville* tab_villes, int nombre_villes, char* nom_ville)
 	return -1;
 }
 
-void vider_buffer () //on vide le buffer avant d'utiliser la fonction fgets pour etre sur d'avoir bien ce que l'utilisateur rentre
+/*on vide le buffer avant d'utiliser la fonction fgets pour etre sur d'avoir bien ce que l'utilisateur rentre*/
+void vider_buffer ()
 {
 	int c=getchar();
 	while (c != EOF && c != '\n')
@@ -32,7 +33,9 @@ void vider_buffer () //on vide le buffer avant d'utiliser la fonction fgets pour
 	}
 }
 
-void reprendre_fgetc (char* mot) //la fonction fgets prend en compte le entree a la fin de la saisie, on parcourt donc le mot pour l'enlever
+/*la fonction fgets prend en compte le "entree" a la fin de la saisie,
+avec cette fonction on parcourt le mot pour l'enlever*/
+void reprendre_fgetc (char* mot)
 {
 	int i = 0;
 	char c = mot[i];
@@ -49,6 +52,11 @@ void reprendre_fgetc (char* mot) //la fonction fgets prend en compte le entree a
 	}
 }
 
+/*Cette fonction prend en entree un vecteur avec des villes, un pointeur vers le nombre de villes totale du tableau
+(qui peut etre modifie si l'utilisateur veut rajouter des villes a la main) et un pointeur vers un entier
+dans lequel on mettra le nombre de villes que l'utilisateur souhaite parcourir.
+L'utilisateur peut choisir dans la console le nombre de villes a parcourir, le nombre de villes qu'il veut choisir personnelement.
+Il peut soit choisir des villes deja existentes, soit les ajouter a la main avec leurs coordonnees*/
 Ville* interface_utilisateur (Ville* tab_villes, int* nombre_villes_total, int* nombre_villes_parcourt)
 {
 	int nb_villes_total = *nombre_villes_total;
@@ -134,7 +142,7 @@ Ville* interface_utilisateur (Ville* tab_villes, int* nombre_villes_total, int* 
 					if (i!=(nb_villes_main-1))
 						printf ("ville trouvee : %s\nx=%f, y=%f\nAppuyez sur entree\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
 					else
-						printf ("ville trouvee : %s\nx=%f, y=%f\nPatientez (plus ou moins longtemps)\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
+						printf ("ville trouvee : %s\nx=%f, y=%f\n\nPatientez (plus ou moins longtemps)\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
 
 					i++;
 				}
@@ -145,7 +153,7 @@ Ville* interface_utilisateur (Ville* tab_villes, int* nombre_villes_total, int* 
 				if (i!=(nb_villes_main-1))
 					printf ("ville trouvee : %s\nx=%f, y=%f\nAppuyez sur entree\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
 				else
-					printf ("ville trouvee : %s\nx=%f, y=%f\nPatientez (plus ou moins longtemps)\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
+					printf ("ville trouvee : %s\nx=%f, y=%f\n\nPatientez (plus ou moins longtemps)\n\n", getNameVille(tab_villes[j]), getXVille(tab_villes[j]), getYVille(tab_villes[j]));
 				i++;
 			}
 		}
@@ -180,10 +188,10 @@ Ville* interface_utilisateur (Ville* tab_villes, int* nombre_villes_total, int* 
 
 /**
  * permet à l'utilisateur de choisir sa liste de ville parmi une liste de villes stoker dans le fichier input
- * et d'éventuellement en rajouter
+ * et d'éventuellement en rajouter. Ecrit le chemin parcouru dans le fichier output
  * @param output fichier dans le quel sera inscrit le cycle issue de l'algorithme TSP
  * @param input fichier contenant des villes et leur coordonnées
- * @param mat_parcourt Matrice dans la quelle sera stoke les villes sélectionne par l'utilisateur
+ * @param mat_parcourt Matrice dans la quelle seront stokees les villes selectionnees par l'utilisateur
  */
 void voyageur_de_commerce_utilisateur (char *input, Matrice *mat_parcourt, char* output)
 {
@@ -199,9 +207,9 @@ void voyageur_de_commerce_utilisateur (char *input, Matrice *mat_parcourt, char*
 
     for (i=0; i<nb_villes_parcourt; i++)
     {
-        SetNameSommet(*mat_parcourt, i, getNameVille(tab_parcourt[i]));
-        SetXSommet(*mat_parcourt, i, getXVille(tab_parcourt[i]));
-        SetYSommet(*mat_parcourt, i, getYVille(tab_parcourt[i]));
+        SetNameSommet( *mat_parcourt, i, getNameVille(tab_parcourt[i]));
+        SetXSommet( *mat_parcourt, i, getXVille(tab_parcourt[i]));
+        SetYSommet( *mat_parcourt, i, getYVille(tab_parcourt[i]));
     }
 
     for (i=0; i<nb_villes_parcourt; i++)
@@ -222,23 +230,25 @@ void voyageur_de_commerce_utilisateur (char *input, Matrice *mat_parcourt, char*
         exit(1);
     }
 
+   //on ecrit le chemin dans output
     TSP(*mat_parcourt, fichier_chemin);
-
     fclose (fichier_chemin);
+
+    //on transforme le chemin ecrit dans output en liste de villes
     fichier_chemin = fopen (output, "r");
-
     Chemin chemin = chemin_of_fichier (fichier_chemin, tab_villes, nb_villes);
-
     fclose (fichier_chemin);
 
+    //on reecrit le chemin avec les villes traversees mais non demandees par l'utilisateur
     villes_traversees (chemin, chemin, tab_villes, nb_villes);
     fichier_chemin = fopen (output, "w");
     fichier_of_chemin (chemin, fichier_chemin);
-
     fclose (fichier_chemin);
     liberer_chemin (chemin);
 
 	liberer_tab_villes (tab_villes, nb_villes);
 	liberer_tab_villes (tab_parcourt, nb_villes_parcourt);
+
+
 
 }

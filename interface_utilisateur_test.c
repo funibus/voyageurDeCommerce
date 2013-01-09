@@ -1,5 +1,6 @@
 #include "interface_utilisateur_test.h"
 
+/*test la fonction trouver_ville : elle doit repondre "Chatenay existe : 525eme position" */
 void test_trouver_ville ()
 {
     int nb_villes = 0;
@@ -14,6 +15,7 @@ void test_trouver_ville ()
     printf ("Chatenay n'existe pas");
 }
 
+/*fonction de test de la fonction interface_utilisateur, avec le fichier "France_towns.txt"*/
 void test_interface_utilisateur ()
 {
     int nb_villes = 0;
@@ -32,27 +34,11 @@ void test_interface_utilisateur ()
     printf("\n");
 }
 
+/*fonction de test de la fonction voyageur de commerce, avec le fichier "France_towns.txt"*/
 void test_voyageur_de_commerce ()
 {
-   int nb_villes = 0;
-   Ville* tab_villes = create_tab_villes ("France_towns.txt", &nb_villes);
-   FILE* fichier_chemin = NULL;
-   FILE* chemin_villes_traversees = NULL;
-   Matrice matrice_parcourt;
+   Matrice* matrice_parcourt = malloc(sizeof(matrice_parcourt));
 
-   voyageur_de_commerce_utilisateur (fichier_chemin, matrice_parcourt, "test_voyageur_de_commerce.txt");
+   voyageur_de_commerce_utilisateur ("Francetowns.txt", matrice_parcourt, "test_voyageur_de_commerce.txt");
 
-   fichier_chemin = fopen ("chemin.txt", "r");
-
-   Chemin chemin = chemin_of_fichier (fichier_chemin, tab_villes, nb_villes);
-
-   fclose(fichier_chemin);
-
-   villes_traversees(chemin, chemin, tab_villes, nb_villes);
-
-   chemin_villes_traversees = fopen ("villes_traversees.txt", "w");
-   fichier_of_chemin (chemin, chemin_villes_traversees);
-
-   fclose (chemin_villes_traversees);
-   liberer_chemin(chemin);
 }
