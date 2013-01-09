@@ -5,10 +5,22 @@
 \usepackage[french]{babel}
 \usepackage[top=1cm, bottom=1.3cm, left=1cm, right=1cm]{geometry}
 
+\usepackage{tikz}
+\usepackage{graphicx}
+
 
 \date{\today} 
 \title{Projet C - Le Voyageur de commerce}
 \author{Alice PELLET -- MARY \& Pierre MACHEREL}
+
+\tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=0pt]
+\tikzstyle{selected vertex} = [vertex, fill=red!24]
+\tikzstyle{edge} = [draw,thick,-]
+\tikzstyle{weight} = [font=\small]
+\tikzstyle{selected edge} = [draw,line width=5pt,-,red!50]
+\tikzstyle{cycle} = [draw,line width=5pt,-,black!20]
+\tikzstyle{cheminarbre} = [draw,thick,blue]
+\tikzstyle{ignored edge} = [draw,line width=5pt,-,black!20]
 
 \begin{document}
 
@@ -24,31 +36,116 @@
 
 \subsection{Tas min} %Pierre
 
+\section{Définition} %Pierre
+Afin de démontrer que l’algorithme que nous avons utilisé retourne une solution dont la longueur n'exede pas deux fois la longueur d'une solution optimal, nous devons introduire un formalisme pour décrire le problème.
+\begin{itemize}
+ \item \textbf{Graphe non orienté} : Un graph $G$ est une paire $G = \left(S, A\right)$ où
+ \begin{itemize}
+  \item S est un ensemble de sommets
+  \item A un ensemble d'arêtes qui sont des paire de sommets. Chaque arête relie deux sommet et est pondérée par un poids.
+ \end{itemize}
+ \item \textbf{Chemin} : un chemin est une suite de sommets $x_1, x_2, \ldots, x_n$ tel que $\left(x_i, x_{i+1}\right) \in A$
+  \item \textbf{Graphe connexe} : un graph $G$ est connexe si pour toutes paires de sommets $u, v \in G$, il existe un chemin reliant de $u$ à $v$.
+ \item \textbf{Cycle} : un cycle est un chemin dont tous les sommets sont distincts, sauf les extrémités qui sont égales.
+ \item \textbf{Cycle hamiltonien} : un cycle hamiltonien est un cycle qui parcourt l'ensemble des sommets du graph.
+ \item \textbf{Arbre} : Un arbre est un un graph connexe sans cycle
+ \item \textbf{Arbre couvrant} : Un arbre $T$ est couvrant sur un graph $G$ si tous les sommets de $G$ sont dans $T$.
+  \item \textbf{Arbre couvrant minimum} : Un arbre couvrant est minimum s'il minimise la somme des poids des arêtes qui le compose.
+\end{itemize}
 
-\section{Algrithmes}
+\section{Algorithmes}
 
 \subsection{Prim} %Alice
 \subsubsection*{Algo}
-\subsubsection*{Complexitée}
+\subsubsection*{Complexité}
 
 \subsection{Parcourt de l'arbre} %Alice
 \subsubsection*{Algo}
-\subsubsection*{Complexitée}
+\subsubsection*{Complexité}
 
 \subsection{Primitives tas min} %Pierre
 \subsubsection*{Algo}
-\subsubsection*{Complexitée}
+\subsubsection*{Complexité}
 
-\section{Définition} %Pierre
 
 \section{Preuve de 2-approximation} %Pierre
+Bien que le problème du voyageur de commerce soit un problème NP-Complet, il existe une solution pour l’approximer si on suppose l’inégalité triangulaire pour le poids des arêtes. L'algorithme que nous avons utilisé est une 2-approximation : la solution retournée par l'algorithme n'exede pas deux fois la longueur d'une solution optimal.
+
+Le poids d'un graph/arbre/cycle est la somme des poids des arêtes qui le compose.
+Dans cette section, nous interchangeables les termes poids et de distance, car dans notre problème, le poids d'une arête $(u,v)$ $(u,v)$ représente la distance séparant les sommets $u$ et $v$.
+
+Le poids d'une solution optimal $c(Opt)$ est borné par le poids d'un arbre couvrant minimum $c(T)$ :
+En supprimant une arête de $Opt$, on obtient un arbre couvrant car $Opt$ est un cycle hamiltonien. Par minimalité de $T$, on a donc \begin{equation}
+c(T) < c(Opt)
+\label{eq1}
+\end{equation}
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}[scale=1, auto,swap]
+    % sommet
+    \foreach \pos/\name in {{(-1,5)/a}, {(1,3)/b}, {(1,4)/c},{(1,5)/d}, {(2,4)/e}, {(2,2)/f}, {(3,1)/g}, {(4,2)/h}, {(3,3)/i}, {(3,0)/j}, {(1,1)/k}}
+        \node[vertex] (\name) at \pos {$\name$};
+    % arete
+    \foreach \source/ \dest in {a/d, d/e, e/i, i/h, h/g, g/j, j/k, k/f, f/b, b/c, c/a}
+        \path[cycle] (\source) -- (\dest);
+    \foreach \source/ \dest in {d/e, e/i, i/h, h/g, g/j, j/k, k/f, f/b, b/c, c/a}
+        \path[edge] (\source) -- (\dest);
+\end{tikzpicture}
+\caption{Une solution optimal en gris et un arbre couvrant en noir}
+\end{figure}
+
+
+Soit $C$ le chemin définit comme suit :
+Choisir $s \in T$ in sommet. En partant de $s$, longer les arêtes de $T$ jusqu’à revenir au sommet $s$. Chaque arête de $T$ sera longer deux fois (une fois par côté de l'arête).
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}[scale=1, auto,swap]
+    % sommet
+    \foreach \pos/\name in {{(-1,5)/a}, {(1,3)/b}, {(1,4)/c},{(1,5)/d}, {(2,4)/e}, {(2,2)/f}, {(3,1)/g}, {(4,2)/h}, {(3,3)/i}, {(3,0)/j}, {(1,1)/k}}
+        \node[vertex] (\name) at \pos {$\name$};
+    % arete
+    \foreach \source/ \dest in {a/b, b/c, c/d, c/e, b/f, f/k, f/g, g/j, g/h, h/i}
+        \path[edge] (\source) -- (\dest);
+    \draw[cheminarbre] (a.south west) \foreach \dest in {b.south west, f.west, k.north west, k.west, k.south west, k.south, k.south east, f.south, g.south west, j.west, j.south west, j.south, j.south east, j.east, g.east, h.south east, h.east, h.north east, i.north east, i.north, i.north west, i.west, i.south west, h.west, g.north, f.north east, b.north east,  c.south east, e.south, e.south east, e.east, e.north east, e.north, c.north east, d.east, d.north east, d.north, d.north west, d.west, c.west, a.north east}{ -- (\dest)};
+\end{tikzpicture}
+\caption{Arbre couvrant minimum $T$ en noire et chemin $C$ en bleu}
+\end{figure}
+
+\begin{equation}
+c(C) = 2c(T)
+\label{eq2}
+\end{equation}
+En combinant (\ref{eq1}) et (\ref{eq2}), on obtient
+\begin{equation}
+c(C) < 2c(Opt)
+\label{eq2}
+\end{equation}
+
+Le chemin $C$ n'est pas une solution au problème du voyageur de commerce car des sommets sont parcouru plusieurs fois dans $C$. Cependant, grâce à l'inégalité triangulaire, supprimer un sommet de $C$ n’augmente pas le cout de $C$.
+Pour obtenir un cycle à partir de $C = x_1, x_2, \ldots, x_n, x_1$ : 
+pour chaque sommet $x_i \in C, i\neq1$, conserver uniquement sa première occurrence.
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}[scale=1, auto,swap]
+    % sommet
+    \foreach \pos/\name in {{(-1,5)/a}, {(1,3)/b}, {(1,4)/c},{(1,5)/d}, {(2,4)/e}, {(2,2)/f}, {(3,1)/g}, {(4,2)/h}, {(3,3)/i}, {(3,0)/j}, {(1,1)/k}}
+        \node[vertex] (\name) at \pos {$\name$};
+    % arete
+        \foreach \source/ \dest in {a/b, b/f, f/k, k/g, g/j, j/h, h/i, i/c, c/e, e/d, d/a}
+        \path[edge] (\source) -- (\dest);
+\end{tikzpicture}
+\caption{Chemin $W$ en noir}
+\end{figure}
 
 \section{Graphique} %Pierre
 
-\section{Uitilisation du programme} %Alice
+\section{Utilisation du programme} %Alice
 
 \section{Conclusion} %Alice
 
-\section{Reference}
+\section{Référence}
 
 \end{document}
