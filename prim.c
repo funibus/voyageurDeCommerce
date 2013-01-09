@@ -55,7 +55,7 @@ void prim (Matrice matrice_poids)
 }
 
 /**
- * quand on piohe l'arete de poids minimal, il faut vérifier qu'elle a bien une extremite
+ * quand on pioche l'arete de poids minimal, il faut vérifier qu'elle a bien une extremite
  * dans l'arbre et pas l'autre, si ce n'est pas le cas on recommence a piocher
  * jusqu'a tomber sur une arete qui convient
  * @param T un tas min qui contient des aretes n'appartenant pas a l'arbre
