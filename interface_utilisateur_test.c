@@ -35,13 +35,12 @@ void test_interface_utilisateur ()
 void test_voyageur_de_commerce ()
 {
    int nb_villes = 0;
-   Ville* tab_villes = create_tab_villes (&nb_villes);
+   Ville* tab_villes = create_tab_villes ("France_towns.txt", &nb_villes);
    FILE* fichier_chemin = NULL;
    FILE* chemin_villes_traversees = NULL;
-   fichier_chemin = fopen ("chemin.txt", "w");
    Matrice matrice_parcourt;
 
-   voyageur_de_commerce_utilisateur (fichier_chemin, matrice_parcourt);
+   voyageur_de_commerce_utilisateur (fichier_chemin, matrice_parcourt, "test_voyageur_de_commerce.txt");
 
    fichier_chemin = fopen ("chemin.txt", "r");
 

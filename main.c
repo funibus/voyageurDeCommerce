@@ -142,8 +142,8 @@ int generation (char *nom_file, Matrice *mat){
 		case 1 :
 			printf("\n\tentrer le nom du fichier a partire du quel vous souhaiter cree votre liste de villes :\n");
 			scanf("%s", source);
-			voyageur_de_commerce_utilisateur (source,  mat);
-			return 11;
+			voyageur_de_commerce_utilisateur (source,  mat, "blop.txt");
+			return 13;
 			break;
 		case 2 :
 			printf("\n\tentrer le nom du fichier de sortie :\n");
