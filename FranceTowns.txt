@@ -9790,7 +9790,7 @@ Biel-Benken: 7.520962; 47.506771!
 Reclere: 6.9219953; 47.3756339!
 Epiquerez: 7.0571129; 47.3282842!
 Nothweiler: 7.7987679; 49.0682196!
-Scheibenhardt, Pfalz: 8.1381589; 48.9820168!
+Scheibenhardt: 8.1381589; 48.9820168!
 Mauschbach: 7.3934568; 49.1862057!
 Fresnes-en-Woevre: 5.6307494; 49.0963224!
 Uberherrn: 6.7013967; 49.2405958!

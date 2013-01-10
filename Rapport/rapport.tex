@@ -99,7 +99,7 @@ Soit $i$ l'indexe d'un nœud. Ses deux fils (s'ils existent) sont dans les cases
 Toutes les arêtes qui seront stoker dans le \texttt{Tas} proviendront de la Matrice. Avoir accès à celle ci permet au \texttt{Tas} d'accéder aux poids des arêtes.
 
 \section{Définition} %Pierre
-Afin de démontrer que l’algorithme que nous avons utilisé retourne une solution dont la longueur n'excède pas deux fois la longueur d'une solution optimal, nous devons introduire un formalisme pour décrire le problème.
+Afin de démontrer que l'algorithme que nous avons utilisé retourne une solution dont la longueur n'excède pas deux fois la longueur d'une solution optimal, nous devons introduire un formalisme pour décrire le problème.
 \begin{description}
  \item[Graphe non orienté] : Un graph $G$ est une paire $G = (S, A)$ où : 
  \begin{itemize}
@@ -332,6 +332,28 @@ pour chaque sommet $x_i \in C, i\neq1$, conserver uniquement sa première occurr
 
 \section{Utilisation du programme} %Alice
 
+Le programme propose plusieurs choix à l'utilisateur :\\
+Un premier menu lui propose :\\
+1. De générer la liste des villes par lesquelles il veut faire passer le voyageur de commerce.
+A partir de là il choisit de générer sa liste de villes graphiquement ou à partir d'un fichier. S'il décide de la générer graphiquement, une fenêtre s'ouvre et il peut cliquer pour placer ses villes. {\large \textbf{(Comment on lance après ?)}}. L'algorithme affiche ensuite le chemin parcouru par le voyageur de commerce et passant par tous les points.\\
+S'il décide de partir d'un fichier, il choisit le fichier qu'il veut utiliser (qui doit être de la forme \\
+\texttt{ville1: 123456; 654321!}\\
+\texttt{ville2: 123458; 657521!}\\
+Puis il choisit le nombre de villes qu'il veut parcourir, et enfin le nombre de villes qu'il veut rentrer à la main parmi ces villes. Pour les villes qu'il ajoute à la main, s'il les connait, le programme les ajoute tout seul, sinon il propose à l'utilisateur de rentrer les coordonnées à la main. L'algorithme écrit ensuite le chemin parcouru dans un fichier dont il demande le nom à l'utilisateur. Il propose aussi à l'utilisateur de rajouter dans le fichier les villes traversées par le voyageur mais non demandées initialement (il vaut mieux ne pas ajouter les villes traversées si on demande initialement beaucoup de villes car ça devient un peu long).\\
+\\
+2. D'appliquer l'algorithme Prim à un fichier de villes (toujours de la forme ci dessus), sans possibilités pour l'utilisateur de choisir ses villes.\\
+\\
+3. D'afficher sur un écran les villes d'un fichier de villes (toujours de la même forme).\\
+\\
+Si l'utilisateur ne dispose pas de la bibliothèque graphique nécessaire pour afficher les villes, il peut l'installer ici : {\large \textbf{(on pourrait peut etre mettre le lien de là où tu l'as trouvé non ?)}} Ou il peut la désactiver en commentant la première ligne du fichier \textit{main.c}.\\
+\\
+\textit{Conseils d'utilisation : }\\
+Pour des raisons de capacité des ordinateurs, il vaut mieux ne pas appliquer l'algorithme prim à plus de 10 000 villes.
+Lorsque l'on choisit les villes à la main, on peut utiliser le fichier \textit{FranceTowns.txt} qui contient plus de 100 000 villes, mais il vaut mieux ne pas en demander plus de 10 000 pour le parcourt.
+Si on affiche graphiquement le résultat il vaut mieux se limiter à {\Large \textbf{(Combien de villes à peu près ?)}}
+Enfin, si on lance l'algorithme prim sur toutes les villes d'un fichier il vaut mieux utiliser le fichier \textit{FranceTownReduced.txt} qui contient moins de villes.
+
+
 \section{Conclusion} %Alice
 
 Lors de ce projet, nous avons donc codé un programme permettant de donner une approximation du voyageur de commerce en temps polynomial. Nous avons implémenté plusieurs possibilités pour l'utilisateur : rentrer les villes à la main ou les récupérer dans un fichier (ou les 2), mais aussi représenter les villes graphiquement et ajouter les villes traversées mais non demandées initialement.\\
@@ -342,7 +364,7 @@ Le problème du voyageur de commerce peut aussi être approximé assez bien avec
 \section{Références}
 
 Les algorithmes utilisés proviennent de l'énoncé du projet et les fichiers de villes utilisés proviennent de la page perso de Lucie Martinet : \\
-http://perso.ens-lyon.fr/lucie.martinet/enseignements/2012_2013/Projet1/fr/documents
+$http://perso.ens-lyon.fr/lucie.martinet/enseignements/2012$\_$2013/Projet1/fr/documents$
 
 \end{document}
 

@@ -44,7 +44,7 @@ int main (int argc, char *argv[]){
 	while (continuer){
 		printf("TSP : selectionner l'action à executer :\n");
 		printf("\t1 : générer une liste de ville\n");
-		printf("\t2 : appliquer l'algoritme prim à un fichier de ville\n");
+		printf("\t2 : appliquer l'algorithme prim à un fichier de ville\n");
 #ifdef GUI_ENABLE
 		printf("\t3 : afficher une liste de ville (aucune action possible -> efficace pour de grand nombre de villes)\n");
 #endif

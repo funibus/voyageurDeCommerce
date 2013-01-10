@@ -1,0 +1,333 @@
+Pre-la-Joux: 6.7881017; 46.2332683!
+Chauffayer: 6.0067509; 44.7568385!
+La Trinite: 5.9854945; 44.778258!
+Les Terrasses: 5.8244073; 44.8887777!
+Les Egats: 5.8339069; 44.8757226!
+Les Alloves: 5.8514915; 44.8651516!
+Les Marcoux: 5.858409; 44.8541507!
+St. Ouen: -2.2020406; 49.2335087!
+St. Mary: -2.1716245; 49.2364029!
+St. John: -2.1349726; 49.2465535!
+Les Quennevais: -2.2031231; 49.1970877!
+Greffern: 8.0056049; 48.7521656!
+Bouilly: 5.5671508; 45.1109514!
+Wissembourg: 7.9490308; 49.0383877!
+Saint-Mesmes: 2.6963878; 48.9845027!
+Vineuil: 2.7054139; 48.9865259!
+Baraque Lortal: 2.1379586; 44.3058525!
+Lyon: 4.8323239; 45.7575958!
+Ile Grande: -3.5789763; 48.8002534!
+La Godivelle: 2.922397; 45.3884116!
+Le Mollard: 5.7210122; 44.9641201!
+La Festiniere: 5.7538475; 44.9538291!
+La Chapelle-Bertin: 3.6495376; 45.2194643!
+La Couronne: 5.0528116; 43.3386706!
+Meribel-Mottaret: 6.5809626; 45.3737947!
+Meribel-les-Allues: 6.5666055; 45.399064!
+Saint-Cirgues-de-Jordanne: 2.5811651; 45.0283951!
+Sainte-Helene: -0.8834238; 44.9664165!
+Mazoires: 3.0442536; 45.3929719!
+Paris: 2.3521334; 48.8565056!
+Marzun: 3.1008146; 45.3409885!
+Chastreix: 2.7333525; 45.5123843!
+Randens: 6.3082252; 45.5453405!
+Cazillac: 1.6097792; 44.9956777!
+Lasvaux: 1.6024943; 44.9956601!
+Aydat: 2.9787535; 45.6618961!
+Sauteyras: 2.981013; 45.6669252!
+Saint-Didier: -1.3710862; 48.095079!
+Prapoutel: 5.995602; 45.2567521!
+Pipay: 6.015482; 45.2649784!
+Le Mas: 2.6174319; 45.4321552!
+Saint-Genes-Champespe: 2.7245317; 45.4186646!
+Compains: 2.927524; 45.4419729!
+Saint-Alyre-es-Montagne: 2.9935292; 45.3905142!
+Apchat: 3.1451084; 45.3887558!
+Lorlanges: 3.2668536; 45.3348123!
+Bousselorgue: 3.1903536; 45.2442299!
+Massiac: 3.1990713; 45.2513583!
+Bousselorgues: 3.1765317; 45.3437012!
+Anzat-le-Luguet: 3.0405377; 45.3316641!
+Boutaresse: 2.9724532; 45.3627944!
+Jassy: 2.9688355; 45.3813853!
+Brion: 2.9613543; 45.4149544!
+La Cassiere: 2.9998949; 45.683428!
+Orcival: 2.8423207; 45.6829639!
+Egliseneuve-d'Entraigues: 2.827279; 45.4078553!
+Cezerat: 2.8994253; 45.2088486!
+Moissac: 2.9722772; 45.1461294!
+Chalinargues: 2.9323746; 45.1543394!
+Apchon: 2.6935084; 45.2488648!
+Murat-le-Quaire: 2.7339523; 45.5978828!
+Murol: 2.9418699; 45.5756356!
+Randanne: 2.9381719; 45.684888!
+Theix: 3.0202062; 45.7059278!
+La Tour-d'Auvergne: 2.6896574; 45.5326791!
+Lusargues: 3.0505563; 45.2768839!
+La Tuliere: 2.6820921; 45.3996964!
+Salers: 2.4943427; 45.1385878!
+Recusset: 2.5952147; 45.1441631!
+Fontanges: 2.5028038; 45.1142771!
+Saint-Simon: 2.4885804; 44.9641415!
+Cheyrouse: 2.5209525; 45.2661562!
+Dijon: 2.5128431; 45.297992!
+Saint-Jacques-des-Blats: 2.7110252; 45.0534206!
+Aime la Plagne: 6.6662927; 45.5102182!
+Plagne Centre: 6.6743647; 45.5058779!
+Plagne Bellecote: 6.6969503; 45.5124902!
+Plagne Montalbert: 6.6350041; 45.5349102!
+Ternand: 4.5288106; 45.9441933!
+Belle Plagne: 6.7070067; 45.5070863!
+Monte-Carlo: 7.4252368; 43.7389419!
+La Grigne: -1.2044486; 44.8947227!
+St Anne: -2.2036184; 49.7147885!
+Digosville: -1.525707; 49.6311797!
+Cherbourg-Octeville: -1.6384497; 49.6292405!
+Saint-Pierre-Eglise: -1.4046471; 49.6679883!
+Barfleur: -1.2644272; 49.6706815!
+Carneville: -1.4507299; 49.6657068!
+Maupertus-sur-Mer: -1.4872352; 49.6590054!
+Le Theil: -1.470807; 49.6098947!
+Bretteville: -1.5199361; 49.6557634!
+Le Becquet de Digosville: -1.545493; 49.6526852!
+La Rue: -1.448923; 49.6539902!
+Le Becquet de Tourlaville: -1.5558578; 49.6515551!
+Beaumont-Hague: -1.8370229; 49.6642448!
+Jobourg: -1.9042283; 49.6839074!
+Herqueville: -1.8791658; 49.6684112!
+Auderville: -1.9303484; 49.7135519!
+Le Vast: -1.3580543; 49.6227835!
+La Vattay: 6.0533451; 46.3891622!
+Le Toupin: -1.5715191; 49.6363849!
+Monteynard Blais: 5.7037401; 44.9792666!
+Le Collet: 5.7577797; 44.9495027!
+Le Crey: 5.7639984; 44.9416429!
+Les Moutieres: 5.7698939; 44.9369669!
+Metz: 6.1763552; 49.1196964!
+Tours: 0.6899713; 47.3903853!
+Clermont-Ferrand: 3.0819427; 45.7774551!
+Reims: 4.031926; 49.2577886!
+Dijon: 5.0414701; 47.3215806!
+Orleans: 1.9086066; 47.9027336!
+Amiens: 2.2956951; 49.8941708!
+Toulouse: 1.4442469; 43.6044622!
+Limoges: 1.2644847; 45.8354243!
+Rennes: -1.680009; 48.1113589!
+Saint-Etienne: 4.3873058; 45.4401467!
+Nantes: -1.5545147; 47.2185155!
+Besancon: 6.0243246; 47.237953!
+Le Mans: 0.1995271; 48.0077367!
+Strasbourg: 7.7507127; 48.584614!
+Mulhouse: 7.3399355; 47.7494188!
+Angers: -0.5518917; 47.4712031!
+Lille: 3.0706414; 50.6305089!
+Toulon: 5.9304919; 43.1257311!
+Nimes: 4.3600687; 43.8374249!
+Rouen: 1.0939658; 49.4404591!
+Grenoble: 5.7364904; 45.1864181!
+Boulogne-Billancourt: 2.2399217; 48.8357506!
+Aix-en-Provence: 5.4474738; 43.5298424!
+Saint-Brieuc: -2.7602707; 48.5141594!
+Bois-d'Arcy: 2.023607; 48.799856!
+Chateaubriant: -1.3757282; 47.7194057!
+Saverne: 7.3625104; 48.7420277!
+Gonesse: 2.4500537; 48.9863555!
+Douarnenez: -4.3311243; 48.0944459!
+Montlucon: 2.6067229; 46.3399276!
+Arcueil: 2.3320692; 48.8021118!
+Moissy-Cramayel: 2.5957717; 48.6270443!
+Foix: 1.6096025; 42.9660039!
+Montmagny: 2.343561; 48.9728571!
+Noeux-les-Mines: 2.6621899; 50.4754!
+Saint-Andre-lez-Lille: 3.04468; 50.6608!
+Blanquefort: -0.609082; 44.9238!
+Le Mee-sur-Seine: 2.6382182; 48.5403535!
+Dax: -1.0533076; 43.7080596!
+Echirolles: 5.71927; 45.1437!
+Villepinte: 2.5347541; 48.9636566!
+Hendaye: -1.7616499; 43.3641518!
+Sable-sur-Sarthe: -0.3352048; 47.8400712!
+Tournefeuille: 1.3464462; 43.5834786!
+Le Chesnay: 2.1319603; 48.8278506!
+Pierrelatte: 4.6976609; 44.3778474!
+Armentieres: 2.88251; 50.6911!
+Coudekerque-Branche: 2.3971139; 51.0175575!
+Chatou: 2.15122; 48.8987!
+Joue-les-Tours: 0.656224; 47.336!
+Gentilly: 2.34371; 48.8127!
+Creil: 2.4737043; 49.2635045!
+Yutz: 6.1886959; 49.3592369!
+Vitry-le-Francois: 4.5851622; 48.7262225!
+Luneville: 6.5013779; 48.5894638!
+Millau: 3.0777594; 44.1006693!
+Torcy: 2.65265; 48.8515!
+Bethune: 2.64781; 50.5199!
+Palaiseau: 2.2468567; 48.7170283!
+Antony: 2.2959423; 48.753554!
+Neuilly-Plaisance: 2.5089943; 48.8611165!
+Chalette-sur-Loing: 2.73636; 48.0165!
+Neuilly-sur-Marne: 2.53921; 48.8642!
+Equeurdreville-Hainneville: -1.667904; 49.6507053!
+Croix: 3.1521074; 50.6783122!
+Mazamet: 2.3764363; 43.4902317!
+Viroflay: 2.17056; 48.8013!
+Aubervilliers: 2.3821895; 48.9146078!
+Thionville: 6.1529769; 49.3591614!
+Valentigney: 6.8264717; 47.4628054!
+Roquebrune-Cap-Martin: 7.4565697; 43.7641047!
+Frontignan: 3.7530636; 43.4487615!
+Lanester: -3.3444489; 47.7639726!
+Vieux-Conde: 3.56503; 50.4714!
+Marcq-en-Baroeul: 3.1043032; 50.6767018!
+Sarrebourg: 7.0533301; 48.7356751!
+Bourg-en-Bresse: 5.2258647; 46.2055235!
+Saint-Egreve: 5.6811465; 45.2329547!
+Andresy: 2.0529587; 48.9788963!
+Bourgoin-Jallieu: 5.2828123; 45.5872259!
+Athis-Mons: 2.3890941; 48.7079028!
+Franconville: 2.2247099; 48.9890001!
+Garches: 2.1853699; 48.8437486!
+Stains: 2.3825154; 48.9565669!
+Wittelsheim: 7.24682; 47.8!
+Saint-Cyr-sur-Loire: 0.6658199; 47.4052448!
+La Valette-du-Var: 5.9834654; 43.1378245!
+Noisiel: 2.61732; 48.8473!
+Clichy: 2.30551; 48.9026!
+Six-Fours-les-Plages: 5.8393953; 43.0935105!
+Annecy-le-Vieux: 6.1421557; 45.9192627!
+Fos-sur-Mer: 4.945595; 43.4380714!
+Maromme: 1.0308208; 49.476737!
+Cognac: -0.3251948; 45.6932909!
+La Garde: 6.0128532; 43.1249185!
+Cergy: 2.0388736; 49.0527528!
+Roubaix: 3.1741734; 50.6915893!
+Octeville: -1.6505096; 49.6207352!
+Saint-Pierre-des-Corps: 0.718669; 47.3904414!
+Ploemeur: -3.4270534; 47.7354591!
+Le Blanc-Mesnil: 2.45686; 48.9403!
+Dinan: -2.047687; 48.4539775!
+Rillieux-la-Pape: 4.8994366; 45.823514!
+Maubeuge: 3.9743784; 50.2785567!
+Abbeville: 1.8343303; 50.1059372!
+Beaucaire: 4.6392648; 43.8085436!
+Saint-Malo: -2.015418; 48.6454528!
+Chelles: 2.5942129; 48.8797422!
+La Ciotat: 5.6232056; 43.1947945!
+Canteleu: 1.0352069; 49.4507987!
+Hyeres: 6.1301614; 43.1202573!
+Tarbes: 0.0685929; 43.2349001!
+Cahors: 1.4364999; 44.4495!
+Septemes-les-Vallons: 5.3663965; 43.3989529!
+Acheres: 2.0701647; 48.9602658!
+Verrieres-le-Buisson: 2.2668991; 48.7463063!
+Le Plessis-Robinson: 2.2619632; 48.7811049!
+Velizy-Villacoublay: 2.1906082; 48.7826191!
+Etaples: 1.638851; 50.5138973!
+Villefontaine: 5.1580574; 45.614003!
+Conflans-Sainte-Honorine: 2.1017799; 49.0003001!
+Lognes: 2.63387; 48.8323!
+Sorgues: 4.8725016; 44.0066403!
+Manosque: 5.7836332; 43.8333864!
+Bailleul: 2.7349286; 50.7396668!
+Mennecy: 2.4379002; 48.5586201!
+Montbrison: 4.0653067; 45.6070698!
+Courcouronnes: 2.41381; 48.621!
+Chateauroux: 1.6957099; 46.8047!
+Saint-Leu-la-Foret: 2.2480799; 49.0212001!
+Saint-Etienne-du-Rouvray: 1.09163; 49.3831!
+Roanne: 4.0738682; 46.0363902!
+Savigny-sur-Orge: 2.3482788; 48.6842593!
+Moulins: 3.333179; 46.566142!
+Avrille: -0.5956539; 47.5045657!
+Le Vesinet: 2.12974; 48.8944!
+Maisons-Alfort: 2.4305233; 48.8010363!
+Grande-Synthe: 2.29351; 51.0182!
+Orsay: 2.1874811; 48.6991805!
+Le Portel: 1.5765268; 50.7079679!
+Bry-sur-Marne: 2.5216259; 48.8394047!
+Carquefou: -1.4921233; 47.2971979!
+Quimper: -4.1024782; 47.9960325!
+Enghien-les-Bains: 2.3068482; 48.9699732!
+Aulnay-sous-Bois: 2.5058071; 48.9396485!
+Nanterre: 2.2071267; 48.8924273!
+Vichy: 3.4203712; 46.1239268!
+Guyancourt: 2.07549; 48.7729!
+Albert: 2.6481281; 50.0050961!
+Freyming-Merlebach: 6.8031117; 49.1479451!
+Mont-Saint-Aignan: 1.0813; 49.4679!
+Epinay-sur-Seine: 2.3145039; 48.9525181!
+Verdun: 5.3867277; 49.1589278!
+Les Ulis: 2.1690093; 48.6805587!
+Ozoir-la-Ferriere: 2.676; 48.7638!
+Comines: 3.0147; 50.749!
+Gueret: 1.8713349; 46.1686865!
+Berck: 1.570879; 50.4050674!
+Longwy: 5.7681606; 49.5169254!
+Brie-Comte-Robert: 2.6166737; 48.6904522!
+Rombas: 6.0949742; 49.2502303!
+Villiers-le-Bel: 2.3983967; 49.0075433!
+Pontault-Combault: 2.61431; 48.7884!
+Carvin: 2.9577519; 50.4934145!
+Chevilly-Larue: 2.3624818; 48.768192!
+Cugnaux: 1.3457537; 43.5369936!
+Talant: 5.0047641; 47.3359617!
+Ambares-et-Lagrave: -0.4980333; 44.9445006!
+Les Lilas: 2.415796; 48.8795658!
+Morangis: 2.3367599; 48.7022956!
+Draveil: 2.4212; 48.6787!
+Kingersheim: 7.3386856; 47.7923002!
+Faches-Thumesnil: 3.07133; 50.5936!
+Deuil-la-Barre: 2.32738; 48.9721!
+Sanary-sur-Mer: 5.8022906; 43.1180387!
+Jarville-la-Malgrange: 6.2057744; 48.6680055!
+Castres: 2.2417954; 43.6036776!
+Port-de-Bouc: 4.9806998; 43.403098!
+Auxerre: 3.58452; 47.7954001!
+Tremblay-en-France: 2.5589558; 48.9802035!
+Ales: 4.0852818; 44.1253665!
+Limeil-Brevannes: 2.4867977; 48.7464991!
+Villemomble: 2.5105095; 48.8847875!
+Saintes: -0.6299329; 45.7420801!
+Montesson: 2.1502476; 48.9117502!
+Hautmont: 3.9200611; 50.2513704!
+Les Pavillons-sous-Bois: 2.5034999; 48.9082988!
+Villeneuve-le-Roi: 2.4179723; 48.7349054!
+Montigny-le-Bretonneux: 2.0249424; 48.7759215!
+Seynod: 6.0992785; 45.8880398!
+Vaires-sur-Marne: 2.6333854; 48.8707017!
+Ostwald: 7.7102193; 48.5425109!
+Rognac: 5.2342903; 43.4872341!
+Bron: 4.9092352; 45.7337532!
+Persan: 2.2675077; 49.1485881!
+Argentan: -0.0223695; 48.7428859!
+La Rochelle: -1.1520434; 46.1591126!
+Bouc-Bel-Air: 5.4126511; 43.4511274!
+Lorient: -3.37958; 47.7504!
+Decines-Charpieu: 4.9633314; 45.773606!
+Vaulx-en-Velin: 4.9206153; 45.7784255!
+Arles: 4.6309653; 43.6776223!
+Sainte-Foy-les-Lyon: 4.7934767; 45.7362255!
+Miramas: 5.0025809; 43.582733!
+Rumilly: 5.9447721; 45.8672278!
+Bois-Colombes: 2.2674892; 48.9148269!
+La Garenne-Colombes: 2.2465748; 48.9069349!
+Hem: 3.1839429; 50.6540895!
+Fontaine: 5.6759709; 45.193603!
+Cran-Gevrier: 6.0998829; 45.9020843!
+Montmorency: 2.3197111; 48.9891693!
+Cernay: 7.1767542; 47.8071991!
+Rosny-sous-Bois: 2.4856366; 48.8761957!
+Blagnac: 1.37799; 43.6434!
+Chatillon: 2.2897124; 48.7997756!
+Sarreguemines: 7.0695021; 49.1091944!
+Givors: 4.7696529; 45.5844238!
+Fontenay-le-Fleury: 2.0461549; 48.8106578!
+Tourlaville: -1.5667534; 49.6465139!
+Plaisance-du-Touch: 1.2978343; 43.5653012!
+Lunel: 4.1348062; 43.6745265!
+Villers-les-Nancy: 6.1453891; 48.6707448!
+Sannois: 2.25226; 48.9735001!
+Castelnau-le-Lez: 3.9133311; 43.6393171!
+Isbergues: 2.4574631; 50.6211244!
+Saint-Brice-sous-Foret: 2.3548273; 49.0030509!
+Le Creusot: 4.4297028; 46.808203!
