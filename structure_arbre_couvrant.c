@@ -101,7 +101,8 @@ element_liste parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice 
 void parcourir_arbre (FILE* fichier, Matrice matrice_poids)
 {
 	element_liste tete_cycle = NULL;
-	tete_cycle = parcourir_arbre_aux (fichier, getTree(matrice_poids), matrice_poids, tete_cycle, 0, -1, 0);
+	if (getNbVilles(matrice_poids))
+		tete_cycle = parcourir_arbre_aux (fichier, getTree(matrice_poids), matrice_poids, tete_cycle, 0, -1, 0);
 	setCycle(matrice_poids, tete_cycle);
 }
 

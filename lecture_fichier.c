@@ -44,7 +44,7 @@ Matrice matrice_of_coordonnees (FILE* fichier)
     */
     curseur_init = ftell(fichier);//position initial dans le fichier
     c = 'A'; //c un charatere different de '\n' et de ':'
-    while (c != '\n' && c != ':'){
+    while (c != '\n' && c != ':' && c != EOF){
     	c = fgetc(fichier);
     }
     if (c == ':'){// fichier avec nom de ville
@@ -58,10 +58,13 @@ Matrice matrice_of_coordonnees (FILE* fichier)
     	}
     	fseek(fichier, 0, curseur_init);//on revient a la position initial pour traiter la premier ligne
     }
-    else{//fichier sommet
+    else if (c != EOF){//fichier sommet
     	fseek(fichier, 0, curseur_init);//on revient a la position initial pour recuperer la taille exacte du tableau
     	fscanf (fichier, "%d!", &nombre_villes);
     	if (!feof(fichier))fgetc(fichier);// saut le \n
+    }
+    else {
+    	nombre_villes = 0;
     }
 
 

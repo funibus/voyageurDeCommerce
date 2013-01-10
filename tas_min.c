@@ -1,9 +1,3 @@
-/*
- * tas_min.c
- *
- *  Created on: Dec 4, 2012
- *      Author: pierre
- */
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>

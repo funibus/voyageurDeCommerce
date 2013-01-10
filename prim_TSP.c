@@ -21,8 +21,10 @@ void prim (Matrice matrice_poids)
 
     /*on choisit un premier sommet qu'on met dans l'arbre, par exmeple le sommet 0*/
 
-    setMarque(matrice_poids, 0); //ajout de 0 aux sommets de l'arbre
-    nombre_sommets_arbre = 1;
+    if (nombre_villes){
+    	setMarque(matrice_poids, 0); //ajout de 0 aux sommets de l'arbre
+    	nombre_sommets_arbre = 1;
+    }
     for (sommet=1; sommet<nombre_villes; sommet++) //ajout des aretes partant de 0 au tas
     {
         entasser_element(T, 0, sommet);

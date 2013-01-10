@@ -124,7 +124,10 @@ int main (int argc, char *argv[]){
 			}
 		}
 #endif
-		if (mat)liberer_mat(mat);
+		if (mat){
+			liberer_mat(mat);
+			mat = NULL;
+		}
 	}
 	fclose(nullstream);
 	if (argc >= 2)fclose(output);
