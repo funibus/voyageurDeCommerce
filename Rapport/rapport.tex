@@ -1,7 +1,7 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage[utf8]{inputenc}
 
-\usepackage{times}             % Police de caractères
+\usepackage{times} % Police de caractères
 \usepackage[french]{babel}
 \usepackage[top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry}
 
@@ -11,8 +11,7 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
-
-\date{\today} 
+\date{\today}
 \title{Projet C - Le Voyageur de commerce}
 \author{Alice PELLET -- MARY \& Pierre MACHEREL}
 
@@ -104,7 +103,7 @@ Toutes les arêtes qui seront stoker dans le \texttt{Tas} proviendront de la Mat
 \section{Définition} %Pierre
 Afin de démontrer que l'algorithme que nous avons utilisé retourne une solution dont la longueur n'excède pas deux fois la longueur d'une solution optimal, nous devons introduire un formalisme pour décrire le problème.
 \begin{description}
- \item[Graphe non orienté] : Un graph $G$ est une paire $G = (S, A)$ où : 
+ \item[Graphe non orienté] : Un graph $G$ est une paire $G = (S, A)$ où :
  \begin{itemize}
  \renewcommand{\FrenchLabelItem}{\textbullet}
   \item S est un ensemble de sommets
@@ -143,7 +142,7 @@ Prim initialise un tas min $T$ qui contiendra des arêtes. On peut avoir jusqu'�
 Prim ajoute le sommet 0 à l'arbre (le choix du sommet 0 est arbitraire, on pourrait prendre n'importe lequel).\\
 Prim ajoute a $T$ toutes les arêtes du graphe partant de zéro.\\
 \\
-Tant que toutes les arêtes ne sont pas marquées : 
+Tant que toutes les arêtes ne sont pas marquées :
 Prim extrait l'arête de poids minimum de $T$ jusqu'à obtenir une arête dont un seul des deux sommets est marqué (c'est fait par la fonction \texttt{trouver\_bonne\_arete} : elle vérifie qu'au moins une des extrémités n'est pas déjà marqué. Puisque les seul aretes qui sont ajouté à $T$ sont celles qui ont un sommet marqué, on est assuré que l'arête réponde au critère).\\
 Prim ajoute cette arête et le sommet non marqué à l'arbre.\\
 Puis Prim marque ce sommet et ajoute à $T$ les arêtes partant du sommet qu'il vient d'ajouter et se terminant par un sommet qui n'est pas déjà dans l'arbre.\\
@@ -152,7 +151,7 @@ A la fin de cette boucle, tous les sommets ont été marqué et la \texttt{M->ar
 
 \textit{Pseudo Code :}\\
 \\
-Initialiser un tas min de taille  $n^2/2$.\\
+Initialiser un tas min de taille $n^2/2$.\\
 Ajouter le sommet 0 à l'arbre.\\
 Ajouter au tas toutes les arêtes partant de 0.\\
 \\
@@ -228,7 +227,7 @@ On a vu que des 2 fonctions précédentes, la première est la plus couteuse.
 La complexité totale de l'algorithme TSP est donc la même que celle de Prim, à savoir $O(n^2*log(n))$.
 
 \subsection{Primitives tas min} %Pierre
-La structure \texttt{Tas} supporte 3 primitives :
+La structure \texttt{Tas} suporte 3 primitives :
 \begin{itemize}
 \item \texttt{extraire\_min} : permet de supprimer et renvoyer l’élément de poids minimum du tas.
 \item \texttt{actualise\_tas} : utilisé uniquement par \texttt{extraire\_min}, cette primitive permet de restaurer les propriétés d'un tas min après la suppressions d'un élément.
@@ -236,8 +235,8 @@ La structure \texttt{Tas} supporte 3 primitives :
 \end{itemize}
 \subsubsection*{extraire\_min}
 \begin{description}
-\item[Entrée] : un \textsf{Tas} $T$ non vide ayant les propriétés du tas min
-\item[Sortie] : un élément $a \in T$ de poids minimum. L'élément $a$ à été supprimé de $T$, et $T$ à les propriété d'un tas min.
+\item[Entrée] : un \textsf{Tas} $T$ non vide ayant les propriété du tas min
+\item[Sortie] : un élément $a \in T$ de poids minimum. l'élément de $a$ à été supprimé de $T$, et $T$ les propriété d'un tas min.
 \end{description}
 \paragraph*{Algo}
 \begin{algorithm}
@@ -346,7 +345,7 @@ Choisir $s \in T$ in sommet. En partant de $s$, longer les arêtes de $T$ jusqu�
     % arete
     \foreach \source/ \dest in {a/b, b/c, c/d, c/e, b/f, f/k, f/g, g/j, g/h, h/i}
         \path[edge] (\source) -- (\dest);
-    \draw[cheminarbre] (a.south west) \foreach \dest in {b.south west, f.west, k.north west, k.west, k.south west, k.south, k.south east, f.south, g.south west, j.west, j.south west, j.south, j.south east, j.east, g.east, h.south east, h.east, h.north east, i.north east, i.north, i.north west, i.west, i.south west, h.west, g.north, f.north east, b.north east,  c.south east, e.south, e.south east, e.east, e.north east, e.north, c.north east, d.east, d.north east, d.north, d.north west, d.west, c.west, a.north east}{ -- (\dest)};
+    \draw[cheminarbre] (a.south west) \foreach \dest in {b.south west, f.west, k.north west, k.west, k.south west, k.south, k.south east, f.south, g.south west, j.west, j.south west, j.south, j.south east, j.east, g.east, h.south east, h.east, h.north east, i.north east, i.north, i.north west, i.west, i.south west, h.west, g.north, f.north east, b.north east, c.south east, e.south, e.south east, e.east, e.north east, e.north, c.north east, d.east, d.north east, d.north, d.north west, d.west, c.west, a.north east}{ -- (\dest)};
 \end{tikzpicture}
 \caption{Arbre couvrant minimum $T$ en noire et chemin $C$ en bleu}
 \end{figure}
@@ -362,7 +361,7 @@ c(C) < 2c(Opt)
 \end{equation}
 
 Le chemin $C$ n'est pas une solution au problème du voyageur de commerce car des sommets sont parcouru plusieurs fois dans $C$. Cependant, grâce à l'inégalité triangulaire, supprimer un sommet de $C$ n’augmente pas le cout de $C$.
-Pour obtenir un cycle à partir de $C = x_1, x_2, \ldots, x_n, x_1$ : 
+Pour obtenir un cycle à partir de $C = x_1, x_2, \ldots, x_n, x_1$ :
 pour chaque sommet $x_i \in C, i\neq1$, conserver uniquement sa première occurrence.
 
 \begin{figure}[!h]
@@ -417,5 +416,3 @@ Les algorithmes utilisés proviennent de l'énoncé du projet et les fichiers de
 $http://perso.ens-lyon.fr/lucie.martinet/enseignements/2012$\_$2013/Projet1/fr/documents$
 
 \end{document}
-
-
