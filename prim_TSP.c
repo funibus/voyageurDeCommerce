@@ -13,7 +13,7 @@ void prim (Matrice matrice_poids)
     int nombre_villes = getNbVilles(matrice_poids);
     int nombre_sommets_arbre = 0;
     element_liste* arbre = getTree(matrice_poids);
-    Tas T = creer_tas (matrice_poids, nombre_villes*nombre_villes);
+    Tas T = creer_tas (matrice_poids, nombre_villes*nombre_villes/2+1);
     int sommet, nouveau_sommet;
     Arete nouvelle_arete;
 
