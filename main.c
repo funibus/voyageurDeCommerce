@@ -1,27 +1,27 @@
-/*
- * main.c
- *
- *  Created on: Nov 27, 2012
- *      Author: pierre
- */
-
+#define GUI_ENABLE //commenter cette ligne pour désactivé l'interface graphique
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <stdbool.h>
 
 #include "tas_min.h"
-#include "prim.h"
-#include "TSP.h"
-#include "gui.h"
+#include "prim_TSP.h"
+#include "lecture_fichier.h"
 #include "structure_matrice.h"
 #include "interface_utilisateur.h"
+
+#ifdef GUI_ENABLE
+#include "gui.h"
+#endif
+
 
 int generation (char *nom_file, Matrice *mat);
 
 int main (int argc, char *argv[]){
-	int continuer = 10, afficher;
+	int continuer = 10;
+#ifdef GUI_ENABLE
+	int afficher;
+#endif
 	char nom_file[1000];
 	Matrice mat = NULL;
 	FILE *input = NULL;
@@ -43,23 +43,19 @@ int main (int argc, char *argv[]){
 
 	while (continuer){
 		printf("TSP : selectionner l'action à executer :\n");
-		printf("\t1 : afficher une liste de ville (aucune action possible -> efficace pour de grand nombre de villes)\n");
-		printf("\t2 : générer une liste de ville\n");
-		printf("\t3 : appliquer l'algoritme prim à un fichier de ville\n");
-		printf("\t4 : afficher les tests\n");
-		printf("\t0 : quiter le programme\n");
+		printf("\t1 : générer une liste de ville\n");
+		printf("\t2 : appliquer l'algoritme prim à un fichier de ville\n");
+#ifdef GUI_ENABLE
+		printf("\t3 : afficher une liste de ville (aucune action possible -> efficace pour de grand nombre de villes)\n");
+#endif
+		printf("\t0 : quitter le programme\n");
 		scanf("%d", &continuer);
 
 		switch(continuer){
 		case 1 :
-			printf("entrer le nom du fichier :\n");
-			scanf("%s", nom_file);
-			affichage_gui(nom_file);
-			break;
-		case 2 :
 			continuer = generation(nom_file, &mat);
 			break;
-		case 3 :
+		case 2 :
 			printf("entrer le nom du fichier :\n");
 			scanf("%s", nom_file);
 			input = fopen (nom_file, "r");
@@ -71,11 +67,16 @@ int main (int argc, char *argv[]){
 			mat = matrice_of_coordonnees(input);
 			fclose(input);
 			TSP (mat,output);
+			fprintf(output,"\n");
 			continuer = 13;
 			break;
-		case 4 :
-			//inserer les testes ici
+#ifdef GUI_ENABLE
+		case 3 :
+			printf("entrer le nom du fichier :\n");
+			scanf("%s", nom_file);
+			affichage_gui(nom_file);
 			break;
+#endif
 		case 0 :
 			break;
 		default :
@@ -83,19 +84,19 @@ int main (int argc, char *argv[]){
 			break;
 		}
 
-
+#ifdef GUI_ENABLE
 		/*propose l'affichage graphique, et initialise la matrice en fonction des choix fait par l'utilisateur*/
+		afficher = 0;
 		switch(continuer){
 		case 13:
 		case 12:
 		case 11:
 			do{
-				printf("voulez vous afficher graphiquement le resultat ? (oui = 1, non = 0)");
+				printf("voulez vous afficher graphiquement le resultat ? (oui = 1, non = 0) ");
 				scanf("%d", &afficher);
 			}while (afficher != 0 && afficher != 1);
 			break;
 		}
-
 		if (afficher){
 			printf("\ncommande :\nla pressions des touches suivantes peremt d'afficher ou masquer : \n"
 					"c(ycle) : le chemins calculer par l'algorithme\n"
@@ -115,12 +116,14 @@ int main (int argc, char *argv[]){
 				//break omis volontairement
 			case 11:// la matrice est initialiser, il sufit d'afficher le cycle
 				TSP (mat, nullstream);
+				fprintf(nullstream,"\n");
 				//break omis volontairement
 			case 13:
 				gui(mat);
 				break;
 			}
 		}
+#endif
 		if (mat)liberer_mat(mat);
 	}
 	fclose(nullstream);
@@ -130,11 +133,14 @@ int main (int argc, char *argv[]){
 
 int generation (char *nom_file, Matrice *mat){
 	char source[1000];
+	char output[1000];
 	int continuer = 10;
 
 	while (continuer){
 		printf("\t\t1 : depuis la console en se basant sur une liste de ville existante\n");
+#ifdef GUI_ENABLE
 		printf("\t\t2 : depuis l'interface graphique\n");
+#endif
 		printf("\t\t0 : revenir au menu precedent\n");
 		scanf("%d", &continuer);
 
@@ -142,16 +148,20 @@ int generation (char *nom_file, Matrice *mat){
 		case 1 :
 			printf("\n\tentrer le nom du fichier a partire du quel vous souhaiter cree votre liste de villes :\n");
 			scanf("%s", source);
-			voyageur_de_commerce_utilisateur (source,  mat, "blop.txt");
+			printf("\n\tentrer le nom du fichier de sortie. Le cycle y sera inscrit:\n");
+			scanf("%s", output);
+			voyageur_de_commerce_utilisateur (source,  mat, (output)?output:"blop.txt");
 			return 13;
 			break;
+#ifdef GUI_ENABLE
 		case 2 :
 			printf("\n\tentrer le nom du fichier de sortie :\n");
 			scanf("%s", nom_file);
-			printf("Cliquer à l'écran pour placer une ville.\nAppuiller sur esc ou entrer pour stoper la saisie\n");
+			printf("Cliquer à l'écran pour placer une ville.\nAppuyer sur esc ou entrer pour stoper la saisie\n\n");
 			gui_generer_ville(nom_file);
 			return 12;
 			break;
+#endif
 		case 0 :
 			break;
 		default :

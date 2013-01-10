@@ -29,12 +29,65 @@
 
 \section*{Introduction} %Alice
 
+L'objectif de ce projet en binôme de 6 semaines était d'écrire un programme permettant d'approcher le problème du voyageur de commerce, ainsi que de créer une grande base de donnée stockant toutes les villes de France (et même peut être plus puisque le fichier d'où sont extraites ces villes contient plus de 100 000 villes alors qu'il n'y a que 30 000 communes en France).\\
+Le problème du voyageur de commerce se pose de la façon suivante : on dispose d'une liste de ville qu'un voyageur de commerce voudrait parcourir, mais il n'est pas très sportif. Il essaye donc de trouver le chemin minimal passant par toutes les villes et qui permet de revenir à son point de départ. Ce problème est un problème fréquent dans de nombreux domaines de l'informatique \textbf{{\Large (COMME ?)}} mais il est NP-Complet : on ne connait pas d'algorithme permettant de le résoudre rapidement (en temps polynomial).\\
+L'algorithme que nous avons implémenté est celui donné dans l'énoncé, à partir d'un arbre couvrant minimal. Cet algorithme ne donne pas le résultat optimal du voyageur de commerce mais a l'avantage d'avoir une complexité polynomiale.\\
+
 \section{Structures de données}
 
+
+\subsection{Villes}
+
+Dans l'algorithme, on utilise des entiers pour représenter les villes. On a donc décidé de créer un type Ville, qui contient le nom de la ville et ses deux coordonnées, puis de créer un tableau de Villes, ce qui permet d'avoir une correspondance entre entier et ville : l'entier i est associé à la ville stockée dans la case i du tableau. Ce tableau est stocké dans la structure Matrice que nous décrire un peu plus tard.\\
+La structure Ville apparait aussi dans toutes les fonctions liées à la lecture des villes dans un fichier où à leur écriture, ainsi que dans l'interface utilisateur.\\
+
+\subsection{Arbre couvrant}
+
+L'algorithme que nous avons implémenté nécessite la création d'un arbre couvrant minimal. On le parcourt ensuite pour trouver l'ordre des villes.\\
+Pour stocker l'arbre couvrant, on a créé un tableau avec autant de cases qu'il y a de villes, puis dans chaque case i du tableau on stocke la liste des voisins du sommet i dans l'arbre. Comme l'arbre doit être couvrant, tous les sommets apparaissent au moins une fois à l'extrémité d'une arête, donc on ne gâche pas de place en stockant l'arbre dans un tableau.\\
+Cet arbre couvrant est lui aussi stocké dans la structure Matrice.\\
+
 \subsection{Matrice} %Alice
-...
+
+La structure Matrice contient toutes les informations nécessaires à l'algorithme TSP qui résout le problème :\\
+$\bullet$ un entier \texttt{nb\_villes} représentant le nombre de villes à parcourir.\\
+$\bullet$ une matrice \texttt{graph} qui contient le poids de chaque arête. Les cases (i,j) et (j,i) de la matrice contiennent le poids de l'arête allant du sommet i au sommet j.\\
+$\bullet$ un tableau d'entiers \texttt{marque} qui sert lors de l'algorithme. Chaque case du tableau représente une ville, qui est marquée si la case contient un 1 et non marquée si elle contient un zéro.\\
+$\bullet$ un tableau de villes \texttt{liste\_name} qui permet la conversion entier-ville. Chaque case i du tableau contient la ville associée à l'entier i.\\
+$\bullet$ un vecteur de liste de sommet \texttt{arbre\_couvrant}qui permet de stocker l'arbre couvrant.\\
+$\bullet$ une liste de sommets \texttt{cycle} qui contient la liste des sommets dans l'ordre du parcourt lorsque l'on parcourt l'arbre couvrant (chaque sommet n'étant écrit qu'une seule fois).\\
+$\bullet$ les coordonnées maximales des villes stockées dans le tableau \texttt{liste\_name} ( \texttt{xmin, xmax, ymin, ymax} )dont on a besoin pour l'affichage graphique.\\
+\\
+La structure Matrice contient énormément de données, elle apparait dans les fonctions Prim, TSP ainsi que dans les fonctions auxiliaires à ces 2 fonctions.\\
+
+\subsection{Arête}
+Notre algorithme associe chaque sommet à un entier. Nous avons représenté les arêtes par des couples d'entier $(u, v)$ stoqué dans des structures. Une arête $(u, v)$ relie le sommet $u$ au sommet $v$/
 
 \subsection{Tas min} %Pierre
+L'algorithme Prim appliqué à un graphe $G = (S, A)$ doit trouver une arête de poids minimum dans un ensemble donné $|A|$ fois.
+Nous avons donc eu besoin d'une structure de donnée qui permettre d'extraire le minimum d'un ensemble avec une faible complexité. Cette structure doit également supporter l'ajout et la suppression d'élément.
+Nous avons choisi d’implémenter cette structure par un tas min.
+Un tas min est un arbre ayant les propriétées suivantes :
+\begin{itemize}
+\item : C'est un arbre binaire.
+\item : Le poids d'un nœud est inférieur à celui de chacun de ses fils. L'élément de poids minimum est donc celui représenté par la racine de l'arbre
+\end{itemize}
+Le poids d'un nœud est celui de l'élément qu'il représente.
+Chaque élément de l'ensemble a représenter est représenté par un nœud de l'arbre.
+
+Dans le projet, les éléments de l'ensemble sont des arêtes, et leur poids est celui de l’arête dans le graphe. La taille du tas min est donc majoré par le nombre d’arêtes dans le graphe.
+Nous avons représenté le tas min dans une structure \texttt{Tas} contenant :
+\begin{itemize}
+\item Un tableau d’arêtes
+\item Une Matrice
+\item La taille maximum de l'ensemble que peut représenté l'arbre
+\item Le nombre d'élément stoker dans l'arbre.
+\end{itemize}
+Le tableau permet de représenté l'arbre du tas min. Il est indexé en partant de 1.
+L'indice 1 représente la racine l'arbre (ie l’arête de poids minimum de l'ensemble).
+Soit $i$ l'indexe d'un nœud. Ses deux fils (s'ils existent) sont dans les cases d'index $2i$ et $2i +1$.
+
+Toutes les arêtes qui seront stoker dans le \texttt{Tas} proviendront de la Matrice. Avoir un pointeur sur celle ci permet au \texttt{Tas} d'accéder aux poids des arêtes.
 
 \section{Définition} %Pierre
 Afin de démontrer que l’algorithme que nous avons utilisé retourne une solution dont la longueur n'exede pas deux fois la longueur d'une solution optimal, nous devons introduire un formalisme pour décrire le problème.
@@ -49,14 +102,37 @@ Afin de démontrer que l’algorithme que nous avons utilisé retourne une solut
  \item \textbf{Cycle} : un cycle est un chemin dont tous les sommets sont distincts, sauf les extrémités qui sont égales.
  \item \textbf{Cycle hamiltonien} : un cycle hamiltonien est un cycle qui parcourt l'ensemble des sommets du graph.
  \item \textbf{Arbre} : Un arbre est un un graph connexe sans cycle
+  \item \textbf{Arbre binaire} : Un arbre est binaire si chacun de ses nœuds à au plus deux fils.
  \item \textbf{Arbre couvrant} : Un arbre $T$ est couvrant sur un graph $G$ si tous les sommets de $G$ sont dans $T$.
   \item \textbf{Arbre couvrant minimum} : Un arbre couvrant est minimum s'il minimise la somme des poids des arêtes qui le compose.
 \end{itemize}
 
 \section{Algorithmes}
 
+
+L'algorithme que nous avons implémenté pour résoudre le problème du voyageur de commerce est composé de 2 fonctions principales, la fonction Prim et une fonction pour parcourir l'arbre couvrant, basées sur les algorithmes données dans l'énoncé du sujet.\\
+
 \subsection{Prim} %Alice
+
+L'algorithme Prim est celui qui permet de construire un arbre couvrant minimal à partir d'un graphe complet. Il prend en entrée une Matrice dont \texttt{arbre\_couvrant} est vide (c'est à dire que le vecteur de contient que des listes vides, aucun sommet n'a de voisin) et la renvoie en ayant modifié la partie \texttt{arbre\_couvrant} pour que ce soit un arbre couvrant minimal du graphe (c'est à dire que la somme du poids de toutes les arêtes de l'arbre est minimal).\\
+
 \subsubsection*{Algo}
+
+\textit{Entrée :} une Matrice M telle que \texttt{M->arbre\_couvrant} ne contient que des listes vides et \texttt{M->marque} ne contient que des zéros (aucun sommet n'est encore marqué, les sommets marqués sont ceux qui appartiennent à l'arbre couvrant).\\
+\textit{Sortie :} la Matrice M modifiée telle que \texttt{M->marque} ne contient que des 1, c'est à dire que l'arbre couvrant contient tous les sommets, il est dont bien couvrant. De plus cet arbre couvrant est minimal.\\
+
+\textit{Algorithme : } \\
+On crée un tas min qui va contenir des arêtes. On peut avoir jusqu'à $n^2/2$ arêtes dans le tas min, alors on crée un tas min de taille $n^2$.\\
+On ajoute le sommet 0 à l'arbre (le choix du sommet 0 est arbitraire, on pourrait prendre n'importe lequel).\\
+On ajoute au tas min toutes les arêtes du graphe partant de zéro.\\
+\\
+Tant que toutes les arêtes ne sont pas marquées : 
+On pioche dans le tas min l'arête de poids le plus faible jusqu'à obtenir une arête dont un sommet est marqué et l'autre non (c'est ce que fait la fonction \texttt{trouver\_bonne\_arete} : elle vérifie qu'au moins une des extrémités n'est pas déjà marqué, comme on n'ajoute au tas que des arêtes dont au moins une des extrémités est marquée c'est bon).\\
+On ajoute cette arête et ses sommets à l'arbre.\\
+Puis on rajoute dans le tas min les arêtes partant du nouveau sommet ajouté à l'arbre.\\
+\\
+A la fin de cette boucle, tous les sommets ont été marqué et la matrice contient un arbre couvrant de poids minimal.\\
+
 \subsubsection*{Complexité}
 
 \subsection{Parcourt de l'arbre} %Alice
@@ -64,12 +140,20 @@ Afin de démontrer que l’algorithme que nous avons utilisé retourne une solut
 \subsubsection*{Complexité}
 
 \subsection{Primitives tas min} %Pierre
-\subsubsection*{Algo}
+La structure \texttt{Tas} suporte 3 primitives :
+\begin{itemize}
+\item \texttt{extraire_min} : permet de supprimer et renvoyer l’élément de poids minimum du tas.
+\item \texttt{acutalise_tas} : utilisé uniquement par \texttt{extraire_min}, cette primitive permet de restaurer les propriétés d'un tas min après la suppressions d'un élément.
+\item \texttt{entasser_element} : permet d'ajouter un élément au tas.
+\end{itemize}
+\subsubsection*{extraire_min}
+\textit{Entrée :} un \texttt{Tas} $T$ non vide ayant les propriété du tas min
+\textit{Sortie :} un élément $a \in T$ de poids minimum. l'élément de $a$ à été supprimé de $T$, et $T$  les propriété d'un tas min.
 \subsubsection*{Complexité}
 
 
 \section{Preuve de 2-approximation} %Pierre
-Bien que le problème du voyageur de commerce soit un problème NP-Complet, il existe une solution pour l’approximer si on suppose l’inégalité triangulaire pour le poids des arêtes. L'algorithme que nous avons utilisé est une 2-approximation : la solution retournée par l'algorithme n'exede pas deux fois la longueur d'une solution optimal.
+Bien que le problème du voyageur de commerce soit un problème NP-Complet, il existe une solution pour approximer si on suppose inégalité triangulaire pour le poids des arêtes. L'algorithme que nous avons utilisé est une 2-approximation : la solution retournée par l'algorithme n'exede pas deux fois la longueur d'une solution optimal.
 
 Le poids d'un graph/arbre/cycle est la somme des poids des arêtes qui le compose.
 Dans cette section, nous interchangeables les termes poids et de distance, car dans notre problème, le poids d'une arête $(u,v)$ $(u,v)$ représente la distance séparant les sommets $u$ et $v$.
@@ -146,6 +230,9 @@ pour chaque sommet $x_i \in C, i\neq1$, conserver uniquement sa première occurr
 
 \section{Conclusion} %Alice
 
-\section{Référence}
+
+\section{Références}
 
 \end{document}
+
+

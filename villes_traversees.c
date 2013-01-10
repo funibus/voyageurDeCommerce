@@ -52,6 +52,7 @@ Chemin chemin_of_fichier (FILE* fichier, Ville* tab_villes, int nb_villes)
         }
         nom_ville[i] = '\0';
         c = fgetc(fichier);
+        c = fgetc(fichier);
 
         j = trouver_ville (tab_villes, nb_villes, nom_ville);
 
@@ -62,7 +63,7 @@ Chemin chemin_of_fichier (FILE* fichier, Ville* tab_villes, int nb_villes)
         }                                                       // la derniere du chemin, mais ce n'est pas très grave.
         else
         {
-            printf ("probleme : une ville du chemin ne devrait pas exister");
+            printf ("probleme : une ville du chemin ne devrait pas exister : %s",nom_ville);
             exit(1);
         }
 
@@ -97,7 +98,7 @@ void villes_traversees (Chemin premiere_ville, Chemin ville_en_court, Ville* tab
     int i;
     double x1,y1,x2,y2,x3,y3;
     double aire; //on calcule l'aire du triangle formee par 3 ville
-    double aire_max = 0; //pour acceptre une ville sur le chemin, il faut que cette aire soit plus petite qu'une valeur qu'on se fixe
+    double aire_max = 0.00001; //pour acceptre une ville sur le chemin, il faut que cette aire soit plus petite qu'une valeur qu'on se fixe
     double dmin; //plus petite distance trouvee entre une la ville en court et une ville sur le chemin
     int tmp = -1; //meilleure ville trouvee pour l'instant, l'entier represente sa position dans le tableau
     if (ville_en_court->ville_suivante != NULL)
@@ -116,7 +117,7 @@ void villes_traversees (Chemin premiere_ville, Chemin ville_en_court, Ville* tab
             aire = (x3-x1)*(y3-y2)-(y3-y1)*(x3-x2);
             aire = aire*aire/((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1)); //on prend les carres pour avoir des resultats positifs
                                                                //et on quotiente par la distance pour eviter des resultats aberrants
-            if (aire<=aire_max && ((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))<dmin && ((x3-x1)*(x2-x1)+(y3-y1)*(y2-y1))>0)
+            if (aire<=aire_max && ((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))<(dmin-0.000001) && ((x3-x1)*(x2-x1)+(y3-y1)*(y2-y1))>0)
             /*il faut que le point soit proche de la droite, moins loin que le point trouve precedement et bien sur le segment et pas
               n'importe ou sur la droite*/
             {

@@ -1,4 +1,4 @@
-#include "villes_traversees_test.h"
+#include "test_villes_traversees.h"
 
 /*Cree une liste de villes a partir d'un fichier ou est ecrit le chemin, puis reecrit le chemin dans un autre fichier
 a partir de la liste de villes.
@@ -16,7 +16,7 @@ void test_creation_chemin ()
    }
 
    int nb_villes = 0;
-   Ville* tab_villes = create_tab_villes (&nb_villes);
+   Ville* tab_villes = create_tab_villes ("FranceTowns.txt",&nb_villes);
 
    Chemin chemin = chemin_of_fichier (fichierChemin, tab_villes, nb_villes);
 
@@ -46,7 +46,7 @@ void test_villes_traversees ()
    }
 
    int nb_villes = 0;
-   Ville* tab_villes = create_tab_villes (&nb_villes);
+   Ville* tab_villes = create_tab_villes ("FranceTowns.txt", &nb_villes);
 
    Chemin chemin = chemin_of_fichier (fichierChemin, tab_villes, nb_villes);
 

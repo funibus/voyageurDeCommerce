@@ -13,6 +13,9 @@ typedef struct ville* Ville;
 
 Ville create_ville (char* name, double x, double y);
 void liberer_ville (Ville V);
+void liberer_tab_villes (Ville *tab, int nombre_villes);
+
+/*primitive d'aces*/
 char * getNameVille(Ville V);
 double getXVille(Ville V);
 double getYVille(Ville V);

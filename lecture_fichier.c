@@ -1,6 +1,6 @@
 #include <math.h>
 
-#include "TSP.h"
+#include "lecture_fichier.h"
 
 
 /*calcule la matrice avec les poids des aretes a partir du fichier avec la distance entre les sommets*/
@@ -172,12 +172,4 @@ Ville* create_tab_villes (char *input, int* nombre_villes)
     fclose (fichier);
     *nombre_villes = nb_villes;
     return tab_villes;
-}
-
-void liberer_tab_villes (Ville *tab, int nombre_villes){
-	int j;
-    for (j=0; j<nombre_villes; j++){
-    	liberer_ville(tab[j]);
-    }
-    free(tab);
 }

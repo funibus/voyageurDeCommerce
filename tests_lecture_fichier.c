@@ -1,5 +1,5 @@
 #include <stddef.h>
-#include "TSP_tests.h"
+#include "tests_lecture_fichier.h"
 #include "structure_matrice.h"
 
 void test_matrice_of_fichier ()

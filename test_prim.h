@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "structure_matrice.h"
-#include "prim.h"
-#include "TSP.h"
+#include "prim_TSP.h"
+#include "lecture_fichier.h"
 
 void test_prim_14_villes ();
 

@@ -16,7 +16,7 @@ element_liste parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice 
  */
 element_liste* creer_arbre (int nombre_villes)
 {
-	element_liste* arbre = calloc (sizeof(element_liste), nombre_villes);//auto initailise à NULL
+	element_liste* arbre = calloc (sizeof(element_liste), nombre_villes);//auto initialise a NULL
 	if (arbre == NULL)
 	{
 		printf("problème d'allocation pour l'arbre\n");
@@ -25,11 +25,13 @@ element_liste* creer_arbre (int nombre_villes)
 	return arbre;
 };
 
-element_liste insertion_tete(element_liste head, int element){
+/*insere l'element element au debut de la liste qui liste qui commencait par head*/
+element_liste insertion_tete(element_liste head, int element)
+{
 	element_liste new_head = (element_liste) malloc (sizeof(struct element_liste));
 	if (new_head == NULL)
 		{
-			printf("problème d'allocation pour la creation d'un element_liste\n");
+			printf("probleme d'allocation pour la creation d'un element_liste\n");
 			exit(1);
 		}
 	new_head->sommet = element;
@@ -73,10 +75,12 @@ void liberer_arbre (element_liste arbre[], int nombre_villes)
 element_liste parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, element_liste cycle, int sommet, int pere, int b)
 {
 	element_liste fils,tete_cycle;
-	if(b==0){
+	if(b==0) //le booleen b sert a savoir si c'est la première ville ou pas : si c'est la première ville on ne met pas de "," avant
+	{
 		fprintf (fichier, "%s", getNameSommet(G, sommet));
 	}
-	else{
+	else
+	{
 		fprintf (fichier, ", %s", getNameSommet(G, sommet));
 	}
 	tete_cycle = insertion_tete(cycle, sommet);

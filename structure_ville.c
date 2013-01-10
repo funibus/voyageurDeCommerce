@@ -47,6 +47,17 @@ void liberer_ville (Ville V){
 		free(V);
 	}
 }
+
+
+
+void liberer_tab_villes (Ville *tab, int nombre_villes){
+	int j;
+    for (j=0; j<nombre_villes; j++){
+    	liberer_ville(tab[j]);
+    }
+    free(tab);
+}
+
 char * getNameVille(Ville V){
 	return V->nom;
 }

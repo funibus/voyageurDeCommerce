@@ -15,6 +15,7 @@ void test_prim_4_villes ()
 
   FILE* chemin = fopen ("chemin.txt", "w");
   TSP(matrice_poids,chemin);
+  fprintf(chemin,"\n");
   fclose (chemin);
   fclose(fichier);
 

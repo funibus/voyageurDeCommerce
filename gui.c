@@ -43,7 +43,6 @@ void gui(Matrice G){
 	int aff_sommet = 1, aff_tree = 1, aff_cycle = 1;
 	SDL_putenv ("SDL_VIDEO_CENTERED=center");
 	SDL_Init( SDL_INIT_VIDEO );
-	SDL_Rect position;
 	int boucle_infini = 1;
 	struct geometry Geom;
 	Geom.widthScreen = 400.0;
@@ -79,35 +78,25 @@ void gui(Matrice G){
 		case SDL_QUIT:
 			boucle_infini = 0;
 			break;
-		case SDL_MOUSEBUTTONUP:
-			switch (event.button.button){
-			case SDL_BUTTON_LEFT:
-				/*position.x = event.button.x - Geom.rayon;
-				position.y = event.button.y - Geom.rayon;
-				SDL_BlitSurface(disque, NULL, screen, &position);
-				SDL_Flip(screen);*/
+		case SDL_KEYDOWN:
+			switch(event.key.keysym.sym){
+			case SDLK_c:
+				aff_cycle = !aff_cycle;
+				break;
+			case SDLK_s:
+				aff_sommet = !aff_sommet;
+				break;
+			case SDLK_t:
+				aff_tree = !aff_tree;
+				break;
+			case SDLK_ESCAPE:
+				boucle_infini = 0;
+				break;
+			default:
 				break;
 			}
+			accutaliser_screen(screen, disque, G, Geom, aff_sommet, aff_tree, aff_cycle);
 			break;
-			case SDL_KEYDOWN:
-				switch(event.key.keysym.sym){
-				case SDLK_c:
-					aff_cycle = !aff_cycle;
-					break;
-				case SDLK_s:
-					aff_sommet = !aff_sommet;
-					break;
-				case SDLK_t:
-					aff_tree = !aff_tree;
-					break;
-				case SDLK_ESCAPE:
-					boucle_infini = 0;
-					break;
-				default:
-					break;
-				}
-				accutaliser_screen(screen, disque, G, Geom, aff_sommet, aff_tree, aff_cycle);
-				break;
 		}
 
 	}

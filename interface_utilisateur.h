@@ -2,8 +2,8 @@
 #define INTERFACE_UTILISATEUR_H_INCLUDED
 
 #include "structure_ville.h"
-#include "TSP.h"
-#include "prim.h"
+#include "lecture_fichier.h"
+#include "prim_TSP.h"
 #include "structure_matrice.h"
 #include "villes_traversees.h"
 

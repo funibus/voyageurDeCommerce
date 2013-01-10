@@ -12,7 +12,7 @@ struct matrice
 	int * marque;//tableau indiquant si un sommet est dans l'arbre couvrant
 	Ville * liste_name;// tableau associatif entre sommet et nom du sommet
 	element_liste* arbre_couvrant;//arbre couvrant
-	element_liste cycle;//liste chaine pour le cycle
+	element_liste cycle;//liste chainee pour le cycle
 
 	//pour l'afficahge, il faut avoir le rectangle qui contien toutes les villes
 	double xmin, xmax, ymin, ymax;

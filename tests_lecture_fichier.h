@@ -1,7 +1,7 @@
 #ifndef TSP_TESTS_H_INCLUDED
 #define TSP_TESTS_H_INCLUDED
 
-#include "TSP.h"
+#include "lecture_fichier.h"
 #include "structure_ville.h"
 
 
