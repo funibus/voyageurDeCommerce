@@ -4,6 +4,7 @@
  *  Created on: Dec 24, 2012
  *      Author: pierre
  */
+#ifdef GUI_ENABLE
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
@@ -351,5 +352,5 @@ void blit_Cycle(Matrice G, SDL_Surface* surface, struct geometry Geom){
 }
 
 
-
+#endif
 
