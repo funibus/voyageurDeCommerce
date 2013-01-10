@@ -8,6 +8,9 @@
 \usepackage{tikz}
 \usepackage{graphicx}
 
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
 
 \date{\today} 
 \title{Projet C - Le Voyageur de commerce}
@@ -225,7 +228,7 @@ On a vu que des 2 fonctions précédentes, la première est la plus couteuse.
 La complexité totale de l'algorithme TSP est donc la même que celle de Prim, à savoir $O(n^2*log(n))$.
 
 \subsection{Primitives tas min} %Pierre
-La structure \texttt{Tas} suporte 3 primitives :
+La structure \texttt{Tas} supporte 3 primitives :
 \begin{itemize}
 \item \texttt{extraire\_min} : permet de supprimer et renvoyer l’élément de poids minimum du tas.
 \item \texttt{actualise\_tas} : utilisé uniquement par \texttt{extraire\_min}, cette primitive permet de restaurer les propriétés d'un tas min après la suppressions d'un élément.
@@ -233,27 +236,74 @@ La structure \texttt{Tas} suporte 3 primitives :
 \end{itemize}
 \subsubsection*{extraire\_min}
 \begin{description}
-\item[Entrée] : un \textsf{Tas} $T$ non vide ayant les propriété du tas min
-\item[Sortie] : un élément $a \in T$ de poids minimum. l'élément de $a$ à été supprimé de $T$, et $T$  les propriété d'un tas min.
+\item[Entrée] : un \textsf{Tas} $T$ non vide ayant les propriétés du tas min
+\item[Sortie] : un élément $a \in T$ de poids minimum. L'élément $a$ à été supprimé de $T$, et $T$ à les propriété d'un tas min.
 \end{description}
 \paragraph*{Algo}
+\begin{algorithm}
+\caption{extraire\_min}
+\begin{algorithmic}[1]
+\STATE $a \leftarrow T\left[1\right]$
+\STATE $T.taille\_tas\_courant \leftarrow T.taille\_tas\_courant - 1$
+\IF {$T.taille\_tas\_courant > 0$}
+\STATE $T\left[1\right] \leftarrow T\left[T.taille\_tas\_courant\right]$
+\STATE $acutalise\_tas(T, 1)$
+\ENDIF
+\RETURN $a$
+\end{algorithmic}
+\end{algorithm}
 \paragraph*{Complexité}
-
+La complexité de \texttt{extraire\_min} est la même que celle de \texttt{acutalise\_tas}
 \subsubsection*{acutalise\_tas}
 \begin{description}
-\item[Entrée] : 
-\item[Sortie] : 
+\item[Entrée] : un \textsf{Tas} $T$ non vide et l'indice $i$ à partir du quel actualiser $T$
+\item[Sortie] : le
 \end{description}
+Initialement, les sous arbres dont les racines sont les fils de l'élément $i$ ont les propriétés du tas min. En revanche, il n'y a pas d'informations entre le poids de $i$ et le poids de ces fils. L'algorithme va comparé le poids de $i$ avec celui de ces fils et échanger de place $i$ avec son fils de poids minimal, puis répété l'opération jusqu'a attendre une feuille ou bien que $T$ est retrouvé ses propriétés de tas min.\\
+Les fonctions $fils\_gauche(i)$ et $fils\_droit(i)$ renvoient les indices des fils de $i$.
 \paragraph*{Algo}
+\begin{algorithm}
+\caption{acutalise\_tas}
+\begin{algorithmic}[1]
+\IF {$poids(fils\_gauche(i)) < poids(fils\_droit(i))$}
+\STATE $fils\_min \leftarrow fils\_gauche(i)$
+\ELSE
+\STATE $fils\_min \leftarrow fils\_droit(i)$
+\ENDIF
+\IF {$poids(fils\_min(i)) < poids(i)$}
+\STATE $Echanger(fils\_min, i)$
+\IF {$not Feuille(fils\_min)$}
+\STATE $acutalise\_tas(T, fils\_min)$
+\ENDIF
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
 \paragraph*{Complexité}
-
-\subsubsection*{acutalise\_tas}
+Chaque instruction de \texttt{acutalise\_tas} s’exécute au plus une foi par appel. Dans le pire des cas, la fonction engendre des appel récursif jusqu’à attendre une feuille (ligne 8). La complexité de \texttt{acutalise\_tas} est donc en $\mathcal{O}(ln(T.taille\_tas\_courant))$
+\subsubsection*{entasser\_element}
 \begin{description}
-\item[Entrée] : 
-\item[Sortie] : 
+\item[Entrée] :  un \textsf{Tas} $T$ ayant les propriétés du tas min et un élément $a$
+\item[Sortie] :  $T$ dans le quel on a inséré $a$. $T$ à toujours les propriétés du tas min
 \end{description}
+\texttt{entasser\_element} insert $a$ en tant que feuille de l'arbre $T$, puis le fait remonté tant que nécessaire pour récupéré les propriétés du tas min.
+La fonction $parent(i)$ renvoient l'indice du père de $i$.
 \paragraph*{Algo}
+\begin{algorithm}
+\caption{entasser\_element}
+\begin{algorithmic}[1]
+\STATE $T.taille\_tas\_courant \leftarrow T.taille\_tas\_courant + 1$
+\STATE $T\left[T.taille\_tas\_courant\right] \leftarrow a$
+\STATE $i \leftarrow T.taille\_tas\_courant$
+\STATE $j \leftarrow i$
+\WHILE {$(j > 1) \&\& (poid(parent(j)) > poid(j))$}
+\STATE $Echanger(j, parent(j))$
+\STATE $j \leftarrow parent(i)$
+\STATE $i \leftarrow j$
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
 \paragraph*{Complexité}
+Dans le pire des cas, le corps de la boucle (ligne 5 à 9) s'éxécute jusqu'à ce que $j$ atteigne la racine. La complexité de \texttt{entasser\_element} est donc en $\mathcal{O}(ln(T.taille\_tas\_courant))$
 
 
 \section{Preuve de 2-approximation} %Pierre
