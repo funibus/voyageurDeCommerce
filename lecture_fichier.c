@@ -39,10 +39,10 @@ Matrice matrice_of_coordonnees (FILE* fichier)
     Matrice matrice_poids;
     /*
     les fichiers coordonnees sommets commencent par une ligne indiquant le nombre de sommets
-    alors que les fichiers coordonnees villes n'indiquent pas le nombre de villes présentes dans le fichier.
+    alors que les fichiers coordonnees villes n'indiquent pas le nombre de villes presentes dans le fichier.
     On va tester si le fichier contient cette indication, et ci c'est le cas, on va simplement l'ignorer (et lire le fichier jusqu'a la fin)
     */
-    curseur_init = ftell(fichier);//position initial dans le fichier
+    curseur_init = ftell(fichier);//position initiale dans le fichier
     c = 'A'; //c un charatere different de '\n' et de ':'
     while (c != '\n' && c != ':' && c != EOF){
     	c = fgetc(fichier);
@@ -56,10 +56,10 @@ Matrice matrice_of_coordonnees (FILE* fichier)
     			nombre_villes++;
     		}
     	}
-    	fseek(fichier, 0, curseur_init);//on revient a la position initial pour traiter la premier ligne
+    	fseek(fichier, 0, curseur_init);//on revient a la position initiale pour traiter la premier ligne
     }
     else if (c != EOF){//fichier sommet
-    	fseek(fichier, 0, curseur_init);//on revient a la position initial pour recuperer la taille exacte du tableau
+    	fseek(fichier, 0, curseur_init);//on revient a la position initiale pour recuperer la taille exacte du tableau
     	fscanf (fichier, "%d!", &nombre_villes);
     	if (!feof(fichier))fgetc(fichier);// saut le \n
     }
@@ -105,7 +105,7 @@ Matrice matrice_of_coordonnees (FILE* fichier)
 
 }
 
-
+/*compte le nombre de villes d'un fichier ou les villes sont separees par "!"*/
 int compter_villes (FILE* fichier)
 {
     char c = fgetc (fichier);
@@ -159,7 +159,7 @@ Ville* create_tab_villes (char *input, int* nombre_villes)
     for (j=0; j<nb_villes; j++)
     {
         i = 0;
-        while (c != ':' && c != EOF) //on laisse c != EOF des fois que le fichier n'ait pas la forme voulu
+        while (c != ':' && c != EOF) //on laisse c != EOF des fois que le fichier n'ait pas la forme voulue
         {
             nom_ville[i] = c;
             i++;

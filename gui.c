@@ -7,7 +7,7 @@
 #include "structure_arbre_couvrant.h"
 
 /**
- * contien les dimensions de l'ecran, et le rayon du disuqe représentant un sommet.
+ * contient les dimensions de l'ecran, et le rayon du disque representant un sommet.
  */
 struct geometry
 {
@@ -28,7 +28,7 @@ void Graph2screeCoordonne(struct geometry Geom, Matrice G, SDL_Rect * rect, int 
 }
 /**
  * @param Geom
- * @param rect entre sortie : contient initialement des coordonnée de l'ecran. Sera convertie en coordonnee entier pour de graph
+ * @param rect entre sortie : contient initialement des coordonnees de l'ecran. Sera convertie en coordonnee entiere pour de graphe
  */
 void Screen2graphCoordonne(struct geometry Geom, SDL_Rect * rect){
 	rect->x = (int)((rect->x)*Geom.widthGraph/Geom.widthScreen + Geom.orX);
@@ -36,8 +36,8 @@ void Screen2graphCoordonne(struct geometry Geom, SDL_Rect * rect){
 }
 
 /**
- * permet d'affiché le cycle hamiltonien, les villes et l'arbre couvrant à l'écran
- * @param G une matrice dont la solution à été calculé
+ * permet d'afficher le cycle hamiltonien, les villes et l'arbre couvrant à l'ecran
+ * @param G une matrice dont la solution a ete calculee
  */
 void gui(Matrice G){
 	int aff_sommet = 1, aff_tree = 1, aff_cycle = 1;
@@ -59,7 +59,7 @@ void gui(Matrice G){
 			SDL_HWSURFACE | SDL_DOUBLEBUF );
 	SDL_WM_SetCaption( "TSP - Projet C", 0 );
 
-	//disque : une surface contenant un disque que l'on vas coller à l'empacement de chaque sommet
+	//disque : une surface contenant un disque que l'on vas coller a l'empacement de chaque sommet
 	disque = SDL_CreateRGBSurface(SDL_HWSURFACE,2*Geom.rayon+2,2*Geom.rayon+2,32,0,0,0,0);
 	filledCircleRGBA(disque,
 			Geom.rayon,Geom.rayon,Geom.rayon,
@@ -105,7 +105,7 @@ void gui(Matrice G){
 }
 
 /**
- * permet à l'utilisateur de créé un fichier liste de sommé compatible avec le programme.
+ * permet à l'utilisateur de crer un fichier liste de sommets compatible avec le programme.
  * la saisie des sommet se fait en cliquant à l'écran.
  * @param filename le fichier ou sera enregistrer la liste de sommet
  */
@@ -137,7 +137,7 @@ void gui_generer_ville(char *filename){
 			SDL_HWSURFACE | SDL_DOUBLEBUF );
 	SDL_WM_SetCaption( "TSP - Projet C", 0 );
 
-	//disque : une surface contenant un disque que l'on vas coller à l'empacement de chaque sommet
+	//disque : une surface contenant un disque que l'on va coller à l'empacement de chaque sommet
 	disque = SDL_CreateRGBSurface(SDL_HWSURFACE,2*Geom.rayon+2,2*Geom.rayon+2,32,0,0,0,0);
 	filledCircleRGBA(disque,
 			Geom.rayon,Geom.rayon,Geom.rayon,
@@ -206,7 +206,6 @@ void affichage_gui(char *filename){
 			SDL_HWSURFACE | SDL_DOUBLEBUF );
 	SDL_WM_SetCaption( "TSP - Projet C", 0 );
 
-	//disque : une surface contenant un disque que l'on vas coller à l'empacement de chaque sommet
 
 	FILE *output = fopen (filename, "r");
 	if (output == NULL)
@@ -219,17 +218,17 @@ void affichage_gui(char *filename){
 	double sommet_x, sommet_y;
 	long curseur_init;
 	/*
-	    les fichiers coordonnées sommets commence par une ligne indiquant le nombre de sommet
-	    tandis ce que les fichiers coordonnées villes n'indique pas le nombre de villes présentent dans le fichier.
-	    On vas tester si le fichiers comporte cette indication, et ci c'est le cas, on va simplement l'ignoré (et lire le fichier jusqu'a la fin)
+	    les fichiers coordonnees sommets commence par une ligne indiquant le nombre de sommet
+	    tandis ce que les fichiers coordonnées villes n'indique pas le nombre de villes présentes dans le fichier.
+	    On vas tester si le fichier comporte cette indication, et si c'est le cas, on va simplement l'ignorer (et lire le fichier jusqu'a la fin)
 	 */
-	curseur_init = ftell(output);//position initial dans le fichier
-	c = 'A'; //c un charatere différent de '\n' et de ':'
+	curseur_init = ftell(output);//position initiale dans le fichier
+	c = 'A'; //c un charatere different de '\n' et de ':'
 	while (c != '\n' && c != ':'){
 		c = fgetc(output);
 	}
-	if (c == ':'){// fichiers avec nom de ville
-		//on compte le nombre de villes présentent dans le fichier
+	if (c == ':'){// fichier avec nom de ville
+		//on compte le nombre de villes presentes dans le fichier
 		nombre_villes=1;
 		while (c != EOF){
 			c = fgetc(output);
@@ -237,12 +236,12 @@ void affichage_gui(char *filename){
 				nombre_villes++;
 			}
 		}
-		fseek(output, 0, curseur_init);//on revient a la position initial pour traiter la premier ligne
+		fseek(output, 0, curseur_init);//on revient a la position initiale pour traiter la premiere ligne
 	}
 	else{//fichier sommet
-		fseek(output, 0, curseur_init);//on revient a la position initial pour récupérer la taille exacte du tableau
+		fseek(output, 0, curseur_init);//on revient a la position initiale pour recuperer la taille exacte du tableau
 		fscanf (output, "%d!", &nombre_villes);
-		if (!feof(output))fgetc(output);// saut le \n
+		if (!feof(output))fgetc(output);// saute le \n
 	}
 	/*
 	 * calcule du plus petit rectangle encadrant les villes pour l'affichage
@@ -268,7 +267,7 @@ void affichage_gui(char *filename){
 	Geom.widthGraph =xmax - Geom.orX;
 	Geom.heightGraph = ymax - Geom.orY;
 
-	//Affichage de toutes les villes (elles ne sont pas mémorisé en mémoire)
+	//Affichage de toutes les villes (elles ne sont pas memorises en mémoire)
 	fseek(output, 0, curseur_init);
 	for (sommet=0; sommet<nombre_villes; sommet++)
 	{
@@ -279,7 +278,7 @@ void affichage_gui(char *filename){
 		} while (name[i] != ':');
 		name[i] = '\0';
 		fscanf(output, "%lf; %lf!", &sommet_x, &sommet_y);
-		if (!feof(output))fgetc(output);// saut le \n
+		if (!feof(output))fgetc(output);// saute le \n
 		position.x = (int)(Geom.widthScreen*(sommet_x - Geom.orX)/Geom.widthGraph);
 		position.y = (int)(Geom.heightScreen - Geom.heightScreen*(sommet_y - Geom.orY)/Geom.heightGraph);
 		pixelRGBA(screen, position.x, position.y, 255,0,0,255);
@@ -310,7 +309,7 @@ void affichage_gui(char *filename){
 }
 
 /*
- * actualise l'écran en fonction des argument aff_sommet, aff_tree et aff_cycle qui indiquent quelle partie de la solution affiché (sommet, arbre et cycle)
+ * actualise l'ecran en fonction des arguments aff_sommet, aff_tree et aff_cycle qui indiquent quelle partie de la solution afficher (sommet, arbre et cycle)
  */
 void accutaliser_screen(SDL_Surface* screen, SDL_Surface* disque, Matrice G, struct geometry Geom, int aff_sommet, int aff_tree, int aff_cycle){
 	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
@@ -321,7 +320,7 @@ void accutaliser_screen(SDL_Surface* screen, SDL_Surface* disque, Matrice G, str
 }
 
 /*
- * affiche les sommets à l'écran
+ * affiche les sommets à l'ecran
  */
 void blit_sommet_matrice(Matrice G, SDL_Surface* formeSommet, SDL_Surface* surface, struct geometry Geom){
 	SDL_Rect position;
@@ -335,7 +334,7 @@ void blit_sommet_matrice(Matrice G, SDL_Surface* formeSommet, SDL_Surface* surfa
 }
 
 /*
- * affiche l'arbre couvrant à l'écran
+ * affiche l'arbre couvrant à l'ecran
  */
 void blit_Tree(Matrice G, SDL_Surface* surface, struct geometry Geom){
 	SDL_Rect u, v;

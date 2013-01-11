@@ -1,7 +1,7 @@
 #include "structure_arbre_couvrant.h"
 
 /*
- * liste chainee d'entier utilisé pour représenté les voisins d'un sommet dans l'arbre couvrant
+ * liste chainee d'entiers utilisee pour representer les voisins d'un sommet dans l'arbre couvrant
  */
 struct element_liste
 {
@@ -27,7 +27,7 @@ element_liste* creer_arbre (int nombre_villes)
 	return arbre;
 };
 
-/*insere l'element element au debut de la liste qui liste qui commencait par head*/
+/*insere l'element element au debut de la liste qui commencait par head*/
 element_liste insertion_tete(element_liste head, int element)
 {
 	element_liste new_head = (element_liste) malloc (sizeof(struct element_liste));
@@ -72,12 +72,12 @@ void liberer_arbre (element_liste arbre[], int nombre_villes)
 }
 
 
-/*parcourt l'arbre en partant d'un sommet donné, sans passer par le sommet du père, et renvoie la liste des sommets dans l'ordre du parcours,
+/*parcourt l'arbre en partant d'un sommet donné, sans passer par le sommet du pere, et renvoie la liste des sommets dans l'ordre du parcours,
   en ne notant un sommet que la premiere fois que l'on passe dessus*/
 element_liste parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, element_liste cycle, int sommet, int pere, int b)
 {
 	element_liste fils,tete_cycle;
-	if(b==0) //le booleen b sert a savoir si c'est la première ville ou pas : si c'est la première ville on ne met pas de "," avant
+	if(b==0) //le booleen b sert a savoir si c'est la premiere ville ou pas : si c'est la premiere ville on ne met pas de "," avant
 	{
 		fprintf (fichier, "%s", getNameSommet(G, sommet));
 	}
