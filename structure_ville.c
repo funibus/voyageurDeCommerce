@@ -13,16 +13,13 @@
 
 struct ville
 {
-    char * nom;//nom de la ville
-    double x;//coordonnees
-    double y;
+	char * nom;//nom de la ville
+	double x;//coordonnees
+	double y;
 };
 
 /**
  * cree un element ville compose d'un nom et de ses coordonnes
- * @param name
- * @param x
- * @param y
  * @return une Ville
  */
 Ville create_ville (char* name, double x, double y){
@@ -40,24 +37,25 @@ Ville create_ville (char* name, double x, double y){
 
 	return V;
 }
+
 void liberer_ville (Ville V){
-	if (V){
-		if (V->nom)
-			free(V->nom);
-		free(V);
-	}
+	free(V->nom);
+	free(V);
 }
 
 
-
+/*
+ * libere chaque ville du tableau tab de nombre_villes Vulle, puis libere le tableau
+ */
 void liberer_tab_villes (Ville *tab, int nombre_villes){
 	int j;
-    for (j=0; j<nombre_villes; j++){
-    	liberer_ville(tab[j]);
-    }
-    free(tab);
+	for (j=0; j<nombre_villes; j++){
+		liberer_ville(tab[j]);
+	}
+	free(tab);
 }
 
+/*acceceurs*/
 char * getNameVille(Ville V){
 	return V->nom;
 }

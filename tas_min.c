@@ -23,8 +23,8 @@ double poid (Tas T, int position){
 }
 
 /**
- * un tas contiendra au plus toutes les aretes
- * @param graph_arg matrice d'adjacence pour calculer le poid d'une arete
+ * un tas contiendra au plus toutes les aretes du graphe
+ * @param graph_arg matrice d'adjacence pour calculer le poids d'une arete
  * @param taille_tas_arg
  * @return le tas cree
  */
@@ -59,7 +59,7 @@ void liberer_tas (Tas T){
 }
 
 /**
- * insert un element en bas du tas et le fait remonter jusqu'a ce que son parent soit plus petit que lui
+ * insert un element (l'arete (u,v))en bas du tas et le fait remonter jusqu'a ce que le poids de son parent soit plus petit que son propre poids lui
  * @param T
  * @param u
  * @param v
@@ -95,6 +95,7 @@ void entasser_element (Tas T, int u, int v){
 	}
 	T->taille_tas_courant++;
 }
+
 /**
  * si on suppose que les fils de i sont tous deux des tas min, actualise_tas actualise le tel de sorte que le tas de racine i soit un tas min
  * @param T un tas
