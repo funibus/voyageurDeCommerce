@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include "villes_traversees.h"
 
+/*la structure Chemin est un pointeur vers une liste de Villes*/
 struct chemin
 {
     Ville ville;
     struct chemin* ville_suivante;
 };
 
-
+/*ajoute une ville en tete du chemin suite_du_chemin*/
 Chemin ajouter_chemin (Ville ville, Chemin suite_du_chemin)
 {
     Chemin nouvelle_ville = (struct chemin*) malloc(sizeof(struct chemin));
@@ -23,6 +24,7 @@ Chemin ajouter_chemin (Ville ville, Chemin suite_du_chemin)
     return nouvelle_ville;
 }
 
+/*libere la place occupee par un chemin*/
 void liberer_chemin (Chemin chemin)
 {
     if (chemin != NULL)
@@ -32,7 +34,8 @@ void liberer_chemin (Chemin chemin)
     }
 }
 
-/*prend en entree un fichier avec un chemin, de la forme ville1, ville2, ville3... et renvoie une liste de villes de type Chemin*/
+/*prend en entree un fichier avec un chemin, de la forme ville1, ville2, ville3... et renvoie
+ une liste de villes de type Chemin*/
 Chemin chemin_of_fichier (FILE* fichier, Ville* tab_villes, int nb_villes)
 {
     char nom_ville[100];

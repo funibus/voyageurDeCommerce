@@ -108,26 +108,9 @@ void parcourir_arbre (FILE* fichier, Matrice matrice_poids)
 	setCycle(matrice_poids, tete_cycle);
 }
 
-/*
- * calcule la distance du chemin inscrit dans fichier avec le poids décrit par matrice_poids
- */
-double distance_parcourue (FILE* fichier, Matrice matrice_poids)
-{
-	int sommet1, sommet2, i;
-	double distance = 0.;
-	int nombre_villes = getNbVilles (matrice_poids);
-	fscanf (fichier, "%d", &sommet1);
-	for (i=1; i<nombre_villes; i++)
-	{
-		fscanf (fichier, ", %d", &sommet2);
-		distance = distance + getPoid(matrice_poids, sommet1, sommet2);
-		sommet1 = sommet2;
-	}
-	return distance;
-}
 
 /*
- * primitives d'accès
+ * primitives d'acces
  */
 int getSommetNode(element_liste l){
 	return l->sommet;

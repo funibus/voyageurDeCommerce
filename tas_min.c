@@ -13,7 +13,7 @@ double poid (Tas T, int position);
 struct tas
 {
 	Arete ** tab;//tableau de pointeur d'arete represantant le tas
-	Matrice graph;//matrice d'adjacence utilisee pour calculer le poid d'une arete
+	Matrice graph;//matrice d'adjacence utilisee pour calculer le poids d'une arete
 	int taille_tas_max;
 	int taille_tas_courant;//indice de la premiere case non utilisee
 };
@@ -39,7 +39,7 @@ Tas creer_tas (Matrice graph_arg, int taille_tas_arg){
 	T->taille_tas_courant = 1;
 	T->graph = graph_arg;
 
-	//(taille_tas_arg+1) car la premiere case ne sert pas (pour facilité la manipulation d'indice)
+	//(taille_tas_arg+1) car la premiere case ne sert pas (pour faciliter la manipulation d'indice)
 	T->tab = (Arete **) malloc(sizeof(Arete *)*(taille_tas_arg+1));
 	if (T->tab == NULL){
 		fprintf(stderr, "erreur allocation tas min : pas assez de memoire");
@@ -50,7 +50,7 @@ Tas creer_tas (Matrice graph_arg, int taille_tas_arg){
 
 void liberer_tas (Tas T){
 	int i;
-	//Libérer les aretes inutilisée
+	//Liberer les aretes inutilisees
 	for (i = 1;  i < T->taille_tas_courant; i++) {
 		free(T->tab[i]);
 	}
@@ -59,7 +59,7 @@ void liberer_tas (Tas T){
 }
 
 /**
- * insert un element (l'arete (u,v))en bas du tas et le fait remonter jusqu'a ce que le poids de son parent soit plus petit que son propre poids lui
+ * insert un element (l'arete (u,v))en bas du tas et le fait remonter jusqu'a ce que le poids de son parent soit plus petit que son propre poids a lui
  * @param T
  * @param u
  * @param v
@@ -84,7 +84,7 @@ void entasser_element (Tas T, int u, int v){
 	T->tab[indice]->v = v;
 
 	parent = indice / 2;
-	//tant que l'element n'est pas la racine du tas, et qu'il est moins lourd que son pere, on les echanges.
+	//tant que l'element n'est pas la racine du tas, et qu'il est moins lourd que son pere, on les echange.
 	while (parent > 0 && poid(T, indice) < poid(T, parent)){
 		tmp = T->tab[indice];
 		T->tab[indice] = T->tab[parent];
@@ -104,7 +104,7 @@ void entasser_element (Tas T, int u, int v){
 void acutalise_tas (Tas T, int indice){
 	//fait descendre un element qui est plus petit que l'un de ces fils
 	int indice_gauche, indice_droit;
-	int min_indice;// l'indice de l'element le plus petit entre indice est ses deux fils
+	int min_indice;// l'indice de l'element le plus petit entre ses deux fils
 	Arete * tmp;
 
 	indice_gauche = Fils_g(indice);
@@ -121,7 +121,7 @@ void acutalise_tas (Tas T, int indice){
 }
 
 /**
- * on renvois la racine du tas min T,
+ * on renvoie la racine du tas min T,
  * puis on place le dernier element de l'arbe a la racine
  * et enfin, on actualise le tas pour qu'il redevienne un tas min
  * @param T un tas min

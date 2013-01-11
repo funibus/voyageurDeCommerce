@@ -19,7 +19,7 @@ struct ville
 };
 
 /**
- * cree un element ville compose d'un nom et de ses coordonnes
+ * cree un element ville compose d'un nom et de ses coordonnees
  * @return une Ville
  */
 Ville create_ville (char* name, double x, double y){
@@ -45,7 +45,7 @@ void liberer_ville (Ville V){
 
 
 /*
- * libere chaque ville du tableau tab de nombre_villes Vulle, puis libere le tableau
+ * libere chaque ville du tableau tab de nombre_villes villes, puis libere le tableau
  */
 void liberer_tab_villes (Ville *tab, int nombre_villes){
 	int j;
@@ -55,7 +55,7 @@ void liberer_tab_villes (Ville *tab, int nombre_villes){
 	free(tab);
 }
 
-/*acceceurs*/
+/*accesseurs*/
 char * getNameVille(Ville V){
 	return V->nom;
 }
