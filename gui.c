@@ -45,8 +45,8 @@ void gui(Matrice G){
 	SDL_Init( SDL_INIT_VIDEO );
 	int boucle_infini = 1;
 	struct geometry Geom;
-	Geom.widthScreen = 400.0;
-	Geom.heightScreen = 400.0;
+	Geom.widthScreen = WIDTH_S;
+	Geom.heightScreen = HEIGTH_S;
 	Geom.rayon = RAYON;
 	Geom.orX = getXmin(G);
 	Geom.orY = getYmin(G);
@@ -118,13 +118,13 @@ void gui_generer_ville(char *filename){
 	int nb_ville_cree=0;
 	int boucle_infini = 1;
 	struct geometry Geom;
-	Geom.widthScreen = 400.0;
-	Geom.heightScreen = 400.0;
+	Geom.widthScreen = WIDTH_S;
+	Geom.heightScreen = HEIGTH_S;
 	Geom.rayon = RAYON;
 	Geom.orX = 0.0;
 	Geom.orY = 0.0;
-	Geom.widthGraph = 400.0 - Geom.orX;
-	Geom.heightGraph = 400.0 - Geom.orY;
+	Geom.widthGraph = WIDTH_S - Geom.orX;
+	Geom.heightGraph = HEIGTH_S - Geom.orY;
 
 	SDL_Event event;
 	SDL_Surface* disque;
@@ -185,8 +185,8 @@ void affichage_gui(char *filename){
 	int boucle_infini = 1;
 	struct geometry Geom;
 	double xmin, ymin, xmax, ymax;
-	Geom.widthScreen = 400.0;
-	Geom.heightScreen = 400.0;
+	Geom.widthScreen = WIDTH_S;
+	Geom.heightScreen = HEIGTH_S;
 	Geom.rayon = RAYON;
 
 	SDL_Event event;
