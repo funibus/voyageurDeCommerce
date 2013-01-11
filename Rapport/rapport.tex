@@ -15,7 +15,7 @@
 \title{Projet C - Le Voyageur de commerce}
 \author{Alice PELLET -- MARY \& Pierre MACHEREL}
 
-\tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=0pt]
+\tikzstyle{vertex}=[circle,fill=black!25,minimum size=15pt,inner sep=0pt]
 \tikzstyle{selected vertex} = [vertex, fill=red!24]
 \tikzstyle{edge} = [draw,thick,-]
 \tikzstyle{weight} = [font=\small]
@@ -37,23 +37,23 @@ Nous avons implémenté un programme basé sur l'algorithme de Prim. Cet algorit
 
 \section{Structures de données}
 Notre programme fait appel à quatre structures de données principales : \textsf{Ville}, \textsf{element\_liste*}, \textsf{Matrice} et \textsf{Tas} qui permettent respectivement de représenter une ville avec ses coordonnées, un arbre, un graphe complet et un ensemble d'arêtes.
-Chaque structure présente des avantages (accès à une information en temps constant, recherche d'un minimum dans un ensemble, etc) et des inconvénients (difficulté d'insertion, place en mémoire ...).\\
+Chaque structure présente des avantages (accès à une information en temps constant, recherche d'un minimum dans un ensemble, etc) et des inconvénients (difficulté d'insertion, place en mémoire, etc).\\
 Pour les structures de données utilisées dans plusieurs fichier, nous avons écrits des fonctions d'accès qui permettent de modifier les structures sans avoir à changer les programmes si on garde le même nom pour les fonctions d'accès.
 
 \subsection{Villes}
 
-Dans l'algorithme, les villes sont représentées par des entiers. On a donc créé un type \textsf{Ville} dans les fichier \emph{structure\_ville}, qui contient le nom de la ville et ses coordonnées. L'ensemble des villes du problème est enregistré dans un tableau de \textsf{Ville}. Cela permet d'associer à chaque ville sa position dans le tableau. Ce tableau est lui même stocké dans la structure \textsf{Matrice} que nous décrirons plus tard.\\
+Dans l'algorithme, les villes sont représentées par des entiers. On a donc créé un type \textsf{Ville} dans les fichiers \emph{structure\_ville}, qui contient le nom de la ville et ses coordonnées. L'ensemble des villes du problème est enregistré dans un tableau de \textsf{Ville}. Cela permet d'associer à chaque ville sa position dans le tableau. Ce tableau est lui même stocké dans la structure \textsf{Matrice} que nous décrirons plus tard.\\
 La structure Ville apparait également dans toutes les fonctions liées à la lecture/écriture des villes dans un fichier, ainsi que dans l'interface utilisateur.
 
 \subsection{Arbre couvrant}
 
 L'algorithme que nous avons implémenté nécessite la création d'un arbre couvrant minimal. On le parcourt ensuite pour trouver l'ordre des villes dans le chemin.\\
-La structure qui implémente l'arbre couvrant se trouve dans les fichier \emph{structure\_arbre\_couvrant}. 
+La structure qui implémente l'arbre couvrant se trouve dans les fichiers \emph{structure\_arbre\_couvrant}. 
 Pour stocker l'arbre couvrant, on a créé un tableau de type \textsf{element\_liste*}, avec autant de cases qu'il y a de villes dans le graphe, puis dans chaque case i du tableau on stocke sous forme de liste chainée d'entiers les voisins du sommet i dans l'arbre. Comme l'arbre doit être couvrant, tous les sommets sont incidents à au moins une arête, donc on ne gâche pas de place en stockant l'arbre dans un tableau. Une liste chainée présente l'avantage de faciliter l'insertion d'élément, or le nombre de voisin d'un sommet dans l'arbre couvrant minimum n'est pas connu à l'avance.\\
 Cet arbre couvrant est également stocké dans la structure Matrice.
 
 \subsection{Matrice} %Alice
-Décrite dans les fichier \emph{structure\_matrice}, la structure \textsf{Matrice} contient toutes les informations nécessaires à l'algorithme TSP qui résout le problème du voyageur de commerce :
+Décrite dans les fichiers \emph{structure\_matrice}, la structure \textsf{Matrice} contient toutes les informations nécessaires à l'algorithme TSP qui résout le problème du voyageur de commerce :
 \begin{itemize}
 \renewcommand{\FrenchLabelItem}{\textbullet}
 \item Un entier \texttt{nb\_villes} représentant le nombre de villes à parcourir.
@@ -84,7 +84,7 @@ Le poids d'un nœud est celui de l'élément qu'il décrit.
 Chaque élément de l'ensemble à représenter est représenté par un nœud de l'arbre.
 
 Dans le projet, les éléments de l'ensemble sont des arêtes, et leur poids est celui de l'arête dans le graphe. La taille du tas min est donc majorée par le nombre d'arêtes dans le graphe.
-Nous avons implémenté le tas min dans une structure \textsf{Tas} contenant :
+Nous avons implémenté le tas min dans une structure \textsf{Tas} contenant (dans le fichier \emph{structure\_tas\_min} :
 \begin{itemize}
 \renewcommand{\FrenchLabelItem}{\textbullet}
 \item Un tableau d’arêtes
@@ -111,7 +111,7 @@ Afin de démontrer que l'algorithme que nous avons utilisé retourne une solutio
  \item[Graphe connexe] : Un graphe $G$ est connexe si pour toutes paires de sommets $u, v \in G$, il existe un chemin reliant $u$ à $v$.
  \item[Cycle] : Un cycle est un chemin dont tous les sommets sont distincts, sauf les extrémités qui sont égales.
  \item[Cycle hamiltonien] : Un cycle hamiltonien est un cycle qui parcourt l'ensemble des sommets du graphe.
- \item[Arbre] : Un arbre est un un graphe connexe sans cycle
+ \item[Arbre] : Un arbre est un un graphe connexe sans cycle.
  \item[Arbre binaire] : Un arbre est binaire si chacun de ses nœuds a au plus deux fils.
  \item[Profondeur d'un nœud] : On peut définir un sommet $r$ comme étant la racine de l'arbre. La profondeur d'un élément $s$ dans un arbre est alors le nombre de nœuds qui composent le chemin entre $r$ et $u$.
  \item[Arbre couvrant] : Un arbre $T$ est couvrant sur un graphe $G$ si tous les sommets de $G$ sont dans $T$.
@@ -138,7 +138,7 @@ L'algorithme Prim permet de construire un arbre couvrant minimal à partir d'un 
 \\
 Prim initialise un tas min $T$ qui contiendra des arêtes. La capacité de $T$ est majorée par $|A|$ le nombre d'arêtes du graphe. Le tas min contiendra l'ensemble des arêtes du graphe incidentes à au moins un sommet de l'arbre couvrant en cour de construction.\\
 Prim ajoute le sommet 0 à l'arbre (le choix du sommet 0 est arbitraire, on pourrait prendre n'importe lequel).\\
-Prim ajoute a $T$ toutes les arêtes du graphe partant de zéro.\\
+Prim ajoute à $T$ toutes les arêtes du graphe partant de zéro.\\
 \\
 Tant que toutes les arêtes ne sont pas marquées :
 Prim extrait l'arête de poids minimum de $T$ jusqu'à obtenir une arête dont un seul des deux sommets est marqué (c'est fait par la fonction \texttt{trouver\_bonne\_arete} : elle vérifie qu'au moins une des extrémités n'est pas déjà marquée. Puisque les seules arêtes qui sont ajoutées à $T$ sont celles qui ont un sommet marqué, on est assuré que l'arête répond au critère).\\
@@ -151,7 +151,7 @@ A la fin de cette boucle, tous les sommets ont été marqué et \texttt{M->arbre
 \caption{Prim}
 \begin{algorithmic}[1]
 
-\STATE Initialiser un tas min de taille $|A|$
+\STATE Initialiser un tas min de capacité $|A|$
 \STATE Ajouter le sommet 0 à l'arbre.
 \STATE Ajouter au tas toutes les arêtes partant de 0.
 \WHILE {l'arbre ne contient pas tous les sommets}
@@ -172,9 +172,9 @@ A la fin de cette boucle, tous les sommets ont été marqué et \texttt{M->arbre
 Soit $n=|S|$ le nombre de sommets du graphe.
 L'algorithme utilise un tas min pour extraire l'arête de poids minimal, l'ajout et l'extraction d'un élément dans un tas min se font en $O(log(\frac{n^2}{2}))$, car le graphe est complet, donc $\frac{n(n-1)}{2} = |A|$\\
 \\
-L'essentiel de la complexité de l'algorithme réside dans les 2 boucles while. Le reste est en $O(n*log(n))$, qui correspond à l'ajout des $n-1$ arêtes dans le tas min (l'ajout d'une arête dans le tas min est en $O(log(n^2)) = O(log(n))$ puisqu'il y a au plus $(n^2)/2$ arêtes dans le tas.\\
+L'essentiel de la complexité de l'algorithme réside dans les 2 boucles while. Le reste est en $O(n*log(n))$, qui correspond à l'ajout des $n-1$ arêtes dans le tas min (l'ajout d'une arête dans le tas min est en $O(log(n^2)) = O(log(n))$ puisqu'il y a au plus $\frac{n^2}{2}$ arêtes dans le tas.\\
 \\
-On peut aussi remarquer que chaque arête ne peut être ajoutée qu'une fois au tas, donc on peut extraire au maximum $(n^2)/2$ arêtes du tas sur le total de l'algorithme. Au total sur tout l'algorithme, la seconde boucle while fera donc au plus $(n^2)/2$ extractions en $O(log(n))$, donc sa complexité est en $(n^2*log(n))$\\
+On peut aussi remarquer que chaque arête ne peut être ajoutée qu'une fois au tas, donc on peut extraire au maximum $\frac{n^2}{2}$ arêtes du tas sur le total de l'algorithme. Au total sur tout l'algorithme, la seconde boucle while fera donc au plus $\frac{n^2}{2}$ extractions en $O(log(n))$, donc sa complexité est en $(n^2*log(n))$\\
 Enfin, la première boucle while va être parcourue $n$ fois au cours de l'algorithme puisqu'on ajoute exactement un sommet à l'arbre à chaque fois. Et chaque passage a une complexité en $O(log(n)*n)$ pour l'ajout des arêtes au tas min (il y a au plus n arêtes à ajouter). L'ajout d'un sommet et d'une arête à l'arbre se fait en temps constant. Au total cette boucle a donc une complexité en $O(n^2*log(n))$.\\
 \\
 La complexité totale de l'algorithme est donc en $O(n^2*log(n)+n^2*log(n)+log(n))$, c'est à dire en $O(n^2*log(n))$.
@@ -243,6 +243,7 @@ La structure \texttt{Tas} supporte 3 primitives :
 \item \texttt{actualise\_tas} : utilisé uniquement par \texttt{extraire\_min}, cette primitive permet de restaurer les propriétés d'un tas min après la suppressions d'un élément.
 \item \texttt{entasser\_element} : permet d'ajouter un élément au tas.
 \end{itemize}
+Ces primitives sont des adaptations d'algorithmes donnés dans le Cormen (le Cormen décrit un tas max).
 \subsubsection*{extraire\_min}
 \begin{description}
 \item[Entrée] : un \textsf{Tas} $T$ non vide ayant les propriétés du tas min.
@@ -260,7 +261,7 @@ La complexité de \texttt{extraire\_min} est la même que celle de \texttt{actua
 \paragraph*{Algo}
 Initialement, les sous-arbres dont les racines sont les fils de l'élément $i$ ont les propriétés du tas min. En revanche, il n'y a pas d'information entre le poids de $i$ et le poids de ses fils. L'algorithme va comparer le poids de $i$ avec celui de ses fils et échanger de place $i$ avec son fils de poids minimal, puis répéter l'opération jusqu'à atteindre une feuille ou bien que $T$ ait retrouvé ses propriétés de tas min.\\
 Les fonctions $fils\_gauche(i)$ et $fils\_droit(i)$ renvoient les indices des fils de $i$.
-\begin{algorithm}
+\begin{algorithm}[h!]
 \caption{actualise\_tas}
 \begin{algorithmic}[1]
 \IF {$poids(fils\_gauche(i)) < poids(fils\_droit(i))$}
@@ -277,7 +278,7 @@ Les fonctions $fils\_gauche(i)$ et $fils\_droit(i)$ renvoient les indices des fi
 \end{algorithmic}
 \end{algorithm}
 \paragraph*{Complexité}
-Chaque instruction de \texttt{actualise\_tas} s'exécute au plus une fois par appel. Dans le pire des cas, la fonction engendre des appels récursifs jusqu'à atteindre une feuille (ligne 8). La complexité de \texttt{actualise\_tas} est donc en $\mathcal{O}(ln(T.taille\_tas\_courant))$
+Chaque instruction de \texttt{actualise\_tas} s'exécute au plus une fois par appel. Dans le pire des cas, la fonction engendre des appels récursifs jusqu'à atteindre une feuille (ligne 8). La complexité de \texttt{actualise\_tas} est donc en $O(log(T.taille\_tas\_courant))$
 \subsubsection*{entasser\_element}
 \begin{description}
 \item[Entrée] :  Un \textsf{Tas} $T$ ayant les propriétés du tas min et un élément $a$.
@@ -286,7 +287,7 @@ Chaque instruction de \texttt{actualise\_tas} s'exécute au plus une fois par ap
 \texttt{entasser\_element} insert $a$ en tant que feuille de l'arbre $T$, puis le fait remonter tant que nécessaire pour récupérer les propriétés du tas min.
 La fonction $parent(i)$ renvoient l'indice du père de $i$.
 \paragraph*{Algo}
-\begin{algorithm}
+\begin{algorithm}[h!]
 \caption{entasser\_element}
 \begin{algorithmic}[1]
 \STATE $T.taille\_tas\_courant \leftarrow T.taille\_tas\_courant + 1$
@@ -301,14 +302,14 @@ La fonction $parent(i)$ renvoient l'indice du père de $i$.
 \end{algorithmic}
 \end{algorithm}
 \paragraph*{Complexité}
-Dans le pire des cas, le corps de la boucle (ligne 5 à 9) s'exécute jusqu'à ce que $j$ atteigne la racine. La complexité de \texttt{entasser\_element} est donc en $\mathcal{O}(ln(T.taille\_tas\_courant))$
+Dans le pire des cas, le corps de la boucle (ligne 5 à 9) s'exécute jusqu'à ce que $j$ atteigne la racine. La complexité de \texttt{entasser\_element} est donc en $0(log(T.taille\_tas\_courant))$
 
 
 \section{Preuve de 2-approximation} %Pierre
 Bien que le problème du voyageur de commerce soit un problème NP-Complet, il existe une solution pour l'approximer si on suppose que ses sommets et le poids des arêtes vérifient l'inégalité triangulaire. Dans ce cas là, l'algorithme que nous avons utilisé est une 2-approximation : la solution retournée par l'algorithme n'excède pas deux fois la longueur d'une solution optimale.
 
 Le poids d'un graph/arbre/cycle est la somme des poids des arêtes qui le compose.
-Dans cette section, nous les termes poids et de distance seront équivalents, car dans notre problème, le poids d'une arête $(u,v)$ $(u,v)$ représente la distance séparant les sommets $u$ et $v$.
+Dans cette section, nous les termes poids et de distance seront équivalents, car dans notre problème, le poids d'une arête $(u,v)$ représente la distance séparant les sommets $u$ et $v$.
 
 Le poids d'une solution optimale $c(Opt)$ est borné par le poids d'un arbre couvrant minimal $c(T)$ :
 En supprimant une arête de $Opt$, on obtient un arbre couvrant car $Opt$ est un cycle hamiltonien. Par minimalité de $T$, on a donc \begin{equation}
@@ -316,38 +317,13 @@ c(T) < c(Opt)
 \label{eq1}
 \end{equation}
 
-\begin{figure}[!h]
-\centering
-\begin{tikzpicture}[scale=1, auto,swap]
-    % sommet
-    \foreach \pos/\name in {{(-1,5)/a}, {(1,3)/b}, {(1,4)/c},{(1,5)/d}, {(2,4)/e}, {(2,2)/f}, {(3,1)/g}, {(4,2)/h}, {(3,3)/i}, {(3,0)/j}, {(1,1)/k}}
-        \node[vertex] (\name) at \pos {$\name$};
-    % arete
-    \foreach \source/ \dest in {a/d, d/e, e/i, i/h, h/g, g/j, j/k, k/f, f/b, b/c, c/a}
-        \path[cycle] (\source) -- (\dest);
-    \foreach \source/ \dest in {d/e, e/i, i/h, h/g, g/j, j/k, k/f, f/b, b/c, c/a}
-        \path[edge] (\source) -- (\dest);
-\end{tikzpicture}
-\caption{Une solution optimal en gris et un arbre couvrant en noir}
-\end{figure}
+
 
 
 Soit $C$ le chemin défini comme suit :
 Choisir $s \in T$. En partant de $s$, longer les arêtes de $T$ jusqu'à revenir au sommet $s$. Chaque arête de $T$ sera longée deux fois (une fois par côté de l'arête).
 
-\begin{figure}[!h]
-\centering
-\begin{tikzpicture}[scale=1, auto,swap]
-    % sommet
-    \foreach \pos/\name in {{(-1,5)/a}, {(1,3)/b}, {(1,4)/c},{(1,5)/d}, {(2,4)/e}, {(2,2)/f}, {(3,1)/g}, {(4,2)/h}, {(3,3)/i}, {(3,0)/j}, {(1,1)/k}}
-        \node[vertex] (\name) at \pos {$\name$};
-    % arete
-    \foreach \source/ \dest in {a/b, b/c, c/d, c/e, b/f, f/k, f/g, g/j, g/h, h/i}
-        \path[edge] (\source) -- (\dest);
-    \draw[cheminarbre] (a.south west) \foreach \dest in {b.south west, f.west, k.north west, k.west, k.south west, k.south, k.south east, f.south, g.south west, j.west, j.south west, j.south, j.south east, j.east, g.east, h.south east, h.east, h.north east, i.north east, i.north, i.north west, i.west, i.south west, h.west, g.north, f.north east, b.north east, c.south east, e.south, e.south east, e.east, e.north east, e.north, c.north east, d.east, d.north east, d.north, d.north west, d.west, c.west, a.north east}{ -- (\dest)};
-\end{tikzpicture}
-\caption{Arbre couvrant minimum $T$ en noire et chemin $C$ en bleu}
-\end{figure}
+
 
 \begin{equation}
 c(C) = 2c(T)
@@ -364,8 +340,9 @@ Pour obtenir un cycle à partir de $C = x_1, x_2, \ldots, x_n, x_1$ :
 pour chaque sommet $x_i \in C, i\neq1$, conserver uniquement sa première occurrence.
 
 \begin{figure}[!h]
+\begin{minipage}[c]{.46\linewidth}
 \centering
-\begin{tikzpicture}[scale=1, auto,swap]
+\begin{tikzpicture}[scale=0.6, auto,swap]
     % sommet
     \foreach \pos/\name in {{(-1,5)/a}, {(1,3)/b}, {(1,4)/c},{(1,5)/d}, {(2,4)/e}, {(2,2)/f}, {(3,1)/g}, {(4,2)/h}, {(3,3)/i}, {(3,0)/j}, {(1,1)/k}}
         \node[vertex] (\name) at \pos {$\name$};
@@ -374,11 +351,28 @@ pour chaque sommet $x_i \in C, i\neq1$, conserver uniquement sa première occurr
         \path[edge] (\source) -- (\dest);
 \end{tikzpicture}
 \caption{Chemin $W$ en noir}
+\end{minipage}
+\begin{minipage}[c]{.46\linewidth}
+\centering
+\begin{tikzpicture}[scale=0.6, auto,swap]
+    % sommet
+    \foreach \pos/\name in {{(-1,5)/a}, {(1,3)/b}, {(1,4)/c},{(1,5)/d}, {(2,4)/e}, {(2,2)/f}, {(3,1)/g}, {(4,2)/h}, {(3,3)/i}, {(3,0)/j}, {(1,1)/k}}
+        \node[vertex] (\name) at \pos {$\name$};
+    % arete
+    \foreach \source/ \dest in {a/b, b/c, c/d, c/e, b/f, f/k, f/g, g/j, g/h, h/i}
+        \path[edge] (\source) -- (\dest);
+    \draw[cheminarbre] (a.south west) \foreach \dest in {b.south west, f.west, k.north west, k.west, k.south west, k.south, k.south east, f.south, g.south west, j.west, j.south west, j.south, j.south east, j.east, g.east, h.south east, h.east, h.north east, i.north east, i.north, i.north west, i.west, i.south west, h.west, g.north, f.north east, b.north east, c.south east, e.south, e.south east, e.east, e.north east, e.north, c.north east, d.east, d.north east, d.north, d.north west, d.west, c.west, a.north east}{ -- (\dest)};
+\end{tikzpicture}
+\caption{Arbre couvrant minimum $T$ en noire et chemin $C$ en bleu}
+\end{minipage}
 \end{figure}
+
+
+
 
 \section{Graphique} %Pierre
 Le programme offre trois possibilités graphiques :
-\subsection{affichage de villes}
+\subsection{Affichage de villes}
 Cette option (numéro 3 dans le menu) permet d'afficher un très grand nombre de villes sans en calculer une solution au problème du voyageur de commerce. C'est l'affichage à choisir pour visualiser le fichier \textit{FranceTowns.txt} (\ref{fig1}). L'utilisateur peut fermer la fenêtre avec la croix.
 \begin{center}
 \begin{figure}[htbp]
@@ -391,7 +385,7 @@ Cette option (numéro 3 dans le menu) permet d'afficher un très grand nombre de
 \end{center}
 
 \subsection{Saisie de villes}
-Cette option (numéro 1 $\rightarrow$ 2 dans le menu) permet de cliquer à l'écran pour enregistrer une ville (\ref{fig2}. L'utilisateur ne peut pas supprimer une ville, ni renseigner son nom. Une fois la saisie terminée, l'utilisateur peut fermer la fenêtre avec la croix, la touche esc ou la touche entrée.
+Cette option (numéro 1 $\rightarrow$ 2 dans le menu) permet de cliquer à l'écran pour enregistrer une ville (\ref{fig2}). L'utilisateur ne peut pas supprimer une ville, ni renseigner son nom. Une fois la saisie terminée, l'utilisateur peut fermer la fenêtre avec la croix, la touche esc ou la touche entrée.
 \begin{center}
 \begin{figure}[htbp]
 \begin{center}
@@ -441,27 +435,38 @@ Puis il choisit le nombre de villes qu'il veut parcourir, et enfin le nombre de 
 Si l'utilisateur ne dispose pas de la bibliothèque graphique nécessaire pour afficher les villes, il peut l'installer à l'adresse $\left[\ref{SDL}\right]$ ou bien il peut la désactiver en commentant la première ligne du fichier \textit{main.c}.\\
 \\
 \textit{Conseils d'utilisation : }\\
-Pour des raisons de capacité mémoire des ordinateurs, il vaut mieux ne pas appliquer l'algorithme prim à plus de 10 000 villes.
-Lorsque l'on choisit les villes à la main, on peut utiliser le fichier \textit{FranceTowns.txt} qui contient plus de 100 000 villes, mais il vaut mieux ne pas en demander plus de 10 000 pour le parcourt.
+Pour des raisons de capacité mémoire des ordinateurs, il vaut mieux ne pas appliquer l'algorithme prim à plus de 10~000 villes.
+Lorsque l'on choisit les villes à la main, on peut utiliser le fichier \textit{FranceTowns.txt} qui contient plus de 100~000 villes, mais il vaut mieux ne pas en demander plus de 10 000 pour le parcourt.
 Enfin, si on lance l'algorithme prim sur toutes les villes d'un fichier il vaut mieux utiliser le fichier \textit{FranceTownReduced.txt} qui contient moins de villes.
 
 
 \section{Conclusion} %Alice
 
-Lors de ce projet, nous avons donc codé un programme permettant de donner une approximation du voyageur de commerce en temps polynomial. Nous avons implémenté plusieurs possibilités pour l'utilisateur : rentrer les villes à la main ou les récupérer dans un fichier (ou les 2), mais aussi représenter les villes graphiquement et ajouter les villes traversées mais non demandées initialement.\\
-On aurait pu améliorer la complexité spatiale de l'algorithme en évitant de stocker toutes les arêtes dans une matrice. Il aurait fallu pour cela se passer de la structure de tas min qui permet de choisir une arête de poids minimal facilement. De plus, en supprimant la matrice, on ne peut plus utiliser l'algorithme pour des fichiers où l'on donne le poids des arêtes et non pas les coordonnées des points (si le graphe ne vérifie pas l'inégalité triangulaire par exemple). Mais cela aurait permis de lancer l'algorithme sur un plus grand nombre de villes. Actuellement notre algorithme fonctionne (sans l'affichage graphique) pour 10 000 villes sur au moins 2 ordinateurs, mais il n'arrive pas à attribuer assez de mémoire stocker la matrice pour 20 000 villes sur ces 2 mêmes ordinateurs.\\
+Lors de ce projet, nous avons donc codé un programme permettant de donner une approximation du voyageur de commerce en temps polynomial. Nous avons implémenté plusieurs possibilités pour l'utilisateur : rentrer les villes à la main ou les récupérer dans un fichier (ou les 2), mais aussi représenter les villes graphiquement et ajouter les villes traversées mais non demandées initialement.
+
+On aurait pu améliorer la complexité spatiale de l'algorithme en évitant de stocker toutes les arêtes dans une matrice. Il aurait fallu pour cela se passer de la structure de tas min qui permet de choisir une arête de poids minimal facilement. De plus, en supprimant la matrice, on ne peut plus utiliser l'algorithme pour des fichiers où l'on donne le poids des arêtes et non pas les coordonnées des points (si le graphe ne vérifie pas l'inégalité triangulaire par exemple). Mais cela aurait permis de lancer l'algorithme sur un plus grand nombre de villes. Actuellement notre algorithme fonctionne  pour 10 000 villes sur au moins 2 ordinateurs, mais il n'arrive pas à attribuer assez de mémoire stocker la matrice pour 20 000 villes sur ces 2 mêmes ordinateurs.
+
 Le problème du voyageur de commerce peut aussi être approximé grâce à des algorithmes génétiques (sans garantie sur la qualité de l'approximation). 
 On génère $x$ cycle hamiltonien, puis on en crée de nouveaux en combinant les solutions précédemment calculées. On conserve ensuite les $x$ meilleures solutions. L'opération peut être répétée un grand nombre de fois pour améliorer le résultat de la meilleure solution calculée.
 
-
+\section{Annexe : Graphe des dépendances}
+\begin{center}
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.55]{depandance.png}
+\caption{Graphe des dépendances du projet}
+\label{fig3}
+\end{center}
+\end{figure}
+\end{center}
 \section{Références}
 
 Les algorithmes utilisés proviennent de l'énoncé du projet et les fichiers de villes utilisés proviennent de la page perso de Lucie Martinet : \\
 $http://perso.ens-lyon.fr/lucie.martinet/enseignements/2012$\_$2013/Projet1/fr/documents$\\
-\label{SDL}
-$http://www.libsdl.org$, SDL : bibliothèque graphique en c\\
-\label{SDLgfx}
+{\label{SDL}
+$http://www.libsdl.org$, SDL : bibliothèque graphique en c}\\
+{\label{SDLgfx}
 $http://www.ferzkopp.net/joomla/content/view/19/14$, SDL\_gfx : surcouche de la SDL\\
-Introduction to Algorithms, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+Introduction to Algorithms, by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein}
 
 \end{document}
