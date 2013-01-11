@@ -1,14 +1,20 @@
-Le programme exe est un programme permetant d'approximé la solution optimal d'un cycle hamiltonient depuis une liste de villes et de leur coordonnées.
+﻿Le programme exe est un programme permettant d'approximer la solution optimal d'un cycle hamiltonien depuis une liste de villes et de leur coordonnées.
 
-Le programme dispose d'une interface graphique qui necessite les bibliothèques SLD et SDL_gfx.
-Pour désactivé l'interface graphique (et permetre la compilation si vous ne possédé pas les bibliothèques), il faut commenté la premier ligne du main et suprimer les bibliothèques du Makefile
+Le programme dispose d'une interface graphique qui nécessite les bibliothèques SLD et SDL_gfx. 
+Ces bibliothèques sont disponibles sur 
+http://www.libsdl.org, pour SDL
+et http://www.ferzkopp.net/joomla/content/view/19/14 pour SDL_gfx.
 
-la comilation se fait avec la comande 
-make
+Pour désactiver l'interface graphique (et permettre la compilation si vous ne possédez pas les bibliothèques), il faut commenter la premier ligne du main.
+
+la compilation se fait avec la comande 
+make exe_gui si vous voulez utiliser les bibliothèque graphiques,
+make exe sinon.
 
 pour executer le programme :
-./exe
-Un parametre du programme (facultatif) permet d'inscrire la solution calculé dans un fichié au lieu de l'affiché à l'écran.
+./exe_gui si vous possédez la bibliothèque graphique, /.exe sinon.
+Un parametre du programme (facultatif) permet d'inscrire la solution calculée dans un fichier au lieu de l'afficher à l'écran.
 
-Des instructions vous gidant sur l'utilisation du programme seront affiché.
+Des instructions vous guidant pour l'utilisation du programme seront affichées.
+(Vous pouvez aussi vous réferer à la partie du rapport sur l'utilisation du programme, mais normalement vous ne devez pas en avoir besoin).
 
