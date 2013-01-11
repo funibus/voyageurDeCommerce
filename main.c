@@ -98,11 +98,11 @@ int main (int argc, char *argv[]){
 			break;
 		}
 		if (afficher){
-			printf("\ncommande :\nla pressions des touches suivantes peremt d'afficher ou masquer : \n"
+			printf("\ncommande :\nla pressions des touches suivantes permet d'afficher ou masquer : \n"
 					"c(ycle) : le chemins calculer par l'algorithme\n"
 					"t(ree) : l'arbre couvrant minimum\n"
 					"s(ommet) : les sommets représentant les villes\n"
-					"Appuiller sur esc pour fermer l'interface graphique\n");
+					"Appuyez sur esc pour fermer l'interface graphique\n");
 			switch(continuer){
 			case 12://un fichier liste de ville (nom_file) vient d'etre cree.
 				input = fopen(nom_file, "r");
@@ -149,18 +149,18 @@ int generation (char *nom_file, Matrice *mat){
 
 		switch(continuer){
 		case 1 :
-			printf("\n\tentrer le nom du fichier a partire du quel vous souhaiter cree votre liste de villes :\n");
+			printf("\n\tentrez le nom du fichier a partir du quel vous souhaitez creer votre liste de villes :\n");
 			scanf("%s", source);
-			printf("\n\tentrer le nom du fichier de sortie. Le cycle y sera inscrit:\n");
+			printf("\n\tentrez le nom du fichier de sortie. Le cycle y sera inscrit:\n");
 			scanf("%s", output);
 			voyageur_de_commerce_utilisateur (source,  mat, (output)?output:"blop.txt");
 			return 13;
 			break;
 #ifdef GUI_ENABLE
 		case 2 :
-			printf("\n\tentrer le nom du fichier de sortie :\n");
+			printf("\n\tentrez le nom du fichier de sortie :\n");
 			scanf("%s", nom_file);
-			printf("Cliquer à l'écran pour placer une ville.\nAppuyer sur esc ou entrer pour stoper la saisie\n\n");
+			printf("Cliquez à l'écran pour placer une ville.\nAppuyez sur esc ou entrée pour stoper la saisie\n\n");
 			gui_generer_ville(nom_file);
 			return 12;
 			break;
