@@ -1,4 +1,4 @@
-//#define GUI_ENABLE //commenter cette ligne pour desactiver l'interface graphique
+#define GUI_ENABLE //commenter cette ligne pour desactiver l'interface graphique
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -13,7 +13,7 @@ CXXFLAGS = -Wall
 all: depend exe Makefile exe_gui
 
 exe: $(OBJ) $(HDR) 
-	${CXX} $(CXXFLAGS) -o $@ $(OBJ) $(LFLAGS)  $(LIB) -lm -U GUI_ENABLE
+	${CXX} $(CXXFLAGS) -o $@ $(OBJ) $(LFLAGS)  $(LIB) -lm
 
 	
 exe_gui: $(OBJG) $(HDR) 
