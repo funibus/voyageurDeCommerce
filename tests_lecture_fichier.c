@@ -2,6 +2,8 @@
 #include "tests_lecture_fichier.h"
 #include "structure_matrice.h"
 
+/*teste la lecture dans le fichier "testEdgesDistances.txt"
+Ecrit le resultat de la lecture dans la console*/
 void test_matrice_of_fichier ()
 {
     FILE* fichier = NULL;
@@ -26,7 +28,8 @@ void test_matrice_of_fichier ()
 }
 
 
-
+/*Teste la lecture de fichier avec le fichier "testVerticesCoordinates.txt"
+Elle doit aussi afficher ce qu'elle a lu dans la console*/
 void test_matrice_of_coordonnees ()
 {
     FILE* fichier = NULL;
@@ -68,7 +71,8 @@ void test_compter_villes ()
 
 }
 
-/*la 1235eme ville est Goderville*/
+/*Teste la lecture dans le fichier "FranceTowns.txt"
+la 1235eme ville est Goderville*/
 void test_create_tab_villes ()
 {
     int nb_villes = 0;

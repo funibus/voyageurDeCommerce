@@ -15,7 +15,8 @@ void test_trouver_ville ()
     printf ("Chatenay n'existe pas");
 }
 
-/*fonction de test de la fonction interface_utilisateur, avec le fichier "France_towns.txt"*/
+/*fonction de test de la fonction interface_utilisateur, avec le fichier "France_towns.txt"
+  Elle doit envoyer les villes choisies dans la console*/
 void test_interface_utilisateur ()
 {
     int nb_villes = 0;
@@ -34,7 +35,8 @@ void test_interface_utilisateur ()
     printf("\n");
 }
 
-/*fonction de test de la fonction voyageur de commerce, avec le fichier "France_towns.txt"*/
+/*fonction de test de la fonction voyageur de commerce, avec le fichier "France_towns.txt"
+Elle ecrit le chemin parcouru dans le fichier "test_voyageur_de_commerce.txt"*/
 void test_voyageur_de_commerce ()
 {
    Matrice* matrice_parcourt = malloc(sizeof(matrice_parcourt));

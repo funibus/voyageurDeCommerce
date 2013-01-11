@@ -32,7 +32,7 @@ void test_creation_chemin ()
 
 /*test pour ecrire les villes entre paris et lyon : le fichier chemin_test2 contient "Paris, Lyon"
 et le programme ecrit les villes intermediaires dans resultat_chemin2 :
-"Lyon, Bousset, Challement, Villiers-Saint-Benoit, Avon, Ivry-sur-Seine, Paris*/
+"Lyon, Bousset, Challement, Villiers-Saint-Benoit, Avon, Ivry-sur-Seine, Paris"*/
 void test_villes_traversees ()
 {
    FILE* fichierChemin = NULL;

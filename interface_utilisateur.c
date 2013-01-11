@@ -199,6 +199,7 @@ void voyageur_de_commerce_utilisateur (char *input, Matrice *mat_parcourt, char*
     Ville* tab_villes = create_tab_villes (input, &nb_villes);
     int nb_villes_parcourt;
     int i,j;
+    int reponse;
     double d;
 
     Ville* tab_parcourt = interface_utilisateur(tab_villes, &nb_villes, &nb_villes_parcourt);
@@ -234,17 +235,36 @@ void voyageur_de_commerce_utilisateur (char *input, Matrice *mat_parcourt, char*
     TSP(*mat_parcourt, fichier_chemin);
     fclose (fichier_chemin);
 
-    //on transforme le chemin ecrit dans output en liste de villes
-    fichier_chemin = fopen (output, "r");
-    Chemin chemin = chemin_of_fichier (fichier_chemin, tab_villes, nb_villes);
-    fclose (fichier_chemin);
+    printf ("Voulez-vous rajouter les villes traversees par le voyageur mais non demandees ?\n");
+    printf ("tapez 1 pour oui ou 2 pour non\n");
+    scanf ("%d", &reponse);
 
-    //on reecrit le chemin avec les villes traversees mais non demandees par l'utilisateur
-    villes_traversees (chemin, chemin, tab_villes, nb_villes);
-    fichier_chemin = fopen (output, "w");
-    fichier_of_chemin (chemin, fichier_chemin);
-    fclose (fichier_chemin);
-    liberer_chemin (chemin);
+    while (reponse != 2)
+    {
+
+    if (reponse == 1)
+    {
+        //on transforme le chemin ecrit dans output en liste de villes
+        fichier_chemin = fopen (output, "r");
+        Chemin chemin = chemin_of_fichier (fichier_chemin, tab_villes, nb_villes);
+        fclose (fichier_chemin);
+
+        //on reecrit le chemin avec les villes traversees mais non demandees par l'utilisateur
+        villes_traversees (chemin, chemin, tab_villes, nb_villes);
+        fichier_chemin = fopen (output, "w");
+        fichier_of_chemin (chemin, fichier_chemin);
+        fclose (fichier_chemin);
+        liberer_chemin (chemin);
+        reponse = 2;
+    }
+
+    else
+    {
+        printf ("Je ne comprend pas votre réponse,\n veuillez taper 1 pour oui ou 2 pour non\n");
+        scanf ("%d", &reponse);
+    }
+
+    }
 
 	liberer_tab_villes (tab_villes, nb_villes);
 	liberer_tab_villes (tab_parcourt, nb_villes_parcourt);

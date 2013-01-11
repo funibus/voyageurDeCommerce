@@ -5,7 +5,7 @@ Arete trouver_bonne_arete (Tas T, Matrice matrice_poids);
 
 
 /**
- * construit l'arbre couvrant et le stock dans matrice_poids
+ * construit l'arbre couvrant et le stocke dans matrice_poids
  * @param matrice_poids
  */
 void prim (Matrice matrice_poids)
@@ -57,8 +57,8 @@ void prim (Matrice matrice_poids)
 }
 
 /**
- * quand on extrait l'arete de poids minimal, il faut vérifier qu'elle a bien une extremite
- * dans l'arbre et pas l'autre, si ce n'est pas le cas on extrait une autre
+ * quand on extrait l'arete de poids minimal, il faut verifier qu'elle a bien une extremite
+ * dans l'arbre et pas l'autre, si ce n'est pas le cas on en extrait une autre
  * jusqu'a tomber sur une arete qui convient
  * @param T un tas min qui contient des aretes n'appartenant pas a l'arbre
  * @param matrice_poids une matrice d'adjacence. Un sommet est "marque" si il appartient à l'arbre couvrant en construction
