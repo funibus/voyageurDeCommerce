@@ -3,7 +3,7 @@
 #include <float.h>
 #include "structure_matrice.h"
 
-/*utilise pour representer un graph avec une matrice d'adjacence*/
+/*utilise pour representer un graphe avec une matrice d'adjacence*/
 struct matrice
 {
 	int nb_villes;// nombre de sommet dans le graph
@@ -40,7 +40,7 @@ Matrice create_mat (int nb_villes_arg){
 		exit(1);
 	}
 	for (i = 0; i < nb_villes_arg; i++){
-		ret->marque[i] = 0;// a l'etat initiale, aucun sommet n'est dans l'arbre couvrant
+		ret->marque[i] = 0;// a l'etat initial, aucun sommet n'est dans l'arbre couvrant
 		ret->graph[i] = (double *) malloc(sizeof(double)*nb_villes_arg);
 		if (ret->graph[i] == NULL){
 			fprintf(stderr, "erreur allocation matrice : pas assez de memoire");

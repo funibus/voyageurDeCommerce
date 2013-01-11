@@ -8,7 +8,7 @@
 #include "prim_TSP.h"
 #include "lecture_fichier.h"
 
-void test_prim_14_villes ();
+void test_TSP ();
 
 
 #endif // TEST_PRIM_H_INCLUDED
