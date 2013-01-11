@@ -1,10 +1,3 @@
-/*
- * gui.c
- *
- *  Created on: Dec 24, 2012
- *      Author: pierre
- */
-
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
 
@@ -13,6 +6,9 @@
 #include "gui.h"
 #include "structure_arbre_couvrant.h"
 
+/**
+ * contien les dimensions de l'ecran, et le rayon du disuqe représentant un sommet.
+ */
 struct geometry
 {
 	int rayon;
@@ -31,14 +27,18 @@ void Graph2screeCoordonne(struct geometry Geom, Matrice G, SDL_Rect * rect, int 
 	rect->y = (int)(Geom.heightScreen - Geom.heightScreen*(getYSommet(G,sommet) - Geom.orY)/Geom.heightGraph);
 }
 /**
- *
  * @param Geom
- * @param rect entre sortie : contient initialement des coordonnée de l'ecran. Sera convertie en coordonnee entier de graph
+ * @param rect entre sortie : contient initialement des coordonnée de l'ecran. Sera convertie en coordonnee entier pour de graph
  */
 void Screen2graphCoordonne(struct geometry Geom, SDL_Rect * rect){
 	rect->x = (int)((rect->x)*Geom.widthGraph/Geom.widthScreen + Geom.orX);
 	rect->y = (int)(Geom.heightScreen - (rect->y)*Geom.heightGraph/Geom.heightScreen + Geom.orY);
 }
+
+/**
+ * permet d'affiché le cycle hamiltonien, les villes et l'arbre couvrant à l'écran
+ * @param G une matrice dont la solution à été calculé
+ */
 void gui(Matrice G){
 	int aff_sommet = 1, aff_tree = 1, aff_cycle = 1;
 	SDL_putenv ("SDL_VIDEO_CENTERED=center");
@@ -104,6 +104,11 @@ void gui(Matrice G){
 	SDL_Quit();
 }
 
+/**
+ * permet à l'utilisateur de créé un fichier liste de sommé compatible avec le programme.
+ * la saisie des sommet se fait en cliquant à l'écran.
+ * @param filename le fichier ou sera enregistrer la liste de sommet
+ */
 void gui_generer_ville(char *filename){
 
 	FILE *output = fopen (filename, "w");
@@ -149,6 +154,7 @@ void gui_generer_ville(char *filename){
 		case SDL_MOUSEBUTTONUP:
 			switch (event.button.button){
 			case SDL_BUTTON_LEFT:
+				//l'utilisateur a clique: on recupere les coordonees de son clique, puis on les enregistre dans le fichier
 				position.x = event.button.x - Geom.rayon;
 				position.y = event.button.y - Geom.rayon;
 				SDL_BlitSurface(disque, NULL, screen, &position);
@@ -163,6 +169,7 @@ void gui_generer_ville(char *filename){
 				switch(event.key.keysym.sym){
 				case SDLK_ESCAPE:
 				case SDLK_RETURN:
+					//quitte la fenetre
 					boucle_infini = 0;
 					break;
 				default:
@@ -176,6 +183,11 @@ void gui_generer_ville(char *filename){
 	SDL_FreeSurface(disque);
 	SDL_Quit();
 }
+
+/**
+ * affiche l'ensemble des villes du fichier filename
+ * @param filename
+ */
 void affichage_gui(char *filename){
 
 
@@ -232,6 +244,9 @@ void affichage_gui(char *filename){
 		fscanf (output, "%d!", &nombre_villes);
 		if (!feof(output))fgetc(output);// saut le \n
 	}
+	/*
+	 * calcule du plus petit rectangle encadrant les villes pour l'affichage
+	 */
 	xmin = ymin = DBL_MAX;
 	xmax = ymax = -DBL_MAX;
 	for (sommet=0; sommet<nombre_villes; sommet++)
@@ -252,6 +267,8 @@ void affichage_gui(char *filename){
 	Geom.orY = ymin;
 	Geom.widthGraph =xmax - Geom.orX;
 	Geom.heightGraph = ymax - Geom.orY;
+
+	//Affichage de toutes les villes (elles ne sont pas mémorisé en mémoire)
 	fseek(output, 0, curseur_init);
 	for (sommet=0; sommet<nombre_villes; sommet++)
 	{
@@ -268,7 +285,7 @@ void affichage_gui(char *filename){
 		pixelRGBA(screen, position.x, position.y, 255,0,0,255);
 	}
 	SDL_Flip(screen);
-	//Affichage des sommets
+
 	while (boucle_infini)
 	{
 		SDL_WaitEvent(&event);
@@ -292,6 +309,9 @@ void affichage_gui(char *filename){
 	SDL_Quit();
 }
 
+/*
+ * actualise l'écran en fonction des argument aff_sommet, aff_tree et aff_cycle qui indiquent quelle partie de la solution affiché (sommet, arbre et cycle)
+ */
 void accutaliser_screen(SDL_Surface* screen, SDL_Surface* disque, Matrice G, struct geometry Geom, int aff_sommet, int aff_tree, int aff_cycle){
 	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
 	if (aff_tree) blit_Tree(G, screen, Geom);
@@ -300,6 +320,9 @@ void accutaliser_screen(SDL_Surface* screen, SDL_Surface* disque, Matrice G, str
 	SDL_Flip(screen);
 }
 
+/*
+ * affiche les sommets à l'écran
+ */
 void blit_sommet_matrice(Matrice G, SDL_Surface* formeSommet, SDL_Surface* surface, struct geometry Geom){
 	SDL_Rect position;
 	int i;
@@ -311,6 +334,9 @@ void blit_sommet_matrice(Matrice G, SDL_Surface* formeSommet, SDL_Surface* surfa
 	}
 }
 
+/*
+ * affiche l'arbre couvrant à l'écran
+ */
 void blit_Tree(Matrice G, SDL_Surface* surface, struct geometry Geom){
 	SDL_Rect u, v;
 	element_liste* tree;
@@ -330,6 +356,9 @@ void blit_Tree(Matrice G, SDL_Surface* surface, struct geometry Geom){
 	}
 }
 
+/*
+ * affiche le cycle a l'ecran
+ */
 void blit_Cycle(Matrice G, SDL_Surface* surface, struct geometry Geom){
 	SDL_Rect u, v;
 	element_liste cycle, ville_suivante;

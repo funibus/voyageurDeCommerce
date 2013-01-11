@@ -48,7 +48,7 @@ Matrice matrice_of_coordonnees (FILE* fichier)
     	c = fgetc(fichier);
     }
     if (c == ':'){// fichier avec nom de ville
-    	//on compte le nombre de villes presentess dans le fichier
+    	//on compte le nombre de villes presentes dans le fichier
     	nombre_villes=1;
     	while (c != EOF){
     		c = fgetc(fichier);
@@ -129,7 +129,7 @@ int compter_villes (FILE* fichier)
     return nb_villes;
 }
 
-/* lit le fichier France_towns.txt et renvoie un tableau tab_villes contenant toutes les villes du fichier
+/* lit le fichier input et renvoie un tableau tab_villes contenant toutes les villes du fichier
  pour obtenir le nombre de ville a la fin, on donne un pointeur vers un entier nb_villes, que l'on modifiera dans la fonction*/
 Ville* create_tab_villes (char *input, int* nombre_villes)
 {

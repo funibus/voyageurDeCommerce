@@ -57,8 +57,8 @@ void prim (Matrice matrice_poids)
 }
 
 /**
- * quand on pioche l'arete de poids minimal, il faut vérifier qu'elle a bien une extremite
- * dans l'arbre et pas l'autre, si ce n'est pas le cas on recommence a piocher
+ * quand on extrait l'arete de poids minimal, il faut vérifier qu'elle a bien une extremite
+ * dans l'arbre et pas l'autre, si ce n'est pas le cas on extrait une autre
  * jusqu'a tomber sur une arete qui convient
  * @param T un tas min qui contient des aretes n'appartenant pas a l'arbre
  * @param matrice_poids une matrice d'adjacence. Un sommet est "marque" si il appartient à l'arbre couvrant en construction

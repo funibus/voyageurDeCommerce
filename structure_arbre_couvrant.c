@@ -1,5 +1,8 @@
 #include "structure_arbre_couvrant.h"
 
+/*
+ * liste chainee d'entier utilisé pour représenté les voisins d'un sommet dans l'arbre couvrant
+ */
 struct element_liste
 {
 	int sommet;
@@ -11,8 +14,7 @@ element_liste parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice 
 /**
  * cree un tableau dont chaque case represente un sommet et contient la liste des sommets voisins
  * l'arbre couvrant contiendra toutes les villes, il est donc pertinant de le representer dans un tableau
- * @param nombre_villes
- * @return
+ * @param nombre_villes : la taille du tableau à cree
  */
 element_liste* creer_arbre (int nombre_villes)
 {
@@ -71,7 +73,7 @@ void liberer_arbre (element_liste arbre[], int nombre_villes)
 
 
 /*parcourt l'arbre en partant d'un sommet donné, sans passer par le sommet du père, et renvoie la liste des sommets dans l'ordre du parcours,
-  en ne notant un sommet que la premiere fois qu'on passe dessus*/
+  en ne notant un sommet que la premiere fois que l'on passe dessus*/
 element_liste parcourir_arbre_aux (FILE* fichier, element_liste* arbre, Matrice G, element_liste cycle, int sommet, int pere, int b)
 {
 	element_liste fils,tete_cycle;
@@ -106,7 +108,9 @@ void parcourir_arbre (FILE* fichier, Matrice matrice_poids)
 	setCycle(matrice_poids, tete_cycle);
 }
 
-
+/*
+ * calcule la distance du chemin inscrit dans fichier avec le poids décrit par matrice_poids
+ */
 double distance_parcourue (FILE* fichier, Matrice matrice_poids)
 {
 	int sommet1, sommet2, i;
@@ -121,6 +125,10 @@ double distance_parcourue (FILE* fichier, Matrice matrice_poids)
 	}
 	return distance;
 }
+
+/*
+ * primitives d'accès
+ */
 int getSommetNode(element_liste l){
 	return l->sommet;
 }

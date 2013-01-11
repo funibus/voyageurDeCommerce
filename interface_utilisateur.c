@@ -187,11 +187,11 @@ Ville* interface_utilisateur (Ville* tab_villes, int* nombre_villes_total, int* 
 }
 
 /**
- * permet à l'utilisateur de choisir sa liste de ville parmi une liste de villes stoker dans le fichier input
+ * permet à l'utilisateur de choisir sa liste de ville parmi une liste de villes stocker dans le fichier input
  * et d'éventuellement en rajouter. Ecrit le chemin parcouru dans le fichier output
  * @param output fichier dans le quel sera inscrit le cycle issue de l'algorithme TSP
  * @param input fichier contenant des villes et leur coordonnées
- * @param mat_parcourt Matrice dans la quelle seront stokees les villes selectionnees par l'utilisateur
+ * @param mat_parcourt Matrice dans la quelle seront stockees les villes selectionnees par l'utilisateur
  */
 void voyageur_de_commerce_utilisateur (char *input, Matrice *mat_parcourt, char* output)
 {
